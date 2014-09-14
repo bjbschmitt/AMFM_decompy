@@ -1,9 +1,7 @@
-AM-FM_decompy
+AMFM_decompy
 =============
 
 version 1.0.0
-
-(The pypi page is recommended for a quick installation. But you can also copy all directories here and then run the setup.py file.)
 
 This python package provides the tools necessary to decompose the voiced part of a speech signal into its modulated components, aka AM-FM decomposition. This designation is used due the fact that, in this method, the signal is modeled as a sum of amplitude- and frequency-modulated components. 
 
@@ -32,11 +30,18 @@ The QHM-like algorithms present some stability problems concerning small magnitu
 Actually, I dedicated a chapter in my Master Thesis to a deeper study about this problem and came up with a better solution. Unfortunately, due stupid burocratic issues, I don't know if and when my work will be defended and published (to be short, the deadline was expired because me and my advisor needed more time to correct and improve the thesis text. Then we required a prorrogation, but the lecturers board declined it. So, basically, I was expelled from the post-gradute program with a finished and working thesis). Anyway, I'm still trying to figure out do now with my work and as soon as find a solution, I'll add my own contributions to this package.
 
 In my thesis I also ran performance tests comparing the QHM family with other two AM-FM decomposition algorithms. Therefore, my next goal is to add these methods to the package. Since they are third-part free MATLAB codes, probably it will take a couple of months to fully translate them.
- 
+
+Installation
+=============
+
+The pypi page is recommended for a quick installation. But you can also copy all directories here and then run the setup.py file. After that, run the script AMFM_test.py to check if everything is ok.
+
+I've tested the installation script and the package itself in Linux and Windows systems (but not in iOS) are everything went fine. So I believe that other users won't have problems with it.
+
 How to use
 =============
 
-Check the pYAAPT and pyQHM pdf documentations included in their respective folders.
+Check the pYAAPT and pyQHM pdf documentations included in the docs folder.
 
 Credits and Publications
 =============
@@ -64,6 +69,6 @@ The QHM algorithm and its upgrades are formulated and presented in the following
 Copyright and contact
 =============
 
-The AM-FM_decompy is free to use, share and modify under the terms of the MIT license.
+The AMFM_decompy is free to use, share and modify under the terms of the MIT license.
 
 Questions, comments, suggestions, and contributions are welcome. Please contact me at bernardo.jb.schmitt@gmail.com.
