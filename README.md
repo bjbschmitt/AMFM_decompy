@@ -31,7 +31,7 @@ The QHM-like algorithms present some stability problems concerning small magnitu
 
 Actually, I dedicated a chapter in my Master Thesis to a deeper study about this problem and came up with a better solution. Unfortunately, due stupid burocratic issues, I don't know if and when my work will be defended and published (to be short, the deadline was expired because me and my advisor needed more time to correct and improve the thesis text. Then we required a prorrogation, but the lecturers board declined it. So, basically, I was expelled from the post-gradute program with a finished and working thesis). Anyway, I'm still trying to figure out do now with my work and as soon as find a solution, I'll add my own contributions to this package.
 
-In my thesis I also ran performance tests comparing the QHM family with other two AM-FM decomposition algorithms. Therefore, my next goal is to add these methods to the package. Since they are third-part free MATLAB codes, probably it will take couple of months to fully translate them.
+In my thesis I also ran performance tests comparing the QHM family with other two AM-FM decomposition algorithms. Therefore, my next goal is to add these methods to the package. Since they are third-part free MATLAB codes, probably it will take a couple of months to fully translate them.
  
 How to use
 =============
