@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+
 """
 Script to test the AMFM_decompy package.
 
 Version 1.0.0
 10/Sep/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
-
+import amfm_decompy
 import amfm_decompy.pYAAPT as pyaapt
 import amfm_decompy.pyQHM as pyqhm
 import os.path
