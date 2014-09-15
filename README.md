@@ -34,9 +34,17 @@ In my thesis I also ran performance tests comparing the QHM family with other tw
 Installation
 =============
 
-The pypi page is recommended for a quick installation. But you can also copy all directories here and then run the setup.py file. After that, run the script AMFM_test.py to check if everything is ok.
+The pypi page is recommended for a quick installation. But you can also copy all directories here and then run 
 
-I've tested the installation script and the package itself in Linux and Windows systems (but not in iOS) are everything went fine. So I believe that other users won't have problems with it.
+```python setup.py install```
+
+in command line. After that, run the test script by typing 
+
+AMFM_test.py
+
+to check if everything is ok (it can take couple of minutes to calculate the results). This script is a example about how to use the package.
+
+I've tested the installation script and the package itself in Linux and Windows systems (but not in iOS) and everything went fine. So, if a problem comes up, it must be probably something about python not finding the files paths.
 
 How to use
 =============
