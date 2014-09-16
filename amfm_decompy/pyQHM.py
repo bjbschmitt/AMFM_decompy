@@ -44,6 +44,7 @@ import scipy
 """
 Creates a signal object.
 """
+
 class SignalObj(object):
 
     def __init__(self, *args):
@@ -71,6 +72,7 @@ class SignalObj(object):
     Method that uses the pitch values to estimate the number of modulated
     components in the signal.
     """
+
     def set_nharm(self, pitch, n_harm_max):
         n_harm = (self.fs/2)/np.amax(pitch) - 0.5
         self.n_harm = int(np.floor(min(n_harm, n_harm_max)))
@@ -78,15 +80,17 @@ class SignalObj(object):
     """
     Adds a zero-mean gaussian noise to the signal.
     """
+
     def noiser(self, pitch, SNR):
-        RMS = np.std(self.data[pitch>0])
-        noise=np.random.normal(0, RMS/(10**(SNR/20)), self.size)
+        RMS = np.std(self.data[pitch > 0])
+        noise = np.random.normal(0, RMS/(10**(SNR/20)), self.size)
         self.data += noise
 
 
 """
 Creates a single component object.
 """
+
 class ComponentObj(object):
 
     def __init__(self, H, i):
@@ -98,6 +102,7 @@ class ComponentObj(object):
     Synthsize the modulated component by using the extracted magnitude and
     phase.
     """
+
     def synthesize(self):
         self.signal = 2*self.mag*np.cos(self.phase)
 
@@ -106,9 +111,10 @@ class ComponentObj(object):
 Creates the output signal object (which, in its turn, is formed by n_harm
 modulated components).
 """
+
 class ModulatedSign(object):
 
-    def __init__(self, n_harm, file_size, fs, phase_tech = 'phase'):
+    def __init__(self, n_harm, file_size, fs, phase_tech='phase'):
         self.n_harm = n_harm
         self.size = file_size
         self.fs = fs
@@ -124,6 +130,7 @@ class ModulatedSign(object):
     stands for the magnitude, 1 for the phase and 2 for the frequency) and the
     third dimension to the temporal axis.
     """
+
     def update_values(self, a, freq, frame):
         self.H[:, 0, frame] = np.abs(a)
         self.H[:, 1, frame] = np.angle(a)
@@ -135,6 +142,7 @@ class ModulatedSign(object):
     is pretty straightforward, the phase one is not. Therefore, references
     [1,2] present a solution for this problem.
     """
+
     def interpolate_samp(self, samp_frames, pitch):
 
         # Interpolation from magnitude and frequency.
@@ -158,16 +166,16 @@ class ModulatedSign(object):
                 M = np.around(np.abs(self.H[:, 1, frame]-bad_phase)/(2*np.pi))
                 if frame-samp_frames[idx] < step:
                     end_step = frame-samp_frames[idx]
-                    func = np.cumsum(np.sin(np.pi*np.arange(1, end_step)/
+                    func = np.cumsum(np.sin(np.pi*np.arange(1, end_step) /
                                             end_step)).reshape(1, end_step-1)
                 else:
                     func = sin_f
 
                 r_vec = (np.pi*(self.H[:, 1, frame]+2*np.pi*M-bad_phase) /
-                        (2*(frame-samp_frames[idx]))).reshape(self.n_harm,1)
+                        (2*(frame-samp_frames[idx]))).reshape(self.n_harm, 1)
 
                 new_phase = cum_phase[:, :-1]+r_vec*func + \
-                        self.H[:, 1, samp_frames[idx]].reshape(self.n_harm,1)
+                        self.H[:, 1, samp_frames[idx]].reshape(self.n_harm, 1)
                 self.H[:, 1, samp_frames[idx]+1:frame] = ((new_phase + np.pi) %
                                                             (2*np.pi)-np.pi)
 
@@ -175,7 +183,8 @@ class ModulatedSign(object):
     Synthesize the final signal by initially creating each modulated component
     and then summing all of them.
     """
-    def synthesize(self, N = None):
+
+    def synthesize(self, N=None):
         if N is None:
             N = self.n_harm
         [self.harmonics[i].synthesize()
@@ -187,6 +196,7 @@ class ModulatedSign(object):
     Calculates the SRER (Signal-to-Reconstruction Error Ratio) for the
     synthesized signal.
     """
+
     def srer(self, orig_signal, pitch):
         self.SRER = 20*np.log10(np.std(orig_signal[np.nonzero(pitch)[0]]) /
                     np.std(orig_signal[np.nonzero(pitch)[0]] -
@@ -203,6 +213,7 @@ class ModulatedSign(object):
     is very helpful to avoid the degradation of aQHM and eaQHM performance
     due the phase wild behaviour.
     """
+
     def phase_edges(self, edges, window):
 
         # Selects whether the phase itself or the cummulative frequency will be
@@ -236,6 +247,7 @@ class ModulatedSign(object):
 """
 Creates the sample window object.
 """
+
 class SampleWindow(object):
 
     def __init__(self, window_duration, fs):
@@ -264,8 +276,8 @@ class SampleWindow(object):
 """
 Main QHM function.
 """
-def qhm(signal, pitch, window, samp_jump = None, N_iter = 1,
-        phase_tech = 'phase'):
+
+def qhm(signal, pitch, window, samp_jump=None, N_iter=1, phase_tech='phase'):
 
     return HM_run(qhm_iteration, signal, pitch, window, samp_jump, N_iter,
                   phase_tech)
@@ -273,8 +285,9 @@ def qhm(signal, pitch, window, samp_jump = None, N_iter = 1,
 """
 Main aQHM function.
 """
-def aqhm(signal, previous_HM, pitch, window, samp_jump = None, N_iter = 1,
-         N_runs = float('Inf'), phase_tech = 'phase', eaQHM_flag = False):
+
+def aqhm(signal, previous_HM, pitch, window, samp_jump=None, N_iter=1,
+         N_runs=float('Inf'), phase_tech='phase', eaQHM_flag=False):
 
     count = 1
     outflag = False
@@ -295,23 +308,24 @@ def aqhm(signal, previous_HM, pitch, window, samp_jump = None, N_iter = 1,
         if count > N_runs:
             outflag = True
 
-
     return previous_HM
 
 """
 Main eaQHM function (which in fact varies very few from the aQHM).
 """
-def eaqhm(signal, previous_HM, pitch, window, samp_jump = None,
-          N_iter = 1, N_runs = float('Inf'), phase_tech = 'phase'):
+
+def eaqhm(signal, previous_HM, pitch, window, samp_jump=None, N_iter=1,
+          N_runs=float('Inf'), phase_tech='phase'):
 
     return aqhm(signal, previous_HM, pitch, window, samp_jump, N_iter, N_runs,
-                phase_tech, eaQHM_flag = True)
+                phase_tech, eaQHM_flag=True)
 
 """
 Parser for the three algorithms.
 """
-def HM_run(func, signal, pitch, window, samp_jump = None, N_iter = 1,
-           phase_tech = 'phase', func_options = None):
+
+def HM_run(func, signal, pitch, window, samp_jump=None, N_iter=1,
+           phase_tech='phase', func_options=None):
 
     # Creates the output signal object and the dummy frequency vector.
     HM = ModulatedSign(signal.n_harm, signal.size, signal.fs, phase_tech)
@@ -323,7 +337,7 @@ def HM_run(func, signal, pitch, window, samp_jump = None, N_iter = 1,
         voiced_frames = np.nonzero(pitch.values)[0]
     else:
         jump = int(np.fix(max(samp_jump*signal.fs, 1.0)))
-        voiced_frames = np.array([], dtype = int)
+        voiced_frames = np.array([], dtype=int)
         for beg, end in zip(pitch.edges[::2], pitch.edges[1::2]):
             voiced_frames = np.append(voiced_frames, np.arange(
                                                         beg+1, end-1, jump))
@@ -355,7 +369,7 @@ def HM_run(func, signal, pitch, window, samp_jump = None, N_iter = 1,
 
     # If the extraction was performed with temporal jumps, interpolate the
     # results.
-    if not samp_jump is None:
+    if samp_jump is not None:
         HM.interpolate_samp(voiced_frames, pitch)
     HM.synthesize()
     HM.srer(signal.data, pitch.values)
@@ -366,15 +380,16 @@ def HM_run(func, signal, pitch, window, samp_jump = None, N_iter = 1,
 """
 Core QHM function.
 """
-def qhm_iteration(data, f0_ref, window, fs, max_step, freq, N_iter = 1):
+
+def qhm_iteration(data, f0_ref, window, fs, max_step, freq, N_iter=1):
 
     # Initialize and allocate variables.
     K = len(freq)
     coef = np.zeros((2*K))
 
-    E = np.ones((window.length, 2*K), dtype = complex)
+    E = np.ones((window.length, 2*K), dtype=complex)
     E = exp_matrix(E, freq, window, K)
-    E_windowed = np.ones((window.length, 2*K), dtype = complex)
+    E_windowed = np.ones((window.length, 2*K), dtype=complex)
 
     windowed_data = (window.data*data).reshape(window.length, 1)
 
@@ -420,8 +435,9 @@ def qhm_iteration(data, f0_ref, window, fs, max_step, freq, N_iter = 1):
 """
 Core aQHM and eaQHM function.
 """
+
 def aqhm_iteration(data, f0_ref, window, fs, max_step, func_options,
-                   N_iter = 1):
+                   N_iter=1):
 
     # Initialize and allocate variables.
     previous_HM = func_options[0]
@@ -443,26 +459,25 @@ def aqhm_iteration(data, f0_ref, window, fs, max_step, func_options,
 
     # Initialize the coefficients.
     coef = np.vstack((previous_HM.H[:, 0, frame].reshape(previous_HM.n_harm, 1) *
-        np.exp(1j*extrap_phase_center), np.zeros((previous_HM.n_harm, 1))))[:,0]
+        np.exp(1j*extrap_phase_center), np.zeros((previous_HM.n_harm, 1))))[:, 0]
 
     # Initialize the matrices.
-    E = np.ones((window.length, 2*previous_HM.n_harm), dtype = complex)
-    E_ro = np.ones((window.length, 2*previous_HM.n_harm), dtype = complex)
-    E_windowed = np.ones((window.length, 2*previous_HM.n_harm), dtype = complex)
+    E = np.ones((window.length, 2*previous_HM.n_harm), dtype=complex)
+    E_ro = np.ones((window.length, 2*previous_HM.n_harm), dtype=complex)
+    E_windowed = np.ones((window.length, 2*previous_HM.n_harm), dtype=complex)
 
     E[:, :previous_HM.n_harm] = np.exp(1j*phase_frame.T)
 
     # If the eaQHM algorithm was selected, ajust the exponential matrix with
     # the normalized magnitude.
     if eaQHM_flag:
-        mag_center = previous_HM.H[:, 0, frame].reshape(
-                                                    previous_HM.n_harm, 1)
-        mag_frame = previous_HM.H[:, 0,frame-window.N:frame+window.N+1] / \
+        mag_center = previous_HM.H[:, 0, frame].reshape(previous_HM.n_harm, 1)
+        mag_frame = previous_HM.H[:, 0, frame-window.N:frame+window.N+1] / \
                     mag_center
         E[:, :previous_HM.n_harm] = mag_frame.T*E[:, :previous_HM.n_harm]
 
     E[:, previous_HM.n_harm:] = E[:, :previous_HM.n_harm] * \
-                                    window.len_vec.reshape(window.length, 1)
+                                window.len_vec.reshape(window.length, 1)
 
     # Run the aQHM/eaQHM algorithm N_iter times.
     for k in xrange(N_iter):
@@ -474,7 +489,7 @@ def aqhm_iteration(data, f0_ref, window, fs, max_step, func_options,
         # Updates the frequency values.
         freq, ro = freq_correction(coef[:previous_HM.n_harm],
                                    coef[previous_HM.n_harm:], freq, f0_ref,
-                                    mag_ref, previous_HM.n_harm, max_step, fs)
+                                   mag_ref, previous_HM.n_harm, max_step, fs)
 
         # Updates the complex exponentials matrix.
         E = E*exp_matrix(E_ro, ro/(2*np.pi), window, previous_HM.n_harm)
@@ -516,10 +531,11 @@ def aqhm_iteration(data, f0_ref, window, fs, max_step, func_options,
 """
 Calculate the a and b coeficients via least-squares method.
 """
+
 def least_squares(E, E_windowed, windowed_data, window, K):
 
-    R = np.zeros((2*K, 2*K), dtype = complex)
-    B = np.zeros((window.length, 1), dtype = complex)
+    R = np.zeros((2*K, 2*K), dtype=complex)
+    B = np.zeros((window.length, 1), dtype=complex)
 
     E_windowed[:, :] = E*window.data.reshape(window.length, 1)
     R = E_windowed.conj().T.dot(E_windowed)
@@ -532,6 +548,7 @@ def least_squares(E, E_windowed, windowed_data, window, K):
 """
 Calculates the frequency mismatch and updates the frequency values.
 """
+
 def freq_correction(a, b, freq, f0_ref, mag_ref, n_harm, max_step, fs):
 
     old_freq = np.zeros(n_harm)
@@ -559,6 +576,7 @@ def freq_correction(a, b, freq, f0_ref, mag_ref, n_harm, max_step, fs):
 Calculate the mean squared error between the original frame and the
 synthsized one.
 """
+
 def error_calc(windowed_data, E, coef, window):
     h = E.dot(coef)
 
@@ -569,10 +587,11 @@ def error_calc(windowed_data, E, coef, window):
 """
 Mounts the complex exponentials matrix.
 """
+
 def exp_matrix(E, freq, window, K):
 
-    E[window.N+1:,:K] = np.exp(1j*np.pi*2*freq)
-    E[window.N+1:,:K] = np.cumprod(E[window.N+1:, :K],axis=0)
+    E[window.N+1:, :K] = np.exp(1j*np.pi*2*freq)
+    E[window.N+1:, :K] = np.cumprod(E[window.N+1:, :K], axis=0)
     E[:window.N, :K] = np.conj(E[window.N+1:, :K][::-1, :])
 
     E[:, K:] = E[:, :K]*window.len_vec.reshape(window.length, 1)
@@ -584,26 +603,21 @@ Some side functions found in reference [2].
 """
 
 def g0(x, N):
-    if x!=0:
+    if x != 0:
         return np.sin((2*N+1)*x/2)/np.sin(x/2)
     else:
         return 2*N+1
 
 def g1(x, N):
-    if x!=0:
+    if x != 0:
         return 1j*((np.sin(N*x)/(2*np.sin(x/2)**2)) -
-                    N*(np.cos((2*N+1)*x/2)/np.sin(x/2)))
+                   N*(np.cos((2*N+1)*x/2)/np.sin(x/2)))
     else:
         return 0
 
-
 def R_eq(delta_f, func, window):
     return (window.a0*func(2*np.pi*delta_f, window.N) +
-                func(2*np.pi*(delta_f+1./(2*window.N)), window.N)*window.a1 +
-                func(2*np.pi*(delta_f-1./(2*window.N)), window.N)*window.a1 +
-                func(2*np.pi*(delta_f+1./window.N), window.N)*window.a2 +
-                func(2*np.pi*(delta_f-1./window.N), window.N)*window.a2)
-
-
-
-
+            func(2*np.pi*(delta_f+1./(2*window.N)), window.N)*window.a1 +
+            func(2*np.pi*(delta_f-1./(2*window.N)), window.N)*window.a1 +
+            func(2*np.pi*(delta_f+1./window.N), window.N)*window.a2 +
+            func(2*np.pi*(delta_f-1./window.N), window.N)*window.a2)

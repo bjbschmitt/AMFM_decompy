@@ -5,8 +5,7 @@ Helper functions for working with audio files in NumPy.
 import numpy as np
 import contextlib
 
-def pcm2float(sig, dtype=np.float64):
-    """
+"""
 Convert PCM signal to floating point with a range from -1 to 1.
 
 Use dtype=np.float32 for single precision.
@@ -26,8 +25,10 @@ normalized floating point data.
 See Also
 --------
 dtype
-
 """
+
+def pcm2float(sig, dtype=np.float64):
+
     # TODO: allow unsigned (e.g. 8-bit) data
 
     sig = np.asarray(sig) # make sure it's a NumPy array
@@ -52,5 +53,3 @@ See http://stackoverflow.com/a/2891805/500098
         yield
     finally:
         np.set_printoptions(**original)
-
-
