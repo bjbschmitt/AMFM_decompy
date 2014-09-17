@@ -279,7 +279,7 @@ def yaapt(*args, **kwargs):
     #---------------------------------------------------------------
     parameters = {}
     parameters['frame_length'] = kwargs.get('frame_length', 25.0)   #Length of each analysis frame (ms)
-    parameters['frame_space'] = kwargs.get('frame_space', 10.0)     #Spacing between analysis frame (ms)
+    parameters['frame_space'] = kwargs.get('frame_space', 10.0)     #Spacing between analysis frames (ms)
     parameters['f0_min'] = kwargs.get('f0_min', 60.0)               #Minimum F0 searched (Hz)
     parameters['f0_max'] = kwargs.get('f0_min', 400.0)              #Maximum F0 searched (Hz)
     parameters['fft_length'] = kwargs.get('fft_length', 8192)       #FFT length
@@ -287,7 +287,7 @@ def yaapt(*args, **kwargs):
     parameters['bp_low'] = kwargs.get('bp_low', 50.0)               #Low frequency of filter passband (Hz)
     parameters['bp_high'] = kwargs.get('bp_high', 1500.0)           #High frequency of filter passband (Hz)
     parameters['nlfer_thresh1'] = kwargs.get('nlfer_thresh1', 0.75) #NLFER boundary for voiced/unvoiced decisions
-    parameters['nlfer_thresh2'] = kwargs.get('nlfer_thresh2', 0.1)  #Threshold for NLFER definitely unvocied
+    parameters['nlfer_thresh2'] = kwargs.get('nlfer_thresh2', 0.1)  #Threshold for NLFER definitely unvoiced
     parameters['shc_numharms'] = kwargs.get('shc_numharms', 3)      #Number of harmonics in SHC calculation
     parameters['shc_window'] = kwargs.get('shc_window', 40.0)       #SHC window length (Hz)
     parameters['shc_maxpeaks'] = kwargs.get('shc_maxpeaks', 4)      #Maximum number of SHC peaks to be found
@@ -296,7 +296,7 @@ def yaapt(*args, **kwargs):
     parameters['shc_thresh2'] = kwargs.get('shc_thresh2', 1.25)     #Threshold 2 for SHC peak picking
     parameters['f0_double'] = kwargs.get('f0_double', 150.0)        #F0 doubling decision threshold (Hz)
     parameters['f0_half'] = kwargs.get('f0_half', 150.0)            #F0 halving decision threshold (Hz)
-    parameters['dp5_k1'] = kwargs.get('dp5_k1', 11.0)               #Weight used in dynaimc program
+    parameters['dp5_k1'] = kwargs.get('dp5_k1', 11.0)               #Weight used in dynamic program
     parameters['dec_factor'] = kwargs.get('dec_factor', 1)          #Factor for signal resampling
     parameters['nccf_thresh1'] = kwargs.get('nccf_thresh1', 0.25)   #Threshold for considering a peak in NCCF
     parameters['nccf_thresh2'] = kwargs.get('nccf_thresh2', 0.9)    #Threshold for terminating serach in NCCF
