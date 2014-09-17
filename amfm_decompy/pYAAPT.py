@@ -7,17 +7,16 @@ The YAAPT program, designed for fundamental frequency tracking,
 is extermely robust for both high quality and telephone speech.
 
 The YAAPT program was created by the Speech Communication Laboratory of
-the state university of New York at Binghamton. The original program is 
+the state university of New York at Binghamton. The original program is
 available at http://www.ws.binghamton.edu/zahorian as free software. Further
 information about the program could be found at "A spectral/temporal
 method for robust fundamental frequency tracking," J.Acoust.Soc.Am. 123(6),
 June 2008.
 
 It must be noticed that, although this ported version is almost equal to the
-original, some few changes were made in order to make the program more "pythonic" and
-improve its performance. Please refer to the documentation file for more 
-information about them. Nevertheless, the results obtained with both algorithms
-were similar.
+original, some few changes were made in order to make the program more "pythonic"
+and improve its performance. Nevertheless, the results obtained with both
+algorithms were similar.
 
 USAGE:
     pitch = yaapt(raw_signal, sample_frequency, <options>)
@@ -38,7 +37,7 @@ INPUTS:
 OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
-           
+
 Version 1.0.0
 21/Jul/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
