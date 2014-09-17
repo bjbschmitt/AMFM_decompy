@@ -9,9 +9,9 @@ is extermely robust for both high quality and telephone speech.
 The YAAPT program was created by the Speech Communication Laboratory of
 the state university of New York at Binghamton. The original program is
 available at http://www.ws.binghamton.edu/zahorian as free software. Further
-information about the program could be found at "A spectral/temporal
-method for robust fundamental frequency tracking," J.Acoust.Soc.Am. 123(6),
-June 2008.
+information about the program could be found at Stephen A. Zahorian, and 
+Hongbing Hu, "A spectral/temporal method for robust fundamental frequency 
+tracking," J. Acosut. Soc. Am. 123(6), June 2008.
 
 It must be noticed that, although this ported version is almost equal to the
 original, some few changes were made in order to make the program more "pythonic"
