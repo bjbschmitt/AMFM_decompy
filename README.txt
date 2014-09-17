@@ -102,8 +102,8 @@ New York at Binghamton.
 It is available at http://www.ws.binghamton.edu/zahorian as free software. Further 
 information about the program can be found at
 
-    [1] "A spectral/temporal method for robust fundamental frequency tracking," 
-        J.Acosut.Soc.Am. 123(6), June 2008.
+    [1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust
+        fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.
 
 The QHM algorithm and its upgrades are formulated and presented in the following 
 publications:
