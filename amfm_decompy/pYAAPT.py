@@ -281,7 +281,7 @@ def yaapt(*args, **kwargs):
     parameters['frame_length'] = kwargs.get('frame_length', 25.0)   #Length of each analysis frame (ms)
     parameters['frame_space'] = kwargs.get('frame_space', 10.0)     #Spacing between analysis frames (ms)
     parameters['f0_min'] = kwargs.get('f0_min', 60.0)               #Minimum F0 searched (Hz)
-    parameters['f0_max'] = kwargs.get('f0_min', 400.0)              #Maximum F0 searched (Hz)
+    parameters['f0_max'] = kwargs.get('f0_max', 400.0)              #Maximum F0 searched (Hz)
     parameters['fft_length'] = kwargs.get('fft_length', 8192)       #FFT length
     parameters['bp_forder'] = kwargs.get('bp_forder', 150)          #Order of band-pass filter
     parameters['bp_low'] = kwargs.get('bp_low', 50.0)               #Low frequency of filter passband (Hz)
@@ -530,9 +530,9 @@ def spec_track(signal, pitch, parameters):
     if (spec_pitch[-1] < pitch_avg/2):
         spec_pitch[-1] = pitch_avg
 
-    spec_voiced = np.array(np.nonzero(spec_pitch))
-    tck, u_original = splprep([spec_voiced[0, :], spec_pitch[spec_voiced[0, :]]],
-                              u=spec_voiced[0, :])
+    spec_voiced = np.array(np.nonzero(spec_pitch)[0])
+    tck, u_original = splprep([spec_voiced, spec_pitch[spec_voiced]],
+                              u=spec_voiced)
     spec_pitch = splev(xrange(pitch.nframes), tck)[1]
     spec_pitch = lfilter(np.ones((3))/3, 1.0, spec_pitch)
 
