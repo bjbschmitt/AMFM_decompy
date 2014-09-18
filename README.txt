@@ -18,7 +18,7 @@ Quasi-Harmonic Model). Their formulation can be found at references [2-4].
 
 Since that the tools mentioned above require a fundamental frequency reference, the 
 package also includes the pitch tracker YAAPT (Yet Another Algorithm for Pitch 
-Tracking) [1], which is extermely robust for both high quality and telephone speech. 
+Tracking) [1], which is extremely robust for both high quality and telephone speech. 
 
 The study of AM-FM decomposition algorithms was the theme from my Master Thesis. 
 The original YAAPT program in MATLAB is provided for free by its authors, while the QHM
@@ -28,10 +28,10 @@ because:
 * the python language is easier to share, read and understand, making it a better way
 to distribute the codes;
 * is more resourceful than MATLAB (has different data structures, scripting options, etc),
-which will be usuful for me in future studies;
+which will be useful for me in future studies;
 * the computational performance from its numeric and scientific packages (numpy and
 scipy) is equivalent to MATLAB;
-* python is free-to-use, while MATLAB is a propertary software;
+* python is free-to-use, while MATLAB is a proprietary software;
 
 Evaluations and future expansions
 =============
@@ -55,7 +55,7 @@ modulated components, which are already documented at [2,3]. In my python code I
 implemented a workaround to this problem, but it is still a sub-optimal solution. 
 
 Actually, I dedicated a chapter in my Master Thesis to a deeper study about this problem 
-and came up with a better solution. Unfortunately, due stupid burocratic issues, I don't 
+and came up with a better solution. Unfortunately, due stupid bureaucratic issues, I don't 
 know if and when my work will be defended and published (to be short, the deadline was 
 expired because me and my advisor needed more time to correct and improve the thesis 
 text. Then we required a prorrogation, but the lecturers board declined it. So, basically, I 
