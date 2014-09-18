@@ -4,7 +4,7 @@ This a ported version for Python from the YAAPT algorithm. The original MATLAB
 program was written by Hongbing Hu and Stephen A.Zahorian.
 
 The YAAPT program, designed for fundamental frequency tracking,
-is extermely robust for both high quality and telephone speech.
+is extremely robust for both high quality and telephone speech.
 
 The YAAPT program was created by the Speech Communication Laboratory of
 the state university of New York at Binghamton. The original program is
@@ -283,7 +283,7 @@ def yaapt(*args, **kwargs):
     parameters['f0_min'] = kwargs.get('f0_min', 60.0)               #Minimum F0 searched (Hz)
     parameters['f0_max'] = kwargs.get('f0_min', 400.0)              #Maximum F0 searched (Hz)
     parameters['fft_length'] = kwargs.get('fft_length', 8192)       #FFT length
-    parameters['bp_forder'] = kwargs.get('bp_forder', 150)          #Order of bandpass filter
+    parameters['bp_forder'] = kwargs.get('bp_forder', 150)          #Order of band-pass filter
     parameters['bp_low'] = kwargs.get('bp_low', 50.0)               #Low frequency of filter passband (Hz)
     parameters['bp_high'] = kwargs.get('bp_high', 1500.0)           #High frequency of filter passband (Hz)
     parameters['nlfer_thresh1'] = kwargs.get('nlfer_thresh1', 0.75) #NLFER boundary for voiced/unvoiced decisions
