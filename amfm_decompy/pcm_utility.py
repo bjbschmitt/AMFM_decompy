@@ -43,10 +43,10 @@ def pcm2float(sig, dtype=np.float64):
 @contextlib.contextmanager
 def printoptions(*args, **kwargs):
     """
-Context manager for temporarily setting NumPy print options.
-
-See http://stackoverflow.com/a/2891805/500098
-"""
+    Context manager for temporarily setting NumPy print options.
+    
+    See http://stackoverflow.com/a/2891805/500098
+    """
     original = np.get_printoptions()
     try:
         np.set_printoptions(*args, **kwargs)
