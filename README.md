@@ -49,7 +49,7 @@ I've tested the installation script and the package itself in Linux and Windows 
 How to use
 =============
 
-Check the pYAAPT and pyQHM pdf documentations included in the docs folder.
+Check the pYAAPT and pyQHM pdf documentations included in the docs folder. The amfm_decompy folder contains the sample.wav file that is used to ilustrate the package's code examples.
 
 Credits and Publications
 =============
