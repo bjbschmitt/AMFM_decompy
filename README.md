@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.0
+version 1.0.1
 
 This python package provides the tools necessary to decompose the voiced part of a speech signal into its modulated components, aka AM-FM decomposition. This designation is used due the fact that, in this method, the signal is modeled as a sum of amplitude- and frequency-modulated components. 
 
@@ -49,7 +49,7 @@ I've tested the installation script and the package itself in Linux and Windows 
 How to use
 =============
 
-Check the pYAAPT and pyQHM pdf documentations included in the docs folder.
+Check the AMFM_decompy pdf documentation included in the docs folder. The amfm_decompy folder contains the sample.wav file that is used to ilustrate the package's code examples.
 
 Credits and Publications
 =============

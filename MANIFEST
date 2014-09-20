@@ -9,3 +9,13 @@ amfm_decompy/pcm_utility.py
 amfm_decompy/pyQHM.py
 amfm_decompy/sample.wav
 bin/AMFM_test.py
+docs/AMFM_decompy.pdf
+docs/index.txt
+docs/interp.png
+docs/pYAAPT.txt
+docs/samp_values.png
+docs/values.png
+docs/_build/latex/AMFM_decompy.pdf
+docs/_build/latex/interp.png
+docs/_build/latex/samp_values.png
+docs/_build/latex/values.png

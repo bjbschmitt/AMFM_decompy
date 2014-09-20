@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='AMFM_decompy',
-    version='1.0.0',
+    version='1.0.1',
     author='Bernardo J.B. Schmitt',
     author_email='bernardo.jb.schmitt@gmail.com',
     packages=['amfm_decompy'],

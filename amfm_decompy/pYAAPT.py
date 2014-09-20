@@ -38,8 +38,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.0
-21/Jul/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.1
+20/Sep/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -115,7 +115,7 @@ class PitchObj(object):
     SMOOTH = ClassProperty(5)
     PTCH_TYP = ClassProperty(100.0)
 
-    def __init__(self, nfft, frame_size, frame_jump):
+    def __init__(self, frame_size, frame_jump, nfft=8192):
 
         self.nfft = nfft
         self.frame_size = frame_size
@@ -123,7 +123,8 @@ class PitchObj(object):
         self.noverlap = self.frame_size-self.frame_jump
 
     def set_energy(self, energy, threshold):
-        self.energy = energy
+        self.mean_energy = np.mean(energy)
+        self.energy = energy/self.mean_energy
         self.vuv = (self.energy > threshold)
 
     def set_frames_pos(self, frames_pos):
@@ -160,8 +161,8 @@ class PitchObj(object):
     def fix(self):
         if self.PITCH_HALF > 0:
             nz_pitch = self.samp_values[self.samp_values > 0]
-            idx = self.samp_values < (mean(nz_pitch)-self.PITCH_HALF_SENS *
-                                      std(nz_pitch))
+            idx = self.samp_values < (np.mean(nz_pitch)-self.PITCH_HALF_SENS *
+                                      np.std(nz_pitch))
             if self.PITCH_HALF == 1:
                 self.samp_values[idx] = 0
             elif self.PITCH_HALF == 2:
@@ -169,8 +170,8 @@ class PitchObj(object):
 
         if self.PITCH_DOUBLE > 0:
             nz_pitch = self.samp_values[self.samp_values > 0]
-            idx = self.samp_values > (mean(nz_pitch)+self.PITCH_DOUBLE_SENS *
-                                      std(nz_pitch))
+            idx = self.samp_values > (np.mean(nz_pitch)+self.PITCH_DOUBLE_SENS *
+                                      np.std(nz_pitch))
             if self.PITCH_DOUBLE == 1:
                 self.samp_values[idx] = 0
             elif self.PITCH_DOUBLE == 2:
@@ -209,7 +210,7 @@ class PitchObj(object):
     def upsample(self, samp_values, file_size, first_samp=0, last_samp=0,
                  interp_tech='spline'):
         if interp_tech is 'step':
-            beg_pad = (self.frame_size - self.frame_jump)/2
+            beg_pad = (self.noverlap)/2
             up_version = np.zeros((file_size))
             up_version[:beg_pad] = first_samp
             up_version[beg_pad:beg_pad+self.frame_jump*self.nframes] = \
@@ -222,7 +223,7 @@ class PitchObj(object):
                                           u=self.frames_pos)
                 up_version = splev(xrange(file_size), tck)[1]
             else:
-                beg_pad = (self.frame_size - self.frame_jump)/2
+                beg_pad = (self.noverlap)/2
                 up_version = np.zeros((file_size))
                 up_version[:beg_pad] = first_samp
                 voiced_frames = np.nonzero(samp_values)[0]
@@ -329,7 +330,7 @@ def yaapt(*args, **kwargs):
     nfft = parameters['fft_length']
     frame_size = int(np.fix(parameters['frame_length']*signal.fs/1000))
     frame_jump = int(np.fix(parameters['frame_space']*signal.fs/1000))
-    pitch = PitchObj(nfft, frame_size, frame_jump)
+    pitch = PitchObj(frame_size, frame_jump, nfft)
 
     if pitch.frame_size < 15:
         print 'Frame length value {} is too short.'.format(nframe_size)
@@ -410,7 +411,7 @@ def nlfer(signal, pitch, parameters):
     specData = np.fft.rfft(data_matrix, pitch.nfft)
 
     frame_energy = np.abs(specData[:, N_f0_min-1:N_f0_max]).sum(axis=1)
-    pitch.set_energy(frame_energy/np.mean(frame_energy), parameters['nlfer_thresh1'])
+    pitch.set_energy(frame_energy, parameters['nlfer_thresh1'])
     pitch.set_frames_pos(samples)
 
 """

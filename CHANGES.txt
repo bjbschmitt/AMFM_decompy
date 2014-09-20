@@ -1,1 +1,10 @@
-v1.0.0, 10/Sep/2014 -- Initial release.
+v1.0.1, 20/Sep/2014 
+
+- 'f0_min' bug in pYAAPT fixed.
+- PitchObj.mean_energy attribute added.
+- minor PEP8, functions and commentaries changes.
+- documentation added.
+
+v1.0.0, 10/Sep/2014 
+
+- Initial release.
