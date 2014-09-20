@@ -1,0 +1,351 @@
+======
+pYAAPT
+======
+
+This a ported version for Python from the YAAPT (Yet Another Algorithm for Pitch Tracking) algorithm. The original MATLAB program was written by Hongbing Hu and Stephen A. Zahorian.
+
+The YAAPT program, designed for fundamental frequency tracking, is extremely robust for both high quality and telephone speech. The YAAPT program was created by the Speech Communication Laboratory of the state university of New York at Binghamton. The original program is available at http://www.ws.binghamton.edu/zahorian as free software. Further information about the program could be found at [ref1]_.
+
+It must be noticed that, although this ported version is almost equal to the original, some few changes were made in order to make the program more "pythonic" and improve its performance. Nevertheless, the results obtained with both algorithms were similar.
+
+-----------
+Quick start
+-----------
+
+The pYAAPT basically contains the whole set of functions to extract the pitch track from a speech signal. These functions, in their turn, are independent from the pyQHM package. Therefore, pYAAPT can be used in any other speech processing application, not only in the AM-FM decomposition. 
+
+USAGE:
+
+.. py:function:: yaapt(signal [, options])
+    :module: amfm_decompy.pYAAPT
+
+    :param signal: created with amfm_decompy.basic_tools.
+    :param options: the default configuration values for all of them are the same as in the original version. A short description about them is presented in the next subitem. For more information about them, please refer to [ref1]_.
+
+    :type signal: signal object
+    :type options: Must be formatted as follow: **{'option_name1' : value1,   'option_name2' : value2, ...}
+    :rtype: pitch object
+
+OPTIONS:
+
+* 'frame_length' - length of each analysis frame (default: 25 ms)
+* 'frame_space' - spacing between analysis frames (default: 10 ms)
+* 'f0_min' - minimum pitch searched (default: 60 Hz)
+* 'f0_max' - maximum pitch searched (default: 400 Hz)
+* 'fft_length' - FFT length (default: 8192 samples)
+* 'bp_forder' - order of band-pass filter (default: 150)
+* 'bp_low' - low frequency of filter passband (default: 50 Hz)
+* 'bp_high' - high frequency of filter passband (default: 1500 Hz)
+* 'nlfer_thresh1' - NLFER (Normalized Low Frequency Energy Ratio) boundary for voiced/unvoiced decisions (default: 0.75)
+* 'nlfer_thresh2' - threshold for NLFER definitely unvoiced (default: 0.1)
+* 'shc_numharms' - number of harmonics in SHC (Spectral Harmonics Correlation) calculation (default: 3)
+* 'shc_window' - SHC window length (default: 40 Hz)
+* 'shc_maxpeaks' - maximum number of SHC peaks to be found (default: 4)
+* 'shc_pwidth' - window width in SHC peak picking (default: 50 Hz)
+* 'shc_thresh1' - threshold 1 for SHC peak picking (default: 5)
+* 'shc_thresh2' - threshold 2 for SHC peak picking (default: 1.25)
+* 'f0_double'- pitch doubling decision threshold (default: 150 Hz)
+* 'f0_half' - pitch halving decision threshold (default: 150 Hz)
+* 'dp5_k1' - weight used in dynamic program (default: 11)
+* 'dec_factor' - factor for signal resampling (default: 1)
+* 'nccf_thresh1' - threshold for considering a peak in NCCF (Normalized Cross Correlation Function) (default: 0.25)
+* 'nccf_thresh2' - threshold for terminating search in NCCF (default: 0.9)
+* 'nccf_maxcands' - maximum number of candidates found (default: 3)
+* 'nccf_pwidth' - window width in NCCF peak picking (default: 5)
+* 'merit_boost' - boost merit (default. 0.20)
+* 'merit_pivot' - merit assigned to unvoiced candidates in definitely unvoiced frames (default: 0.99)
+* 'merit_extra' - merit assigned to extra candidates in reducing pitch doubling/halving errors (default: 0.4)
+* 'median_value' - order of medial filter (default: 7)
+* 'dp_w1' - DP (Dynamic Programming) weight factor for voiced-voiced transitions (default: 0.15)
+* 'dp_w2' - DP weight factor for voiced-unvoiced or unvoiced-voiced transitions (default: 0.5)
+* 'dp_w3' - DP weight factor of unvoiced-unvoiced transitions (default: 0.1)
+* 'dp_w4' - Weight factor for local costs (default: 0.9)
+
+EXAMPLES:
+
+Example 1 - extract the pitch track from a signal using the default configurations::
+
+     import amfm_decompy.pYAAPT as pYAAPT
+     import amfm_decompy.basic_tools as basic
+
+     signal = basic.SignalObj('path_to_sample.wav')
+     pitch = pYAAPT.yaapt(signal)
+
+Example 2 - extract the pitch track from a signal with the minimum pitch set to 150 Hz, the frame length to 15 ms and the frame jump to 5 ms::
+
+     import amfm_decompy.pYAAPT as pYAAPT
+     import amfm_decompy.basic_tools as basic
+
+     signal = basic.SignalObj('path_to_sample.wav')
+     pitch = pYAAPT.yaapt(signal, **{'f0_min' : 150.0, 'frame_length' : 15.0, 'frame_space' : 5.0})
+
+------------
+Classes
+------------
+
+
+PitchObj Class
+-----------------------
+
+The PitchObj Class stores the extracted pitch and all the parameters related to it. A pitch object is necessary for the QHM algorithms. However, the pitch class structure was built in a way that it can be used by any other pitch tracker, not only the YAAPT.
+
+USAGE:
+
+.. py:function:: PitchObj(frame_size, frame_jump[, nfft=8192])
+    :module: amfm_decompy.pYAAPT
+
+    :param frame_size: analysis frame length.
+    :param frame_jump: distance between the center of a extracting frame and the center of its adjacent neighbours.
+    :param nfft: FFT length.
+
+    :type frame_size: int
+    :type frame_jump: int
+    :type nfft: int
+    :rtype: pitch object.
+
+PITCH CLASS VARIABLES:
+^^^^^^^^^^^^^^^^^^^^^
+
+These variables not related with the YAAPT algorithm itself, but with a post-processing where the data is smoothed and halving/doubling errors corrected.
+
+.. py:attribute:: PITCH_HALF
+    :module: PitchObj
+
+    This variable is a flag. When its value is equal to 1, the halving detector set the half pitch values to 0. If PITCH_HALF is equal to 2, the half pitch values are multiplied by 2. For other PITCH_HALF values, the halving detector is not employed (default: 0).
+
+.. py:attribute:: PITCH_HALF_SENS
+    :module: PitchObj
+
+    Set the halving detector sensibility. A pitch sample is considered half valued if it is not zero and lower than::
+
+    mean(pitch) - PITCH_HALF_SENS*std(pitch)
+
+    (default: 2.9).
+
+.. py:attribute:: PITCH_DOUBLE
+    :module: PitchObj
+
+    This variable is a flag. When its value is equal to 1, the doubling detector set the double pitch values to 0. If PITCH_DOUBLE is equal to 2, the double pitch values are divided by 2. For other PITCH_DOUBLE values, the doubling detector is not employed (default: 0).
+
+.. py:attribute:: PITCH_DOUBLE_SENS
+    :module: PitchObj
+
+    Set the doubling detector sensibility. A pitch sample is considered double valued if it is not zero and higher than::
+
+    mean(pitch) + PITCH_DOUBLE_SENS*std(pitch)
+
+    (default: 2.9).
+
+.. py:attribute:: SMOOTH_FACTOR
+    :module: PitchObj
+
+    Determines the median filter length used to smooth the interpolated pitch values (default: 5). [1]_
+
+.. py:attribute:: SMOOTH
+    :module: PitchObj
+
+    This variable is a flag. When its value is not equal to 0, the interpolated pitch is smoothed by a median filter (default: 5). [1]_
+
+.. py:attribute:: PTCH_TYP
+    :module: PitchObj
+
+    If there are less than 2 voiced frames in the file, the PTCH_TYP value is used in the interpolation (default: 100 Hz). [1]_
+
+.. rubric:: Footnotes
+
+.. [1] don't mistake this interpolation with the one performed by the pYAAPT.upsample method. For more explanation, please refer to the pYAAPT.samp_interp and pYAAPT.values_interp attributes.
+
+EXAMPLE:
+
+Example 1 - the pitch is extracted from sample.wav with different smoothing and interpolation configurations::
+
+    import amfm_decompy.pYAAPT as pYAAPT
+    import amfm_decompy.basic_tools as basic
+
+    signal = basic.SignalObj('path_to_sample.wav')
+
+    pYAAPT.PitchObj.PITCH_DOUBLE = 2      # set new values
+    pYAAPT.PitchObj.PITCH_HALF = 2
+    pYAAPT.PitchObj.SMOOTH_FACTOR = 3
+
+    pitch = pYAAPT.yaapt(signal) # calculate the pitch track
+
+
+PITCH OBJECT ATTRIBUTES:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:attribute:: nfft
+    :module: PitchObj
+
+    Length in samples from the FFT used by the pitch tracker. It is set during the object's initialization.
+
+.. py:attribute:: frame_size
+    :module: PitchObj
+
+    Length in samples from the frames used by the pitch tracker. It is set during the object's initialization.
+
+.. py:attribute:: frame_jump
+    :module: PitchObj
+
+    Distance in samples between the center of a extracting frame and the center of its adjacent neighbours. It is set during the object's initialization.
+
+.. py:attribute:: noverlap
+    :module: PitchObj
+
+    It's the difference between the frame size and the frame jump. Represents the number of samples that two adjacent frames share in common, i.e, how much they overlap each other. It is set during the object's initialization.
+
+.. py:attribute:: mean_energy
+    :module: PitchObj
+
+    Signal's low frequency band mean energy. It is set by the PitchObj.set_energy method.
+
+.. py:attribute:: energy
+    :module: PitchObj
+
+    Array that contains the low frequency band energy from each frame, normalized by PitchObj.mean_energy. It is set by the PitchObj.set_energy method.
+
+.. py:attribute:: vuv
+    :module: PitchObj
+
+    Boolean vector that indicates if each speech frame was classified as voiced (represented as 'True') or unvoiced (represented as 'False'). It is set by the PitchObj.set_energy method.
+
+.. py:attribute:: frames_pos
+    :module: PitchObj
+
+    A numpy array that contains the samples where the center of the frames were placed during the extraction. It is set by the PitchObj.set_frame_pos method.
+
+.. py:attribute:: nframes
+    :module: PitchObj
+
+    Number of frames. It is set by the PitchObj.set_frame_pos method.
+
+.. py:attribute:: samp_values
+                  samp_interp
+    :module: PitchObj
+
+    Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are substituted by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications. The figure below presents both arrays from the sample.wav file:
+
+.. image:: samp_values.png
+
+Both attributes are set by the PitchObj.set_values method.
+
+.. py:attribute:: values
+                  values_interp
+    :module: PitchObj
+
+    PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method). The figure below presents both arrays from the sample.wav file:
+
+.. image:: values.png
+
+Both attributes are set by the PitchObj.set_values method.
+
+.. py:attribute:: edges
+    :module: PitchObj
+
+    A list that contains the index where occur the transitions between unvoiced-voiced and voiced-unvoiced in PitchObj.values. It is set by the PitchObj.set_values method, which employs internally the PitchObj.edges_finder method.
+
+PITCH OBJECT METHODS:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:method:: set_energy(energy, threshold)
+    :module: PitchObj
+
+    :param energy: contains the low frequency energy for each frame.
+    :param threshold: normalized threshold.
+
+    :type energy: numpy array
+
+    Set the normalized low frequency energy by taking the input array and dividing it by its mean value. Normalized values above the threshold are considered voiced frames, while the ones below it are unvoiced frames.
+
+.. py:method:: set_frames_pos(frames_pos)
+    :module: PitchObj
+
+    :param frames_pos: index with the sample positions.
+
+    :type values: numpy array
+
+    Set the position from the center of the extraction frames.
+
+.. py:method:: set_values(samp_values, file_size [, interp_tech='spline'])
+    :module: PitchObj
+
+    :param samp_values: pitch value for each frame.
+    :param file_size: length of the speech signal.
+    :param interp_tech: interpolation method employed to upsample the data. Can be 'spline' (default) and 'step'.
+
+    :type samp_values: numpy array
+    :type file_size: int
+    :type interp_tech: string
+
+    Set the pitch values and also calculates its interpolated version (for more information, check the PitchObj.samp_values and PitchObj.samp_interp attributes). A post-process is employed then using the PitchObj class attributes. After that, both arrays are upsampled, so that the output arrays have the same length as the original speech signal. In this process, a second interpolation is necessary. The interpolation technique employed is indicated by the parameter interp_tech.
+
+    Example::
+
+       import amfm_decompy.pYAAPT as pYAAPT
+       import amfm_decompy.basic_tools as basic
+       from matplotlib import pyplot as plt
+
+       signal = basic.SignalObj('path_to_sample.wav')
+       pitch = pYAAPT.yaapt(signal)
+
+       plt.plot(pitch.values, label='spline interpolation', color='red')
+
+       pitch.set_values(pitch.samp_values, len(pitch.values), interp_tech='step')
+
+       plt.plot(pitch.values, label='step interpolation')
+
+       plt.xlabel('samples', fontsize=18)
+       plt.ylabel('pitch (Hz)', fontsize=18)
+       plt.legend(loc='upper right')
+
+    The output is presented below:
+
+.. image:: interp.png
+
+.. py:method:: edges_finder(values)
+    :module: PitchObj
+
+    :param values: contains the low frequency energy for each frame.
+
+    :type values: numpy array
+    :rtype: list.
+
+    Returns the index of the samples where occur the transitions between unvoiced-voiced and voiced-unvoiced.
+
+
+BandpassFilter Class
+--------------------
+
+Creates a bandpass filter necessary for the YAAPT algorithm.
+
+USAGE:
+
+.. py:function:: BandpassFilter(fs, parameters)
+    :module: amfm_decompy.pYAAPT
+
+    :param fs: signal's fundamental frequency
+    :param parameters: contains the parameters options from the YAAPT algorithm.
+
+    :type fs: float
+    :type parameters: dictionary
+    :rtype: bandpass filter object.
+
+BANDPASS FILTER ATTRIBUTES:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:attribute:: b
+    :module: BandpassFilter
+
+    Bandpass filter zeros coefficients. It is set during the object's initialization.
+
+.. py:attribute:: a
+    :module: BandpassFilter
+
+    Bandpass filter poles coefficients. It is set during the object's initialization.
+
+.. py:attribute:: dec_factor
+    :module: BandpassFilter
+
+    Decimation factor used for downsampling the data. It is set during the object's initialization.
+
+.. [ref1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.
