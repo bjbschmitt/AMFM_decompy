@@ -1,0 +1,53 @@
+SignalObj Class
+---------------
+
+The SignalObj Class stores the speech signal and all the parameters related to it. It must be noticed that the SignalObj here is different from the pyQHM module one.
+
+USAGE:
+
+.. py:function:: SignalObj(args)
+    :module: amfm_decompy.pYAAPT
+
+    :param args: the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.
+
+    :rtype: speech signal object.
+
+SIGNAL OBJECT ATTRIBUTES:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:attribute:: data
+    :module: SignalObj
+
+    Numpy array containing the speech signal data. It is set during the object's initialization.
+
+.. py:attribute:: fs
+    :module: SignalObj
+
+    Sample frequency in Hz. It is set during the object's initialization.
+
+.. py:attribute:: size
+    :module: SignalObj
+
+    Speech signal length. It is set during the object's initialization.
+
+.. py:attribute:: filtered
+    :module: SignalObj
+
+    Bandpassed version from the speech data. It is set by the SignalObj.filtered_version method.
+
+.. py:attribute:: new_fs
+    :module: SignalObj
+
+    Downsampled fundamental frequency from the speech data. It is set by the SignalObj.filtered_version method.
+
+
+SIGNAL OBJECT METHODS:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:method:: filtered_version(bp_filter)
+    :module: SignalObj
+
+    :param bp_filter: BandpassFilter object.
+
+    Filters the signal data by a bandpass filter.
+

@@ -2,6 +2,7 @@ v1.0.1, 20/Sep/2014
 
 - 'f0_min' bug in pYAAPT fixed.
 - PitchObj.mean_energy attribute added.
+- two SignalObj classes merged into only one.
 - minor PEP8, functions and commentaries changes.
 - documentation added.
 

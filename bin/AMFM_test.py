@@ -3,12 +3,13 @@
 """
 Script to test the AMFM_decompy package.
 
-Version 1.0.0
-10/Sep/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.1
+20/Sep/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 import amfm_decompy
 import amfm_decompy.pYAAPT as pyaapt
 import amfm_decompy.pyQHM as pyqhm
+import amfm_decompy.basic_tools as basic
 import os.path
 
 # Declare the variables.
@@ -18,13 +19,13 @@ nharm_max = 25
 SNR = float('Inf')
 
 # Create the signal object.
-signal = pyqhm.SignalObj(file_name)
+signal = basic.SignalObj(file_name)
 
 # Create the window object.
 window = pyqhm.SampleWindow(window_duration, signal.fs)
 
 # Create the pitch object and calculate its attributes.
-pitch = pyaapt.yaapt(signal.data, signal.fs)
+pitch = pyaapt.yaapt(signal)
 
 # Set the number of modulated components.
 signal.set_nharm(pitch.values, nharm_max)

@@ -40,53 +40,6 @@ import scipy
 --------------------------------------------
 """
 
-
-"""
-Creates a signal object.
-"""
-
-class SignalObj(object):
-
-    def __init__(self, *args):
-        if len(args) == 1:
-            try:
-                from scipy.io import wavfile
-                from pcm_utility import pcm2float
-            except:
-                print "ERROR: Wav modules could not loaded!"
-                thread.interrupt_main()
-            self.fs, self.data = wavfile.read(args[0])
-            self.fs = float(self.fs)
-            self.nbits = int(16)
-            self.data = pcm2float(self.data, dtype='f')
-            self.name = args[0]
-        elif len(args) == 2:
-            self.data = args[0]
-            self.fs = args[1]
-
-        self.size = len(self.data)
-        self.clean = np.empty((self.size))
-        self.clean[:] = self.data
-
-    """
-    Method that uses the pitch values to estimate the number of modulated
-    components in the signal.
-    """
-
-    def set_nharm(self, pitch, n_harm_max):
-        n_harm = (self.fs/2)/np.amax(pitch) - 0.5
-        self.n_harm = int(np.floor(min(n_harm, n_harm_max)))
-
-    """
-    Adds a zero-mean gaussian noise to the signal.
-    """
-
-    def noiser(self, pitch, SNR):
-        RMS = np.std(self.data[pitch > 0])
-        noise = np.random.normal(0, RMS/(10**(SNR/20)), self.size)
-        self.data += noise
-
-
 """
 Creates a single component object.
 """

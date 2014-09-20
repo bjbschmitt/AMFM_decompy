@@ -12,22 +12,18 @@ It must be noticed that, although this ported version is almost equal to the ori
 Quick start
 -----------
 
-The pYAAPT basically contains the whole set of functions to extract the pitch track from a speech signal. These functions, in their turn, are independent from the pyQHM package. Therefore, pYAAPT can be used in any other speech processing application, not only in the AM-FM decomposition. Its only dependency is the pcm_utility.py (in case that is necessary to read a wav file), which is already included in the AMFM_decompy package.
+The pYAAPT basically contains the whole set of functions to extract the pitch track from a speech signal. These functions, in their turn, are independent from the pyQHM package. Therefore, pYAAPT can be used in any other speech processing application, not only in the AM-FM decomposition. 
 
 USAGE:
 
-.. py:function:: yaapt(raw_signal, sample_frequency [, options])
-              yaapt(wav_file [, options])
+.. py:function:: yaapt(signal [, options])
     :module: amfm_decompy.pYAAPT
 
-    :param raw_signal: speech signal.
-    :param sample_frequency: sample rate of the input data in Hz.
+    :param signal: created with amfm_decompy.basic_tools.
     :param options: the default configuration values for all of them are the same as in the original version. A short description about them is presented in the next subitem. For more information about them, please refer to [ref1]_.
 
-    :param wav_file: string containing the path from the speech signal wav file.
-    :type raw_signal: numpy array
+    :type signal: signal object
     :type options: Must be formatted as follow: **{'option_name1' : value1,   'option_name2' : value2, ...}
-    :type wav_file: string
     :rtype: pitch object
 
 OPTIONS:
@@ -67,32 +63,29 @@ OPTIONS:
 
 EXAMPLES:
 
-Example 1 - read a file data and extract the pitch track using the default configurations::
+Example 1 - extract the pitch track from a signal using the default configurations::
 
      import amfm_decompy.pYAAPT as pYAAPT
-     import numpy as np
-     from amfm_decompy.pcm_utility import pcm2float
-     from scipy.io import wavfile
+     import amfm_decompy.basic_tools as basic
 
-     frequency, data = wavfile.read('path_to_sample.wav')
-     frequency = float(frequency)
-     data = pcm2float(data, dtype='f')
+     signal = basic.SignalObj('path_to_sample.wav')
+     pitch = pYAAPT.yaapt(signal)
 
-     pitch = pYAAPT.yaapt(data, frequency)
-
-Example 2 - read a wav file and extract the pitch track. The minimum pitch is set to 150 Hz, the frame length to 15 ms and the frame jump to 5 ms::
+Example 2 - extract the pitch track from a signal with the minimum pitch set to 150 Hz, the frame length to 15 ms and the frame jump to 5 ms::
 
      import amfm_decompy.pYAAPT as pYAAPT
+     import amfm_decompy.basic_tools as basic
 
-     pitch = pYAAPT.yaapt('path_to_sample.wav', **{'f0_min' : 150.0, 'frame_length' : 15.0, \
-            'frame_space' : 5.0})
--------
+     signal = basic.SignalObj('path_to_sample.wav')
+     pitch = pYAAPT.yaapt(signal, **{'f0_min' : 150.0, 'frame_length' : 15.0, 'frame_space' : 5.0})
+
+------------
 Classes
--------
+------------
 
 
 PitchObj Class
---------------
+-----------------------
 
 The PitchObj Class stores the extracted pitch and all the parameters related to it. A pitch object is necessary for the QHM algorithms. However, the pitch class structure was built in a way that it can be used by any other pitch tracker, not only the YAAPT.
 
@@ -164,15 +157,18 @@ These variables not related with the YAAPT algorithm itself, but with a post-pro
 
 EXAMPLE:
 
-Example 1 - the pitch is extracted from sample.wav and after that, recalculated with different smoothing and interpolation configurations::
+Example 1 - the pitch is extracted from sample.wav with different smoothing and interpolation configurations::
 
     import amfm_decompy.pYAAPT as pYAAPT
+    import amfm_decompy.basic_tools as basic
+
+    signal = basic.SignalObj('path_to_sample.wav')
 
     pYAAPT.PitchObj.PITCH_DOUBLE = 2      # set new values
     pYAAPT.PitchObj.PITCH_HALF = 2
     pYAAPT.PitchObj.SMOOTH_FACTOR = 3
 
-    pitch = pYAAPT.yaapt('path_to_sample.wav') # calculate the pitch track
+    pitch = pYAAPT.yaapt(signal) # calculate the pitch track
 
 
 PITCH OBJECT ATTRIBUTES:
@@ -286,9 +282,11 @@ PITCH OBJECT METHODS:
     Example::
 
        import amfm_decompy.pYAAPT as pYAAPT
+       import amfm_decompy.basic_tools as basic
        from matplotlib import pyplot as plt
 
-       pitch = pYAAPT.yaapt('path_to_ample.wav')
+       signal = basic.SignalObj('path_to_sample.wav')
+       pitch = pYAAPT.yaapt(signal)
 
        plt.plot(pitch.values, label='spline interpolation', color='red')
 
@@ -313,60 +311,6 @@ PITCH OBJECT METHODS:
     :rtype: list.
 
     Returns the index of the samples where occur the transitions between unvoiced-voiced and voiced-unvoiced.
-
-
-SignalObj Class
----------------
-
-The SignalObj Class stores the speech signal and all the parameters related to it. It must be noticed that the SignalObj here is different from the pyQHM module one.
-
-USAGE:
-
-.. py:function:: SignalObj(args)
-    :module: amfm_decompy.pYAAPT
-
-    :param args: the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.
-
-    :rtype: speech signal object.
-
-SIGNAL OBJECT ATTRIBUTES:
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. py:attribute:: data
-    :module: SignalObj
-
-    Numpy array containing the speech signal data. It is set during the object's initialization.
-
-.. py:attribute:: fs
-    :module: SignalObj
-
-    Sample frequency in Hz. It is set during the object's initialization.
-
-.. py:attribute:: size
-    :module: SignalObj
-
-    Speech signal length. It is set during the object's initialization.
-
-.. py:attribute:: filtered
-    :module: SignalObj
-
-    Bandpassed version from the speech data. It is set by the SignalObj.filtered_version method.
-
-.. py:attribute:: new_fs
-    :module: SignalObj
-
-    Downsampled fundamental frequency from the speech data. It is set by the SignalObj.filtered_version method.
-
-
-SIGNAL OBJECT METHODS:
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. py:method:: filtered_version(bp_filter)
-    :module: SignalObj
-
-    :param bp_filter: BandpassFilter object.
-
-    Filters the signal data by a bandpass filter.
 
 
 BandpassFilter Class
@@ -403,9 +347,5 @@ BANDPASS FILTER ATTRIBUTES:
     :module: BandpassFilter
 
     Decimation factor used for downsampling the data. It is set during the object's initialization.
-
-----------
-References
-----------
 
 .. [ref1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.

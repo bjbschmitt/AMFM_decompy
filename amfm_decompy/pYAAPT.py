@@ -19,20 +19,18 @@ and improve its performance. Nevertheless, the results obtained with both
 algorithms were similar.
 
 USAGE:
-    pitch = yaapt(raw_signal, sample_frequency, <options>)
-or
-    pitch = yaapt(wav_file, <options>)
+    pitch = yaapt(signal, <options>)
 
 INPUTS:
-    raw_signal: numpy array containing the normalized speech signal.
-    sample_frequency: sample rate of the input data in Hz.
+    signal: signal object created by amfm_decompy.basic_tools. For more 
+    information about its properties, please consult the documentation file.
+    
     <options>: must be formated as follows:
                **{'option_name1' : value1, 'option_name2' : value2, ...}
                The default configuration values for all of them are the same as
                in the original version. The main yaapt function in this file
                provides a short description about each option.
                For more information, please refer to the original bibliography.
-    wav_file: string containing the path from the speech signal wav file.
 
 OUTPUTS:
     pitch: pitch object. For more information about its properties, please
@@ -44,8 +42,9 @@ Version 1.0.1
 
 import numpy as np
 import numpy.lib.stride_tricks as stride_tricks
-from scipy.signal import *
+from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
 from scipy.interpolate import *
+import amfm_decompy.basic_tools as basic
 import thread
 import itertools
 
@@ -69,38 +68,6 @@ class ClassProperty(object):
     def __set__(self, obj, val):
         self.val = val
 
-
-"""
-Creates a signal object.
-"""
-class SignalObj(object):
-
-    def __init__(self, args):
-
-        if len(args) == 1:
-            try:
-                from scipy.io import wavfile
-                from pcm_utility import pcm2float
-            except:
-                print "ERROR: Wav modules could not loaded!"
-                thread.interrupt_main()
-            self.fs, self.data = wavfile.read(args[0])
-            self.fs = float(self.fs)
-            self.data = pcm2float(self.data, dtype='f')
-        elif len(args) == 2:
-            self.data = args[0]
-            self.fs = args[1]
-
-        self.size = len(self.data)
-
-    """
-    Filters the signal data by a bandpass filter.
-    """
-    def filtered_version(self, bp_filter):
-        tempData = lfilter(bp_filter.b, bp_filter.a, self.data)
-
-        self.filtered = tempData[0:self.size:bp_filter.dec_factor]
-        self.new_fs = self.fs/bp_filter.dec_factor
 
 """
 Creates a pitch object.
@@ -273,7 +240,7 @@ class BandpassFilter(object):
                 Main function.
 --------------------------------------------
 """
-def yaapt(*args, **kwargs):
+def yaapt(signal, **kwargs):
 
     #---------------------------------------------------------------
     # Set the default values for the parameters.
@@ -317,9 +284,8 @@ def yaapt(*args, **kwargs):
     #---------------------------------------------------------------
     # Create the signal objects and filter them.
     #---------------------------------------------------------------
-    signal = SignalObj(args)
     fir_filter = BandpassFilter(signal.fs, parameters)
-    nonlinear_sign = SignalObj((signal.data**2, signal.fs))
+    nonlinear_sign = basic.SignalObj(signal.data**2, signal.fs)
 
     signal.filtered_version(fir_filter)
     nonlinear_sign.filtered_version(fir_filter)
