@@ -96,15 +96,15 @@ class ModulatedSign(object):
     [1,2] present a solution for this problem.
     """
 
-    def interpolate_samp(self, samp_frames, pitch):
+    def interpolate_samp(self, samp_frames, pitch_track):
 
         # Interpolation from magnitude and frequency.
 
         for idx, func in [(0, 'linear'), (2, 'cubic')]:
             f = scipy.interpolate.interp1d(samp_frames,
                                        self.H[:, idx, samp_frames], kind=func)
-            self.H[:, idx, np.nonzero(pitch.values)[0]] = f(
-                                                    np.nonzero(pitch.values)[0])
+            self.H[:, idx, np.nonzero(pitch_track)[0]] = f(
+                                                    np.nonzero(pitch_track)[0])
 
         # Interpolation from phase.
 
@@ -323,7 +323,7 @@ def HM_run(func, signal, pitch, window, samp_jump=None, N_iter=1,
     # If the extraction was performed with temporal jumps, interpolate the
     # results.
     if samp_jump is not None:
-        HM.interpolate_samp(voiced_frames, pitch)
+        HM.interpolate_samp(voiced_frames, pitch.values)
     HM.synthesize()
     HM.srer(signal.data, pitch.values)
     HM.phase_edges(pitch.edges, window)
@@ -381,7 +381,7 @@ def qhm_iteration(data, f0_ref, window, fs, max_step, freq, N_iter=1):
         coef = least_squares(E, E_windowed, windowed_data, window, K)
 
     # Calculate the mean squared error between the original frame and the
-    # synthsized one.
+    # synthesized one.
     err = error_calc(windowed_data, E, coef, window)
     return coef, freq, err
 
