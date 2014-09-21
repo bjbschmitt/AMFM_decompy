@@ -150,10 +150,10 @@ class ModulatedSign(object):
     synthesized signal.
     """
 
-    def srer(self, orig_signal, pitch):
-        self.SRER = 20*np.log10(np.std(orig_signal[np.nonzero(pitch)[0]]) /
-                    np.std(orig_signal[np.nonzero(pitch)[0]] -
-                    self.signal[np.nonzero(pitch)[0]]))
+    def srer(self, orig_signal, pitch_track):
+        self.SRER = 20*np.log10(np.std(orig_signal[np.nonzero(pitch_track)[0]]) /
+                    np.std(orig_signal[np.nonzero(pitch_track)[0]] -
+                    self.signal[np.nonzero(pitch_track)[0]]))
 
     """
     Extrapolates the phase at the border of the voiced frames by integrating
