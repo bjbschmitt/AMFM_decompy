@@ -159,7 +159,7 @@ class ModulatedSign(object):
     Extrapolates the phase at the border of the voiced frames by integrating
     the edge frequency value. This procedure is necessary for posterior aQHM
     calculations. Additionally, the method allows the replacement of the
-    extracted phase by the cummulative frequency. The objective is to provide
+    extracted phase by the cumulative frequency. The objective is to provide
     smoother bases for further aQHM and eaQHM calculations. Normally this is
     not necessary, since that the interpolation process already smooths the
     phase vector. But in a sample-by-sample extraction case, this substitution
