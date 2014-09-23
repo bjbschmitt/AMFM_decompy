@@ -15,9 +15,5 @@ setup(
     description='Package to decompose the voiced part of a speech signal into \
                     its modulated components, aka AM-FM decomposition.',
     long_description=open('README.txt').read(),
-    install_requires=[
-        "numpy",
-        "scipy",
-    ],
 )
 
