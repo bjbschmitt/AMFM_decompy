@@ -34,7 +34,7 @@ In my thesis I also ran performance tests comparing the QHM family with other tw
 Installation
 =============
 
-The pypi page is recommended for a quick installation. But you can also copy all directories here and then run 
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.1 is recommended for a quick installation. But you can also copy all directories here and then run 
 
 ```python setup.py install```
 
