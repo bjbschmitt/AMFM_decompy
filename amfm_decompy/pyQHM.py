@@ -46,10 +46,10 @@ Creates a single component object.
 
 class ComponentObj(object):
 
-    def __init__(self, H, i):
-        self.mag = H[i, 0, :]
-        self.phase = H[i, 1, :]
-        self.freq = H[i, 2, :]
+    def __init__(self, H, harm):
+        self.mag = H[harm, 0, :]
+        self.phase = H[harm, 1, :]
+        self.freq = H[harm, 2, :]
 
     """
     Synthsize the modulated component by using the extracted magnitude and
