@@ -34,13 +34,13 @@ class SignalObj(object):
             self.fs = args[1]
 
         self.size = len(self.data)
-        self.clean = np.empty((self.size))
-        self.clean[:] = self.data
+
 
     """
     Filters the signal data by a bandpass filter.
     """
     def filtered_version(self, bp_filter):
+        
         tempData = lfilter(bp_filter.b, bp_filter.a, self.data)
 
         self.filtered = tempData[0:self.size:bp_filter.dec_factor]
@@ -52,6 +52,7 @@ class SignalObj(object):
     """
 
     def set_nharm(self, pitch_track, n_harm_max):
+        
         n_harm = (self.fs/2)/np.amax(pitch_track) - 0.5
         self.n_harm = int(np.floor(min(n_harm, n_harm_max)))
 
@@ -60,6 +61,10 @@ class SignalObj(object):
     """
 
     def noiser(self, pitch_track, SNR):
+        
+        self.clean = np.empty((self.size))
+        self.clean[:] = self.data
+        
         RMS = np.std(self.data[pitch_track > 0])
         noise = np.random.normal(0, RMS/(10**(SNR/20)), self.size)
         self.data += noise
@@ -70,7 +75,6 @@ Transform a pcm raw signal into a float one, with values limited between -1 and
 """
 
 def pcm2float(sig, dtype=np.float64):
-
 
     sig = np.asarray(sig) # make sure it's a NumPy array
     assert sig.dtype.kind == 'i', "'sig' must be an array of signed integers!"
