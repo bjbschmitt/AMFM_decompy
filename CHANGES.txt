@@ -1,3 +1,7 @@
+v1.0.2, 27/Nov/2014 
+
+- "missing thread package" bug in basic_tools.py fixed.
+
 v1.0.1, 20/Sep/2014 
 
 - 'f0_min' bug in pYAAPT fixed.

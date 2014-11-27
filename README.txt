@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.1
+version 1.0.2
 
 This python package provides the tools necessary to decompose the voiced part of a 
 speech signal into its modulated components, aka AM-FM decomposition. This 
@@ -71,7 +71,7 @@ of months to fully translate them.
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.1 is recommended for 
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.2 is recommended for 
 a quick installation. But you can also copy all directories here and then run 
 
 python setup.py install
