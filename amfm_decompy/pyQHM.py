@@ -27,8 +27,8 @@ References:
         of the adaptive quasi-harmonic model”, em IEEE International Conference
         on Acoustics, Speech and Signal Processing (ICASSP), 2012.
 
-Version 1.0.2
-27/Nov/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.3
+23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -204,8 +204,10 @@ Creates the sample window object.
 class SampleWindow(object):
 
     def __init__(self, window_duration, fs):
-        self.dur = window_duration         # s
+        self.dur = window_duration         # in seconds
         self.length = int(self.dur*fs+1)
+        if not self.length %2:
+            self.length -= 1
         self.data = np.hamming(self.length)
         self.data2 = self.data**2
         self.N = int(self.dur*fs/2)

@@ -9,8 +9,8 @@ is extremely robust for both high quality and telephone speech.
 The YAAPT program was created by the Speech Communication Laboratory of
 the state university of New York at Binghamton. The original program is
 available at http://www.ws.binghamton.edu/zahorian as free software. Further
-information about the program could be found at Stephen A. Zahorian, and 
-Hongbing Hu, "A spectral/temporal method for robust fundamental frequency 
+information about the program could be found at Stephen A. Zahorian, and
+Hongbing Hu, "A spectral/temporal method for robust fundamental frequency
 tracking," J. Acosut. Soc. Am. 123(6), June 2008.
 
 It must be noticed that, although this ported version is almost equal to the
@@ -22,9 +22,9 @@ USAGE:
     pitch = yaapt(signal, <options>)
 
 INPUTS:
-    signal: signal object created by amfm_decompy.basic_tools. For more 
+    signal: signal object created by amfm_decompy.basic_tools. For more
     information about its properties, please consult the documentation file.
-    
+
     <options>: must be formated as follows:
                **{'option_name1' : value1, 'option_name2' : value2, ...}
                The default configuration values for all of them are the same as
@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.2
-27/Nov/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.3
+23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -98,7 +98,7 @@ class PitchObj(object):
         self.frames_pos = frames_pos
         self.nframes = len(self.frames_pos)
 
-    def set_values(self, samp_values, file_size, interp_tech='spline'):
+    def set_values(self, samp_values, file_size, interp_tech='pchip'):
         self.samp_values = samp_values
         self.fix()
         self.values = self.upsample(self.samp_values, file_size, 0, 0,
@@ -156,9 +156,8 @@ class PitchObj(object):
             pitch[pitch == 0] = self.PTCH_TYP
         else:
             nz_pitch = pitch2[pitch2 > 0]
-            tck, u_original = splprep([np.nonzero(pitch2)[0], nz_pitch],
-                                      u=np.nonzero(pitch2)[0])
-            pitch2 = splev(xrange(self.nframes), tck)[1]
+            pitch2 = pchip(np.nonzero(pitch2)[0],
+                           nz_pitch)(xrange(self.nframes))
             pitch[pitch == 0] = pitch2[pitch == 0]
         if self.SMOOTH > 0:
             pitch = medfilt(pitch, self.SMOOTH_FACTOR)
@@ -175,7 +174,7 @@ class PitchObj(object):
     value.
     """
     def upsample(self, samp_values, file_size, first_samp=0, last_samp=0,
-                 interp_tech='spline'):
+                 interp_tech='pchip'):
         if interp_tech is 'step':
             beg_pad = (self.noverlap)/2
             up_version = np.zeros((file_size))
@@ -184,11 +183,16 @@ class PitchObj(object):
                                     np.repeat(samp_values, self.frame_jump)
             up_version[beg_pad+self.frame_jump*self.nframes:] = last_samp
 
-        if interp_tech is 'spline':
+        elif interp_tech is 'pchip' or 'spline':
             if np.amin(samp_values) > 0:
-                tck, u_original = splprep([self.frames_pos, samp_values],
-                                          u=self.frames_pos)
-                up_version = splev(xrange(file_size), tck)[1]
+                if interp_tech is 'pchip':
+                    up_version = pchip(self.frames_pos,
+                                       samp_values)(xrange(file_size))
+
+                elif interp_tech is 'spline':
+                    tck, u_original = splprep([self.frames_pos, samp_values],
+                                              u=self.frames_pos)
+                    up_version = splev(xrange(file_size), tck)[1]
             else:
                 beg_pad = (self.noverlap)/2
                 up_version = np.zeros((file_size))
@@ -202,9 +206,14 @@ class PitchObj(object):
                     up_interval = self.frames_pos[frame]
                     tot_interval = np.arange(up_interval[0]-(self.frame_jump/2),
                                           up_interval[-1]+(self.frame_jump/2))
-                    tck, u_original = splprep([up_interval, samp_values[frame]],
+                    if interp_tech is 'pchip':
+                        up_version[tot_interval] = pchip(up_interval,
+                                       samp_values[frame])(tot_interval)                      
+                    
+                    elif interp_tech is 'spline':
+                        tck, u_original = splprep([up_interval, samp_values[frame]],
                                                u=up_interval)
-                    up_version[tot_interval] = splev(tot_interval, tck)[1]
+                        up_version[tot_interval] = splev(tot_interval, tck)[1]
 
                 up_version[beg_pad+self.frame_jump*self.nframes:] = last_samp
 
@@ -334,6 +343,7 @@ def yaapt(signal, **kwargs):
     # Use dyanamic programming to determine the final pitch.
     #---------------------------------------------------------------
     final_pitch = dynamic(ref_pitch, ref_merit, pitch, parameters)
+
     pitch.set_values(final_pitch, signal.size)
 
     return pitch
@@ -498,9 +508,9 @@ def spec_track(signal, pitch, parameters):
         spec_pitch[-1] = pitch_avg
 
     spec_voiced = np.array(np.nonzero(spec_pitch)[0])
-    tck, u_original = splprep([spec_voiced, spec_pitch[spec_voiced]],
-                              u=spec_voiced)
-    spec_pitch = splev(xrange(pitch.nframes), tck)[1]
+    spec_pitch = pchip(spec_voiced,
+                       spec_pitch[spec_voiced])(xrange(pitch.nframes))
+
     spec_pitch = lfilter(np.ones((3))/3, 1.0, spec_pitch)
 
     spec_pitch[0] = spec_pitch[2]
@@ -739,6 +749,10 @@ def peaks(data, delta, maxpeaks, parameters):
 
     for n in (peaks.ravel().nonzero()[0]+min_lag+center+1).tolist():
         if np.argmax(data[n-center:n+center+1]) == center:
+            if numpeaks >= maxpeaks:
+                pitch = np.append(pitch, np.zeros((1)))
+                merit = np.append(merit, np.zeros((1)))
+
             pitch[numpeaks] = float(n)*delta
             merit[numpeaks] = data[n]
             numpeaks += 1
@@ -819,13 +833,16 @@ Corresponds to the path1.m file.
 """
 def path1(local, trans, n_lin, n_col):
 
-    if n_lin >= 100:
-        print 'Stop in Dynamic due to M>100'
-        thread.interrupt_main()
+# Apparently the following lines are somehow kind of useless.
+# Therefore, I removed them in the version 1.0.3.
 
-    if n_col >= 1000:
-        print 'Stop in Dynamic due to N>1000'
-        thread.interrupt_main()
+#    if n_lin >= 100:
+#        print 'Stop in Dynamic due to M>100'
+#        thread.interrupt_main()
+#
+#    if n_col >= 1000:
+#        print 'Stop in Dynamic due to N>1000'
+#        thread.interrupt_main()
 
     PRED = np.zeros((n_lin, n_col), dtype=int)
     P = np.ones((n_col), dtype=int)
@@ -874,7 +891,7 @@ def crs_corr(data, lag_min, lag_max):
     x_jr = data[lag_min:lag_max+N]
     p = np.dot(x_j, x_j)
 
-    x_jr_matrix = stride_matrix(x_jr, x_jr.shape[-1]-N, N, 1)
+    x_jr_matrix = stride_matrix(x_jr, lag_max-lag_min, N, 1)
 
     formula_nume = np.dot(x_jr_matrix, x_j)
     formula_denom = np.sum(x_jr_matrix*x_jr_matrix, axis=1)*p + eps1

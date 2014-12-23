@@ -2,14 +2,14 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.2
-27/Nov/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.3
+23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
 from scipy.signal import lfilter
 import thread
-#import pdb
+
 
 """
 Creates a signal object.
@@ -35,13 +35,19 @@ class SignalObj(object):
             self.fs = args[1]
 
         self.size = len(self.data)
+      
+        if self.size == self.data.size/2:
+            print "Warning: stereo wav file. Converting it to mono for the analysis."
+            self.data = (self.data[:,0]+self.data[:,1])/2
+
+
 
 
     """
     Filters the signal data by a bandpass filter.
     """
     def filtered_version(self, bp_filter):
-        
+
         tempData = lfilter(bp_filter.b, bp_filter.a, self.data)
 
         self.filtered = tempData[0:self.size:bp_filter.dec_factor]
@@ -53,7 +59,7 @@ class SignalObj(object):
     """
 
     def set_nharm(self, pitch_track, n_harm_max):
-        
+
         n_harm = (self.fs/2)/np.amax(pitch_track) - 0.5
         self.n_harm = int(np.floor(min(n_harm, n_harm_max)))
 
@@ -62,10 +68,10 @@ class SignalObj(object):
     """
 
     def noiser(self, pitch_track, SNR):
-        
+
         self.clean = np.empty((self.size))
         self.clean[:] = self.data
-        
+
         RMS = np.std(self.data[pitch_track > 0])
         noise = np.random.normal(0, RMS/(10**(SNR/20)), self.size)
         self.data += noise
@@ -84,4 +90,4 @@ def pcm2float(sig, dtype=np.float64):
     # Note that 'min' has a greater (by 1) absolute value than 'max'!
     # Therefore, we use 'min' here to avoid clipping.
     return sig.astype(dtype) / dtype.type(-np.iinfo(sig.dtype).min)
-        
+

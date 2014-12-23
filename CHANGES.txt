@@ -1,3 +1,23 @@
+v1.0.3, 23/Dec/2014 
+
+- several bugs related to the analysis of 44,1 kHz files fixed. Thanks to 
+  Tomasz Toczyski for reporting them.
+- "growing pitch and merit vectors" bug in the peaks function from pYAAPT.py 
+  fixed.
+- "Stop in Dynamic" exceptions in path1 function from pYAAPT.py removed. They 
+  were inherited from the original MATLAB code, but apperently don't have a
+  real use or meaning.
+-  internal interpolation functions changed from spline to pchip in order to 
+  keep the fidelity to the original MATLAB code and also to produce better
+  results.
+- "pchip" option added and set as default to the PitchObj method "upsample" in
+  pYAAPT.py. This interpolation method is favored over "spline" because 
+  produces less horrible pitch spikes.
+- "single sample upsample" bug in PitchObj method "upsample" from
+  pYAAPT.py fixed.
+- support for stereo files added.
+- documentation updated.
+
 v1.0.2, 27/Nov/2014 
 
 - "missing thread package" bug in basic_tools.py fixed.

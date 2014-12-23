@@ -3,8 +3,8 @@
 """
 Script to test the AMFM_decompy package.
 
-Version 1.0.2
-27/Nov/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.3
+23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 import amfm_decompy
 import amfm_decompy.pYAAPT as pyaapt
@@ -14,7 +14,7 @@ import os.path
 
 # Declare the variables.
 file_name = os.path.dirname(amfm_decompy.__file__)+os.sep+"sample.wav"
-window_duration = 0.015
+window_duration = 0.015   # in seconds
 nharm_max = 25
 SNR = float('Inf')
 

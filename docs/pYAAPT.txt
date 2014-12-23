@@ -271,7 +271,7 @@ PITCH OBJECT METHODS:
 
     :param samp_values: pitch value for each frame.
     :param file_size: length of the speech signal.
-    :param interp_tech: interpolation method employed to upsample the data. Can be 'spline' (default) and 'step'.
+    :param interp_tech: interpolation method employed to upsample the data. Can be 'pchip' (default), 'spline' and 'step'.
 
     :type samp_values: numpy array
     :type file_size: int
@@ -288,11 +288,13 @@ PITCH OBJECT METHODS:
        signal = basic.SignalObj('path_to_sample.wav')
        pitch = pYAAPT.yaapt(signal)
 
+       plt.plot(pitch.values, label='pchip interpolation', color='green')
+
+       pitch.set_values(pitch.samp_values, len(pitch.values), interp_tech='spline')
        plt.plot(pitch.values, label='spline interpolation', color='red')
 
        pitch.set_values(pitch.samp_values, len(pitch.values), interp_tech='step')
-
-       plt.plot(pitch.values, label='step interpolation')
+       plt.plot(pitch.values, label='step interpolation', color='blue')
 
        plt.xlabel('samples', fontsize=18)
        plt.ylabel('pitch (Hz)', fontsize=18)
