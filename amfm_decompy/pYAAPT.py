@@ -206,14 +206,17 @@ class PitchObj(object):
                     up_interval = self.frames_pos[frame]
                     tot_interval = np.arange(up_interval[0]-(self.frame_jump/2),
                                           up_interval[-1]+(self.frame_jump/2))
-                    if interp_tech is 'pchip':
+                    if interp_tech is 'pchip' and len(frame) > 1:
                         up_version[tot_interval] = pchip(up_interval,
-                                       samp_values[frame])(tot_interval)                      
-                    
-                    elif interp_tech is 'spline':
+                                       samp_values[frame])(tot_interval)
+
+                    elif interp_tech is 'spline' and len(frame) > 1:
                         tck, u_original = splprep([up_interval, samp_values[frame]],
                                                u=up_interval)
                         up_version[tot_interval] = splev(tot_interval, tck)[1]
+
+                    elif len(frame) == 1:
+                        up_version[tot_interval] = samp_values[frame]
 
                 up_version[beg_pad+self.frame_jump*self.nframes:] = last_samp
 
@@ -336,6 +339,9 @@ def yaapt(signal, **kwargs):
     #---------------------------------------------------------------
     # Refine pitch candidates.
     #---------------------------------------------------------------
+    ref_pitch = np.zeros((time_pitch1.shape[0]*2, time_pitch1.shape[1]))
+    ref_merit = np.zeros((time_merit1.shape[0]*2, time_merit1.shape[1]))
+
     ref_pitch, ref_merit = refine(time_pitch1, time_merit1, time_pitch2,
                                   time_merit2, spec_pitch, pitch, parameters)
 
@@ -620,6 +626,7 @@ def refine(time_pitch1, time_merit1, time_pitch2, time_merit2, spec_pitch,
     time_merit[maxcands-3, :] = pitch.energy/5.0
 
     return time_pitch, time_merit
+
 
 """
 Dynamic programming used to compute local and transition cost matrices,
