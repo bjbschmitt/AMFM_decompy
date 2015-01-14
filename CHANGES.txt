@@ -1,3 +1,8 @@
+v1.0.4, 13/Jan/2015
+
+- segmentation fault issue in pYAAPT.py fixed.
+- online documentation added.
+
 v1.0.3, 23/Dec/2014 
 
 - several bugs related to the analysis of 44,1 kHz files fixed. Thanks to 

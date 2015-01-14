@@ -5,8 +5,6 @@ README.txt
 setup.py
 amfm_decompy/__init__.py
 amfm_decompy/basic_tools.py
-amfm_decompy/files_test.py
-amfm_decompy/interp_script.py
 amfm_decompy/pYAAPT.py
 amfm_decompy/pyQHM.py
 amfm_decompy/sample.wav
@@ -15,7 +13,6 @@ docs/AMFM_decompy.pdf
 docs/basic_tools.txt
 docs/freq1.png
 docs/index.txt
-docs/index_old.txt
 docs/interp.png
 docs/mag3.png
 docs/pYAAPT.txt

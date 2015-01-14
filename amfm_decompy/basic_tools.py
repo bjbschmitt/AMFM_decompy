@@ -2,8 +2,8 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.3
-23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.4
+13/Jan/2015 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np

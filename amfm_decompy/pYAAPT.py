@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.3
-23/Dec/2014 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.4
+13/Jan/2015 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -45,8 +45,7 @@ import numpy.lib.stride_tricks as stride_tricks
 from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
 from scipy.interpolate import *
 import amfm_decompy.basic_tools as basic
-import thread
-import itertools
+from thread import interrupt_main
 
 
 """
@@ -312,10 +311,10 @@ def yaapt(signal, **kwargs):
 
     if pitch.frame_size < 15:
         print 'Frame length value {} is too short.'.format(nframe_size)
-        thread.interrupt_main()
+        interrupt_main()
     elif pitch.frame_size > 2048:
         print 'Frame length value {} exceeds the limit.'.format(nframe_size)
-        thread.interrupt_main()
+        interrupt_main()
 
     #---------------------------------------------------------------
     # Calculate NLFER and determine voiced/unvoiced frames.
@@ -339,9 +338,6 @@ def yaapt(signal, **kwargs):
     #---------------------------------------------------------------
     # Refine pitch candidates.
     #---------------------------------------------------------------
-    ref_pitch = np.zeros((time_pitch1.shape[0]*2, time_pitch1.shape[1]))
-    ref_merit = np.zeros((time_merit1.shape[0]*2, time_merit1.shape[1]))
-
     ref_pitch, ref_merit = refine(time_pitch1, time_merit1, time_pitch2,
                                   time_merit2, spec_pitch, pitch, parameters)
 
@@ -592,7 +588,8 @@ def refine(time_pitch1, time_merit1, time_pitch2, time_merit2, spec_pitch,
 
     idx = np.argsort(-time_merit, axis=0)
     time_merit.sort(axis=0)
-    time_merit = np.flipud(time_merit)
+    time_merit[:, :] = time_merit[::-1,:]
+
     time_pitch = time_pitch[idx, xrange(pitch.nframes)]
 
     best_pitch = medfilt(time_pitch[0, :], parameters['median_value'])*pitch.vuv
@@ -867,7 +864,7 @@ def path1(local, trans, n_lin, n_col):
         CCOST = PCOST[K]+trans[K, xrange(n_lin), I]
         if CCOST.any() >= 1.0E+30:
             print 'CCOST>1.0E+30, Stop in Dynamic'
-            thread.interrupt_main()
+            interrupt_main()
         CCOST = CCOST+local[:, I]
 
         PCOST[:] = CCOST
