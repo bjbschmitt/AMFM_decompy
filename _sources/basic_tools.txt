@@ -1,0 +1,110 @@
+===========
+basic_tools
+===========
+
+This module contains a set of basic classes and functions that are commonly used by the other modules of the package.
+
+-------
+Classes
+-------
+
+SignalObj Class
+---------------
+
+The SignalObj Class stores the speech signal and all the parameters related to it.
+
+USAGE:
+
+.. py:function:: SignalObj(args)
+    :module: amfm_decompy.basic_tools
+
+    :param args: the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.
+
+    :rtype: speech signal object.
+
+SIGNAL OBJECT ATTRIBUTES:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:attribute:: data
+    :module: SignalObj
+
+    Numpy array containing the speech signal data. It is set during the object's initialization.
+
+.. py:attribute:: fs
+    :module: SignalObj
+
+    Sample frequency in Hz. It is set during the object's initialization.
+
+.. py:attribute:: size
+    :module: SignalObj
+
+    Speech signal length. It is set during the object's initialization.
+
+.. py:attribute:: filtered
+    :module: SignalObj
+
+    Bandpassed version from the speech data. It is set by the SignalObj.filtered_version method.
+
+.. py:attribute:: new_fs
+    :module: SignalObj
+
+    Downsampled fundamental frequency from the speech data. It is set by the SignalObj.filtered_version method.
+
+.. py:attribute:: clean
+    :module: SignalObj
+
+    When the SignalObj.noiser method is called, this attribute is created and used to store a clean copy from the original signal.
+
+
+SIGNAL OBJECT METHODS:
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. py:method:: filtered_version(bp_filter)
+    :module: SignalObj
+
+    :param bp_filter: BandpassFilter object.
+
+    Filters the signal data by a bandpass filter.
+
+.. py:method:: set_nharm(pitch_track, n_harm_max)
+    :module: SignalObj
+
+    :param pitch_track: pitch extracted values for each signal sample.
+    :param n_harm_max: represents the maximum number of components that can be extracted from the signal.
+
+    :type pitch_track: numpy array
+    :type n_harm_max: int
+
+    Uses the pitch values to estimate the number of modulated components in the signal.
+
+.. py:method:: noiser(pitch_track, SNR)
+    :module: SignalObj
+
+    :param pitch_track: pitch extracted values for each signal sample.
+    :param SNR: desired signal-to-noise ratio from the output signal.
+
+    :type pitch_track: numpy array
+    :type SNR: float
+
+    Adds a zero-mean gaussian noise to the signal.
+
+---------
+Functions
+---------
+
+pcm2float
+---------
+
+USAGE:
+
+.. py:function:: pcm2float(sig[, dtype=numpy.float64])
+    :module: amfm_decompy.basic_tools
+
+    :param sig: PCM speech signal data.
+    :param dtype: data type from the elements of the output array (default: numpy.float64).
+
+    :type sig: numpy array
+    :type dtype: float
+    :rtype: numpy array.
+
+    Transform a PCM raw signal into a float one, with values limited between -1 and 1.
