@@ -101,7 +101,7 @@ class PitchObj(object):
         self.samp_values = samp_values
         self.fix()
         self.values = self.upsample(self.samp_values, file_size, 0, 0,
-                                    interp_tech)
+                                    interp_tech)  # type: np.ndarray
         self.edges = self.edges_finder(self.values)
         self.interpolate()
         self.values_interp = self.upsample(self.samp_interp, file_size,
@@ -204,15 +204,21 @@ class PitchObj(object):
                 for frame in voiced_frames:
                     up_interval = self.frames_pos[frame]
                     tot_interval = np.arange(up_interval[0]-(self.frame_jump/2),
-                                          up_interval[-1]+(self.frame_jump/2))
-                    if interp_tech is 'pchip' and len(frame) > 1:
-                        up_version[tot_interval] = pchip(up_interval,
-                                       samp_values[frame])(tot_interval)
+                                             up_interval[-1]+(self.frame_jump/2))
 
-                    elif interp_tech is 'spline' and len(frame) > 1:
+                    if interp_tech is 'pchip' and len(frame) > 2:
+                        up_version[tot_interval] = pchip(up_interval,
+                                                         samp_values[frame])(tot_interval)
+
+                    elif interp_tech is 'spline' and len(frame) > 2:
                         tck, u_original = splprep([up_interval, samp_values[frame]],
-                                               u=up_interval)
+                                                  u=up_interval)
                         up_version[tot_interval] = splev(tot_interval, tck)[1]
+
+                    # MD: In case len(frame)==2, above methods fail. Use linear interpolation instead.
+                    elif len(frame) == 2:
+                        up_version[tot_interval] = interp1d(up_interval, samp_values[frame],
+                                                            fill_value='extrapolate')(tot_interval)
 
                     elif len(frame) == 1:
                         up_version[tot_interval] = samp_values[frame]
@@ -976,3 +982,4 @@ def stride_matrix(vector, n_lin, n_col, hop):
                         strides=(vector.strides[0]*hop, vector.strides[0]))
 
     return data_matrix
+
