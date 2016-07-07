@@ -116,7 +116,7 @@ class PitchObj(object):
         vec1 = (np.abs(values[1:]+values[:-1]) > 0)
         vec2 = (np.abs(values[1:]*values[:-1]) == 0)
         edges = np.logical_and(vec1, vec2)
-        index = np.arange(len(values))
+        index = np.arange(len(values)-1)
         index = index[edges > 0]
         return index.tolist()
 
@@ -162,8 +162,8 @@ class PitchObj(object):
             pitch = medfilt(pitch, self.SMOOTH_FACTOR)
         edges = self.edges_finder(pitch)
         try:
-            pitch[:edges[0]-1] = mean(pitch[pitch > 0])
-            pitch[edges[-1]+1:] = mean(pitch[pitch > 0])
+            pitch[:edges[0]-1] = np.mean(pitch[pitch > 0])
+            pitch[edges[-1]+1:] = np.mean(pitch[pitch > 0])
         except:
             pass
         self.samp_interp = pitch
@@ -316,10 +316,10 @@ def yaapt(signal, **kwargs):
     pitch = PitchObj(frame_size, frame_jump, nfft)
 
     if pitch.frame_size < 15:
-        print 'Frame length value {} is too short.'.format(nframe_size)
+        print 'Frame length value {} is too short.'.format(pitch.frame_size)
         interrupt_main()
     elif pitch.frame_size > 2048:
-        print 'Frame length value {} exceeds the limit.'.format(nframe_size)
+        print 'Frame length value {} exceeds the limit.'.format(pitch.frame_size)
         interrupt_main()
 
     #---------------------------------------------------------------
@@ -790,7 +790,7 @@ def peaks(data, delta, maxpeaks, parameters):
     #Step4
     #---------------------------------------------------------------
     if (numpeaks > 0):
-        if (pitch[0] > parameters['f0_double']):
+        if (pitch[0] > parameters['f0_half']):
             numpeaks = min(numpeaks+1, maxpeaks)
             pitch[numpeaks-1] = pitch[0]/2.0
             merit[numpeaks-1] = parameters['merit_extra']
