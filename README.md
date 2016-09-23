@@ -42,7 +42,7 @@ The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.5 is recommended for
 
 in command line. After that, run the test script by typing 
 
-```AMFM_test.py```
+`AMFM_test.py`
 
 to check if everything is ok (it can take couple of minutes to calculate the results). This script is a example about how to use the package.
 
