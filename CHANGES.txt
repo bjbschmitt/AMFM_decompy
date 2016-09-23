@@ -1,4 +1,4 @@
-v 1.0.5, Sep/2016
+v1.0.5, Sep/2016
 - issue with the interpolation of short voiced frames fixed and also minor corrections 
   in the code. Thanks to Michał Dankiewicz for reporting and fixing them.
 - "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra 
