@@ -1,20 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pYAAPT &mdash; AMFM_decompy 4 documentation</title>
+    <title>pYAAPT &#8212; AMFM decompy 1.0.5 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4',
+        VERSION:     '1.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +24,17 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="AMFM_decompy 4 documentation" href="index.html" />
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="AMFM decompy 1.0.5 documentation" href="index.html" />
     <link rel="next" title="pyQHM" href="pyQHM.html" />
-    <link rel="prev" title="Welcome to AMFM_decompy’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to AMFM decompy’s documentation!" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -38,16 +44,64 @@
           <a href="pyQHM.html" title="pyQHM"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to AMFM_decompy’s documentation!"
+          <a href="index.html" title="Welcome to AMFM decompy’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">AMFM_decompy 4 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.5 documentation</a> &#187;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pYAAPT</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#pitchobj-class">PitchObj Class</a><ul>
+<li><a class="reference internal" href="#pitch-class-variables">PITCH CLASS VARIABLES:</a></li>
+<li><a class="reference internal" href="#pitch-object-attributes">PITCH OBJECT ATTRIBUTES:</a></li>
+<li><a class="reference internal" href="#pitch-object-methods">PITCH OBJECT METHODS:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bandpassfilter-class">BandpassFilter Class</a><ul>
+<li><a class="reference internal" href="#bandpass-filter-attributes">BANDPASS FILTER ATTRIBUTES:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to AMFM decompy&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pyQHM.html"
+                        title="next chapter">pyQHM</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pYAAPT.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="pyaapt">
 <h1>pYAAPT<a class="headerlink" href="#pyaapt" title="Permalink to this headline">¶</a></h1>
@@ -60,7 +114,7 @@
 <p>USAGE:</p>
 <dl class="function">
 <dt id="amfm_decompy.pYAAPT.yaapt">
-<tt class="descclassname">amfm_decompy.pYAAPT.</tt><tt class="descname">yaapt</tt><big>(</big><em>signal</em><span class="optional">[</span>, <em>options</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#amfm_decompy.pYAAPT.yaapt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">amfm_decompy.pYAAPT.</code><code class="descname">yaapt</code><span class="sig-paren">(</span><em>signal</em><span class="optional">[</span>, <em>options</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pYAAPT.yaapt" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -115,19 +169,19 @@
 </ul>
 <p>EXAMPLES:</p>
 <p>Example 1 - extract the pitch track from a signal using the default configurations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="kn">as</span> <span class="nn">pYAAPT</span>
-<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="kn">as</span> <span class="nn">basic</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
 
-<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
 <span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Example 2 - extract the pitch track from a signal with the minimum pitch set to 150 Hz, the frame length to 15 ms and the frame jump to 5 ms:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="kn">as</span> <span class="nn">pYAAPT</span>
-<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="kn">as</span> <span class="nn">basic</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
 
-<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
-<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s">&#39;f0_min&#39;</span> <span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span> <span class="s">&#39;frame_length&#39;</span> <span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span> <span class="s">&#39;frame_space&#39;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">})</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;f0_min&#39;</span> <span class="p">:</span> <span class="mf">150.0</span><span class="p">,</span> <span class="s1">&#39;frame_length&#39;</span> <span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span> <span class="s1">&#39;frame_space&#39;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -139,7 +193,7 @@
 <p>USAGE:</p>
 <dl class="function">
 <dt id="amfm_decompy.pYAAPT.PitchObj">
-<tt class="descclassname">amfm_decompy.pYAAPT.</tt><tt class="descname">PitchObj</tt><big>(</big><em>frame_size</em>, <em>frame_jump</em><span class="optional">[</span>, <em>nfft=8192</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#amfm_decompy.pYAAPT.PitchObj" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">amfm_decompy.pYAAPT.</code><code class="descname">PitchObj</code><span class="sig-paren">(</span><em>frame_size</em>, <em>frame_jump</em><span class="optional">[</span>, <em>nfft=8192</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pYAAPT.PitchObj" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -163,13 +217,13 @@
 <p>These variables not related with the YAAPT algorithm itself, but with a post-processing where the data is smoothed and halving/doubling errors corrected.</p>
 <dl class="attribute">
 <dt id="PitchObj.PITCH_HALF">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">PITCH_HALF</tt><a class="headerlink" href="#PitchObj.PITCH_HALF" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">PITCH_HALF</code><a class="headerlink" href="#PitchObj.PITCH_HALF" title="Permalink to this definition">¶</a></dt>
 <dd><p>This variable is a flag. When its value is equal to 1, the halving detector set the half pitch values to 0. If PITCH_HALF is equal to 2, the half pitch values are multiplied by 2. For other PITCH_HALF values, the halving detector is not employed (default: 0).</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.PITCH_HALF_SENS">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">PITCH_HALF_SENS</tt><a class="headerlink" href="#PitchObj.PITCH_HALF_SENS" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">PITCH_HALF_SENS</code><a class="headerlink" href="#PitchObj.PITCH_HALF_SENS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the halving detector sensibility. A pitch sample is considered half valued if it is not zero and lower than:</p>
 <p>mean(pitch) - PITCH_HALF_SENS*std(pitch)</p>
 <p>(default: 2.9).</p>
@@ -177,13 +231,13 @@
 
 <dl class="attribute">
 <dt id="PitchObj.PITCH_DOUBLE">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">PITCH_DOUBLE</tt><a class="headerlink" href="#PitchObj.PITCH_DOUBLE" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">PITCH_DOUBLE</code><a class="headerlink" href="#PitchObj.PITCH_DOUBLE" title="Permalink to this definition">¶</a></dt>
 <dd><p>This variable is a flag. When its value is equal to 1, the doubling detector set the double pitch values to 0. If PITCH_DOUBLE is equal to 2, the double pitch values are divided by 2. For other PITCH_DOUBLE values, the doubling detector is not employed (default: 0).</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.PITCH_DOUBLE_SENS">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">PITCH_DOUBLE_SENS</tt><a class="headerlink" href="#PitchObj.PITCH_DOUBLE_SENS" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">PITCH_DOUBLE_SENS</code><a class="headerlink" href="#PitchObj.PITCH_DOUBLE_SENS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the doubling detector sensibility. A pitch sample is considered double valued if it is not zero and higher than:</p>
 <p>mean(pitch) + PITCH_DOUBLE_SENS*std(pitch)</p>
 <p>(default: 2.9).</p>
@@ -191,19 +245,19 @@
 
 <dl class="attribute">
 <dt id="PitchObj.SMOOTH_FACTOR">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">SMOOTH_FACTOR</tt><a class="headerlink" href="#PitchObj.SMOOTH_FACTOR" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">SMOOTH_FACTOR</code><a class="headerlink" href="#PitchObj.SMOOTH_FACTOR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines the median filter length used to smooth the interpolated pitch values (default: 5). <a class="footnote-reference" href="#id8" id="id5">[1]</a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.SMOOTH">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">SMOOTH</tt><a class="headerlink" href="#PitchObj.SMOOTH" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">SMOOTH</code><a class="headerlink" href="#PitchObj.SMOOTH" title="Permalink to this definition">¶</a></dt>
 <dd><p>This variable is a flag. When its value is not equal to 0, the interpolated pitch is smoothed by a median filter (default: 5). <a class="footnote-reference" href="#id8" id="id6">[1]</a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.PTCH_TYP">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">PTCH_TYP</tt><a class="headerlink" href="#PitchObj.PTCH_TYP" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">PTCH_TYP</code><a class="headerlink" href="#PitchObj.PTCH_TYP" title="Permalink to this definition">¶</a></dt>
 <dd><p>If there are less than 2 voiced frames in the file, the PTCH_TYP value is used in the interpolation (default: 100 Hz). <a class="footnote-reference" href="#id8" id="id7">[1]</a></p>
 </dd></dl>
 
@@ -216,16 +270,16 @@
 </table>
 <p>EXAMPLE:</p>
 <p>Example 1 - the pitch is extracted from sample.wav with different smoothing and interpolation configurations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="kn">as</span> <span class="nn">pYAAPT</span>
-<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="kn">as</span> <span class="nn">basic</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
 
-<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
 
-<span class="n">pYAAPT</span><span class="o">.</span><span class="n">PitchObj</span><span class="o">.</span><span class="n">PITCH_DOUBLE</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c"># set new values</span>
+<span class="n">pYAAPT</span><span class="o">.</span><span class="n">PitchObj</span><span class="o">.</span><span class="n">PITCH_DOUBLE</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># set new values</span>
 <span class="n">pYAAPT</span><span class="o">.</span><span class="n">PitchObj</span><span class="o">.</span><span class="n">PITCH_HALF</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">pYAAPT</span><span class="o">.</span><span class="n">PitchObj</span><span class="o">.</span><span class="n">SMOOTH_FACTOR</span> <span class="o">=</span> <span class="mi">3</span>
 
-<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="c"># calculate the pitch track</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="c1"># calculate the pitch track</span>
 </pre></div>
 </div>
 </div>
@@ -233,63 +287,63 @@
 <h4>PITCH OBJECT ATTRIBUTES:<a class="headerlink" href="#pitch-object-attributes" title="Permalink to this headline">¶</a></h4>
 <dl class="attribute">
 <dt id="PitchObj.nfft">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">nfft</tt><a class="headerlink" href="#PitchObj.nfft" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">nfft</code><a class="headerlink" href="#PitchObj.nfft" title="Permalink to this definition">¶</a></dt>
 <dd><p>Length in samples from the FFT used by the pitch tracker. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.frame_size">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">frame_size</tt><a class="headerlink" href="#PitchObj.frame_size" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">frame_size</code><a class="headerlink" href="#PitchObj.frame_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Length in samples from the frames used by the pitch tracker. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.frame_jump">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">frame_jump</tt><a class="headerlink" href="#PitchObj.frame_jump" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">frame_jump</code><a class="headerlink" href="#PitchObj.frame_jump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distance in samples between the center of a extracting frame and the center of its adjacent neighbours. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.noverlap">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">noverlap</tt><a class="headerlink" href="#PitchObj.noverlap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">noverlap</code><a class="headerlink" href="#PitchObj.noverlap" title="Permalink to this definition">¶</a></dt>
 <dd><p>It&#8217;s the difference between the frame size and the frame jump. Represents the number of samples that two adjacent frames share in common, i.e, how much they overlap each other. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.mean_energy">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">mean_energy</tt><a class="headerlink" href="#PitchObj.mean_energy" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">mean_energy</code><a class="headerlink" href="#PitchObj.mean_energy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signal&#8217;s low frequency band mean energy. It is set by the PitchObj.set_energy method.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.energy">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">energy</tt><a class="headerlink" href="#PitchObj.energy" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">energy</code><a class="headerlink" href="#PitchObj.energy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Array that contains the low frequency band energy from each frame, normalized by PitchObj.mean_energy. It is set by the PitchObj.set_energy method.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.vuv">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">vuv</tt><a class="headerlink" href="#PitchObj.vuv" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">vuv</code><a class="headerlink" href="#PitchObj.vuv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boolean vector that indicates if each speech frame was classified as voiced (represented as &#8216;True&#8217;) or unvoiced (represented as &#8216;False&#8217;). It is set by the PitchObj.set_energy method.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.frames_pos">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">frames_pos</tt><a class="headerlink" href="#PitchObj.frames_pos" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">frames_pos</code><a class="headerlink" href="#PitchObj.frames_pos" title="Permalink to this definition">¶</a></dt>
 <dd><p>A numpy array that contains the samples where the center of the frames were placed during the extraction. It is set by the PitchObj.set_frame_pos method.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.nframes">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">nframes</tt><a class="headerlink" href="#PitchObj.nframes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">nframes</code><a class="headerlink" href="#PitchObj.nframes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of frames. It is set by the PitchObj.set_frame_pos method.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.samp_values">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">samp_values</tt><a class="headerlink" href="#PitchObj.samp_values" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">samp_values</code><a class="headerlink" href="#PitchObj.samp_values" title="Permalink to this definition">¶</a></dt>
 <dt id="PitchObj.samp_interp">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">samp_interp</tt><a class="headerlink" href="#PitchObj.samp_interp" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">samp_interp</code><a class="headerlink" href="#PitchObj.samp_interp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are substituted by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications. The figure below presents both arrays from the sample.wav file:</p>
 </dd></dl>
 
@@ -297,9 +351,9 @@
 <p>Both attributes are set by the PitchObj.set_values method.</p>
 <dl class="attribute">
 <dt id="PitchObj.values">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">values</tt><a class="headerlink" href="#PitchObj.values" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">values</code><a class="headerlink" href="#PitchObj.values" title="Permalink to this definition">¶</a></dt>
 <dt id="PitchObj.values_interp">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">values_interp</tt><a class="headerlink" href="#PitchObj.values_interp" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">values_interp</code><a class="headerlink" href="#PitchObj.values_interp" title="Permalink to this definition">¶</a></dt>
 <dd><p>PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method). The figure below presents both arrays from the sample.wav file:</p>
 </dd></dl>
 
@@ -307,7 +361,7 @@
 <p>Both attributes are set by the PitchObj.set_values method.</p>
 <dl class="attribute">
 <dt id="PitchObj.edges">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">edges</tt><a class="headerlink" href="#PitchObj.edges" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">edges</code><a class="headerlink" href="#PitchObj.edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list that contains the index where occur the transitions between unvoiced-voiced and voiced-unvoiced in PitchObj.values. It is set by the PitchObj.set_values method, which employs internally the PitchObj.edges_finder method.</p>
 </dd></dl>
 
@@ -316,7 +370,7 @@
 <h4>PITCH OBJECT METHODS:<a class="headerlink" href="#pitch-object-methods" title="Permalink to this headline">¶</a></h4>
 <dl class="method">
 <dt id="PitchObj.set_energy">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">set_energy</tt><big>(</big><em>energy</em>, <em>threshold</em><big>)</big><a class="headerlink" href="#PitchObj.set_energy" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">set_energy</code><span class="sig-paren">(</span><em>energy</em>, <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#PitchObj.set_energy" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -334,7 +388,7 @@
 
 <dl class="method">
 <dt id="PitchObj.set_frames_pos">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">set_frames_pos</tt><big>(</big><em>frames_pos</em><big>)</big><a class="headerlink" href="#PitchObj.set_frames_pos" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">set_frames_pos</code><span class="sig-paren">(</span><em>frames_pos</em><span class="sig-paren">)</span><a class="headerlink" href="#PitchObj.set_frames_pos" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -348,7 +402,7 @@
 
 <dl class="method">
 <dt id="PitchObj.set_values">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">set_values</tt><big>(</big><em>samp_values</em>, <em>file_size</em><span class="optional">[</span>, <em>interp_tech='spline'</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#PitchObj.set_values" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">set_values</code><span class="sig-paren">(</span><em>samp_values</em>, <em>file_size</em><span class="optional">[</span>, <em>interp_tech='spline'</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PitchObj.set_values" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -364,24 +418,24 @@
 </table>
 <p>Set the pitch values and also calculates its interpolated version (for more information, check the PitchObj.samp_values and PitchObj.samp_interp attributes). A post-process is employed then using the PitchObj class attributes. After that, both arrays are upsampled, so that the output arrays have the same length as the original speech signal. In this process, a second interpolation is necessary. The interpolation technique employed is indicated by the parameter interp_tech.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="kn">as</span> <span class="nn">pYAAPT</span>
-<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="kn">as</span> <span class="nn">basic</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
-<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
 <span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;pchip interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pchip interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
-<span class="n">pitch</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_values</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">interp_tech</span><span class="o">=</span><span class="s">&#39;spline&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;spline interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">pitch</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_values</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">interp_tech</span><span class="o">=</span><span class="s1">&#39;spline&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;spline interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
-<span class="n">pitch</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_values</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">interp_tech</span><span class="o">=</span><span class="s">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;step interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">pitch</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_values</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">interp_tech</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;step interpolation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;samples&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;pitch (Hz)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;samples&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pitch (Hz)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The output is presented below:</p>
@@ -390,7 +444,7 @@
 <img alt="_images/interp.png" src="_images/interp.png" />
 <dl class="method">
 <dt id="PitchObj.edges_finder">
-<tt class="descclassname">PitchObj.</tt><tt class="descname">edges_finder</tt><big>(</big><em>values</em><big>)</big><a class="headerlink" href="#PitchObj.edges_finder" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">PitchObj.</code><code class="descname">edges_finder</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#PitchObj.edges_finder" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -412,7 +466,7 @@
 <p>USAGE:</p>
 <dl class="function">
 <dt id="amfm_decompy.pYAAPT.BandpassFilter">
-<tt class="descclassname">amfm_decompy.pYAAPT.</tt><tt class="descname">BandpassFilter</tt><big>(</big><em>fs</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#amfm_decompy.pYAAPT.BandpassFilter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">amfm_decompy.pYAAPT.</code><code class="descname">BandpassFilter</code><span class="sig-paren">(</span><em>fs</em>, <em>parameters</em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pYAAPT.BandpassFilter" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -434,19 +488,19 @@
 <h4>BANDPASS FILTER ATTRIBUTES:<a class="headerlink" href="#bandpass-filter-attributes" title="Permalink to this headline">¶</a></h4>
 <dl class="attribute">
 <dt id="BandpassFilter.b">
-<tt class="descclassname">BandpassFilter.</tt><tt class="descname">b</tt><a class="headerlink" href="#BandpassFilter.b" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">BandpassFilter.</code><code class="descname">b</code><a class="headerlink" href="#BandpassFilter.b" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bandpass filter zeros coefficients. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="BandpassFilter.a">
-<tt class="descclassname">BandpassFilter.</tt><tt class="descname">a</tt><a class="headerlink" href="#BandpassFilter.a" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">BandpassFilter.</code><code class="descname">a</code><a class="headerlink" href="#BandpassFilter.a" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bandpass filter poles coefficients. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="BandpassFilter.dec_factor">
-<tt class="descclassname">BandpassFilter.</tt><tt class="descname">dec_factor</tt><a class="headerlink" href="#BandpassFilter.dec_factor" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">BandpassFilter.</code><code class="descname">dec_factor</code><a class="headerlink" href="#BandpassFilter.dec_factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decimation factor used for downsampling the data. It is set during the object&#8217;s initialization.</p>
 </dd></dl>
 
@@ -465,58 +519,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pYAAPT</a><ul>
-<li><a class="reference internal" href="#quick-start">Quick start</a></li>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#pitchobj-class">PitchObj Class</a><ul>
-<li><a class="reference internal" href="#pitch-class-variables">PITCH CLASS VARIABLES:</a></li>
-<li><a class="reference internal" href="#pitch-object-attributes">PITCH OBJECT ATTRIBUTES:</a></li>
-<li><a class="reference internal" href="#pitch-object-methods">PITCH OBJECT METHODS:</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bandpassfilter-class">BandpassFilter Class</a><ul>
-<li><a class="reference internal" href="#bandpass-filter-attributes">BANDPASS FILTER ATTRIBUTES:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to AMFM_decompy&#8217;s documentation!</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="pyQHM.html"
-                        title="next chapter">pyQHM</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/pYAAPT.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -526,14 +531,14 @@
           <a href="pyQHM.html" title="pyQHM"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to AMFM_decompy’s documentation!"
+          <a href="index.html" title="Welcome to AMFM decompy’s documentation!"
              >previous</a> |</li>
-        <li><a href="index.html">AMFM_decompy 4 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.5 documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2015, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Bernardo J. B. Schmitt.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>
 </html>

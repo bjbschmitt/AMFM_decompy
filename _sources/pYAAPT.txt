@@ -104,7 +104,7 @@ USAGE:
     :rtype: pitch object.
 
 PITCH CLASS VARIABLES:
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 These variables not related with the YAAPT algorithm itself, but with a post-processing where the data is smoothed and halving/doubling errors corrected.
 
@@ -333,7 +333,7 @@ USAGE:
     :rtype: bandpass filter object.
 
 BANDPASS FILTER ATTRIBUTES:
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. py:attribute:: b
     :module: BandpassFilter
