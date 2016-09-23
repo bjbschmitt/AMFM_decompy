@@ -2,8 +2,8 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.4
-13/Jan/2015 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.5
+22/Sep/2016 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -18,7 +18,7 @@ Creates a signal object.
 class SignalObj(object):
 
     def __init__(self, *args):
-        #pdb.set_trace()
+
         if len(args) == 1:
             try:
                 from scipy.io import wavfile

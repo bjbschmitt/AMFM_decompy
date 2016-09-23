@@ -23,7 +23,7 @@ USAGE:
     :rtype: speech signal object.
 
 SIGNAL OBJECT ATTRIBUTES:
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. py:attribute:: data
     :module: SignalObj

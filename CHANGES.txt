@@ -1,3 +1,15 @@
+v 1.0.5, Sep/2016
+- issue with the interpolation of short voiced frames fixed and also minor corrections 
+  in the code. Thanks to Michał Dankiewicz for reporting and fixing them.
+- "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra 
+   workaround to avoid it added. Thanks to Javier Villalba García for reporting it.
+- corrected the array lenght mismatch in the edges_finder method from the PitchObj
+  class in pYAAPT.py.
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float numbers
+  as array indeces in pYAAPT.py.
+- requirements and classifiers added to setup.py.
+- distutils replaced by setuptools in setup.py.
+
 v1.0.4, 13/Jan/2015
 
 - segmentation fault issue in pYAAPT.py fixed.

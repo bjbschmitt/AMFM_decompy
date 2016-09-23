@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.4
-13/Jan/2015 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.5
+22/Sep/2016 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -46,7 +46,6 @@ from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
 from scipy.interpolate import *
 import amfm_decompy.basic_tools as basic
 from thread import interrupt_main
-
 
 """
 --------------------------------------------
@@ -101,7 +100,7 @@ class PitchObj(object):
         self.samp_values = samp_values
         self.fix()
         self.values = self.upsample(self.samp_values, file_size, 0, 0,
-                                    interp_tech)  # type: np.ndarray
+                                    interp_tech)
         self.edges = self.edges_finder(self.values)
         self.interpolate()
         self.values_interp = self.upsample(self.samp_interp, file_size,
@@ -116,7 +115,18 @@ class PitchObj(object):
         vec1 = (np.abs(values[1:]+values[:-1]) > 0)
         vec2 = (np.abs(values[1:]*values[:-1]) == 0)
         edges = np.logical_and(vec1, vec2)
-        index = np.arange(len(values)-1)
+        # The previous logical operation detects where voiced/unvoiced transitions
+        # occur. Thus, a 'True' in the edges[n] sample indicates that the sample
+        # value[n+1] has a different state than value[n](i.e. if values[n] is
+        # voiced, then values[n+1] is unvoiced - and vice-versa). Consequently,
+        # the last sample from edges array will always be 'False' and is not
+        # calculated (because "there is no n+1 sample" for it. That's why
+        # len(edges) = len(values)-1). However, just for sake of comprehension
+        # (and also to avoid python warnings about array length mismatchs), I
+        # add a 'False' to edges the array. But in pratice, this 'False' is
+        # useless.
+        edges = np.append(edges,[False])
+        index = np.arange(len(values))
         index = index[edges > 0]
         return index.tolist()
 
@@ -204,24 +214,27 @@ class PitchObj(object):
                 for frame in voiced_frames:
                     up_interval = self.frames_pos[frame]
                     tot_interval = np.arange(up_interval[0]-(self.frame_jump/2),
-                                             up_interval[-1]+(self.frame_jump/2))
+                                          up_interval[-1]+(self.frame_jump/2))
 
                     if interp_tech is 'pchip' and len(frame) > 2:
                         up_version[tot_interval] = pchip(up_interval,
-                                                         samp_values[frame])(tot_interval)
+                                            samp_values[frame])(tot_interval)
 
                     elif interp_tech is 'spline' and len(frame) > 2:
                         tck, u_original = splprep([up_interval, samp_values[frame]],
                                                   u=up_interval)
                         up_version[tot_interval] = splev(tot_interval, tck)[1]
 
-                    # MD: In case len(frame)==2, above methods fail. Use linear interpolation instead.
+                    # MD: In case len(frame)==2, above methods fail.
+                    #Use linear interpolation instead.
                     elif len(frame) == 2:
-                        up_version[tot_interval] = interp1d(up_interval, samp_values[frame],
-                                                            fill_value='extrapolate')(tot_interval)
+                        up_version[tot_interval] = interp1d(up_interval,
+                                                    samp_values[frame],
+                                        fill_value='extrapolate')(tot_interval)
 
                     elif len(frame) == 1:
                         up_version[tot_interval] = samp_values[frame]
+
 
                 up_version[beg_pad+self.frame_jump*self.nframes:] = last_samp
 
@@ -394,7 +407,7 @@ def nlfer(signal, pitch, parameters):
 
     specData = np.fft.rfft(data_matrix, pitch.nfft)
 
-    frame_energy = np.abs(specData[:, N_f0_min-1:N_f0_max]).sum(axis=1)
+    frame_energy = np.abs(specData[:, int(N_f0_min-1):int(N_f0_max)]).sum(axis=1)
     pitch.set_energy(frame_energy, parameters['nlfer_thresh1'])
     pitch.set_frames_pos(samples)
 
@@ -789,13 +802,16 @@ def peaks(data, delta, maxpeaks, parameters):
     #---------------------------------------------------------------
     #Step4
     #---------------------------------------------------------------
+
     if (numpeaks > 0):
-        if (pitch[0] > parameters['f0_half']):
+        # The first two "if pitch[0]" statements seem to had been deprecated in
+        # the original YAAPT Matlab code, so they may be removed here as well.
+        if (pitch[0] > parameters['f0_double']):
             numpeaks = min(numpeaks+1, maxpeaks)
             pitch[numpeaks-1] = pitch[0]/2.0
             merit[numpeaks-1] = parameters['merit_extra']
 
-        if (pitch[0] < parameters['f0_double']):
+        if (pitch[0] < parameters['f0_half']):
             numpeaks = min(numpeaks+1, maxpeaks)
             pitch[numpeaks-1] = pitch[0]*2.0
             merit[numpeaks-1] = parameters['merit_extra']
@@ -982,4 +998,3 @@ def stride_matrix(vector, n_lin, n_col, hop):
                         strides=(vector.strides[0]*hop, vector.strides[0]))
 
     return data_matrix
-

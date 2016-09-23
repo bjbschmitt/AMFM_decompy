@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.4
+version 1.0.5
 
 This python package provides the tools necessary to decompose the voiced part of a speech signal into its modulated components, aka AM-FM decomposition. This designation is used due the fact that, in this method, the signal is modeled as a sum of amplitude- and frequency-modulated components. 
 
@@ -21,7 +21,7 @@ The study of AM-FM decomposition algorithms was the theme from my Master Thesis.
 Evaluations and future expansions
 =============
 
-As for the algorithms computational performance, I optimized the YAAPT code, so my pyhton version runs now about twice as fast as the original MATLAB one. However, the QHM algorithms still run as fast as their counterparts in MATLAB. That's because the main bottleneck of both versions are the matrix dot and least-squares operations. Since numpy and MATLAB are already optimized to perform these tasks using internal Fortran functions, as far as I investigated there's no way to speed them up (like using Cython, for example). Nevertheless, I still looking for ways to make my code faster.
+As for the algorithms computational performance, I optimized the YAAPT code, so my pyhton version runs now about twice as fast as the original MATLAB one. However, the QHM algorithms still run as fast as their counterparts in MATLAB. That's because the main bottleneck of both versions are the matrix dot and least-squares operations. Since numpy and MATLAB are already optimized to perform these tasks using internal Fortran functions, as far as I investigated there's no way to speed them up using Cython, for example. Nevertheless, recently I have read about numba, which could be applied to substantially improve the AMFM_decompy performance. Therefore, I may run some tests using it.
 
 In [1] the YAAPT is compared with well-known pitch trackers like the YIN and the RAPT, and presents the best results. In fact, so far I've been using it, the algorithm has been proved to be indeed very robust. It must be emphasized that I merely translated the code, so I only have an average knowledge about its theoretical formulation. For deep questions concerning it, I would advise to contact the original authors.
 
@@ -29,18 +29,20 @@ The QHM-like algorithms present some stability problems concerning small magnitu
 
 Actually, I dedicated a chapter in my Master Thesis to a deeper study about this problem and came up with a better solution. Unfortunately, due stupid bureaucratic issues, I don't know if and when my work will be defended and published (to be short, the deadline was expired because me and my advisor needed more time to correct and improve the thesis text. Then we required a prorrogation, but the lecturers board declined it. So, basically, I was expelled from the post-gradute program with a finished and working thesis). Anyway, I'm still trying to figure out do now with my work and as soon as find a solution, I'll add my own contributions to this package.
 
-In my thesis I also ran performance tests comparing the QHM family with other two AM-FM decomposition algorithms. Therefore, my next goal is to add these methods to the package. Since they are third-part free MATLAB codes, probably it will take a couple of months to fully translate them.
+In my thesis I also ran performance tests comparing the QHM family with other two AM-FM decomposition algorithms. Therefore, my next goal is to add these methods to the package.
+
+Recently the original YAAPT Matlab code received an update, so I also want to take a deep look on it to check if there is any necessary modification that should be applied on pYAAPT. But I guess that the only substantial alteration was the addition of a speed option (at the cost of accuracy), which I'm relatively skeptical that could benefit pYAAPT.  
 
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.4 is recommended for a quick installation. But you can also copy all directories here and then run 
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.5 is recommended for a quick installation. But you can also copy all directories here and then run 
 
 ```python setup.py install```
 
 in command line. After that, run the test script by typing 
 
-AMFM_test.py
+```AMFM_test.py```
 
 to check if everything is ok (it can take couple of minutes to calculate the results). This script is a example about how to use the package.
 
@@ -58,22 +60,19 @@ The original MATLAB YAAPT program was written by Hongbing Hu and Stephen A.Zahor
 
 It is available at http://www.ws.binghamton.edu/zahorian as free software. Further information about the program can be found at
 
-    [1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust
-        fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.
+   [1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust
+       fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.
 
 The QHM algorithm and its upgrades are formulated and presented in the following publications:
 
-    [2] Y. Pantazis, “Decomposition of AM-FM signals with applications in speech 
-        processing”, PhD Thesis, University of Creta, 2010.
+   [2] Y. Pantazis, , PhD Thesis, University of Creta, 2010.
 
-    [3] Y. Pantazis, O. Rosec and Y. Stylianou, “Adaptive AM-FM signal decomposition 
-        with application to speech analysis”, IEEE Transactions on Audio, Speech and 
-        Language Processing, vol. 19, n 2, 2011.
+   [3] Y. Pantazis, O. Rosec and Y. Stylianou, , IEEE Transactions on Audio, Speech and 
+       Language Processing, vol. 19, n 2, 2011.
 
-    [4] G. P. Kafentzis, Y. Pantazis, O. Rosec and Y. Stylianou, “An extension of the 
-        adaptive quasi-harmonic model”, in IEEE International Conference on Acoustics, 
-        Speech and Signal Processing (ICASSP), 2012.
-  
+   [4] G. P. Kafentzis, Y. Pantazis, O. Rosec and Y. Stylianou, , in IEEE International Conference on Acoustics, 
+       Speech and Signal Processing (ICASSP), 2012.
+ 
 Copyright and contact
 =============
 
