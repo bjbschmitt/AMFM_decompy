@@ -72,7 +72,7 @@ class ModulatedSign(object):
         self.size = file_size
         self.fs = fs
         self.H = np.zeros((self.n_harm, 3, self.size))
-        self.harmonics = [ComponentObj(self.H, i) for i in xrange(self.n_harm)]
+        self.harmonics = [ComponentObj(self.H, i) for i in range(self.n_harm)]
         self.error = np.zeros(self.size)
         self.phase_tech = phase_tech
 
@@ -141,9 +141,9 @@ class ModulatedSign(object):
         if N is None:
             N = self.n_harm
         [self.harmonics[i].synthesize()
-                            for i in xrange(N)]
+                            for i in range(N)]
         self.signal = sum([self.harmonics[i].signal
-                            for i in xrange(self.n_harm)])
+                            for i in range(self.n_harm)])
 
     """
     Calculates the SRER (Signal-to-Reconstruction Error Ratio) for the
@@ -349,7 +349,7 @@ def qhm_iteration(data, f0_ref, window, fs, max_step, freq, N_iter=1):
     windowed_data = (window.data*data).reshape(window.length, 1)
 
     # Run the QHM algorithm N_iter times.
-    for k in xrange(N_iter):
+    for k in range(N_iter):
         # Calculate the a and b coeficients via least-squares.
         coef = least_squares(E, E_windowed, windowed_data, window, K)
 
@@ -435,7 +435,7 @@ def aqhm_iteration(data, f0_ref, window, fs, max_step, func_options,
                                 window.len_vec.reshape(window.length, 1)
 
     # Run the aQHM/eaQHM algorithm N_iter times.
-    for k in xrange(N_iter):
+    for k in range(N_iter):
 
         # Calculate the a and b coeficients via least-squares.
         coef = least_squares(E, E_windowed, windowed_data, window,

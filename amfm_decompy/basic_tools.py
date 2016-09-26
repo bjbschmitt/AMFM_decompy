@@ -8,7 +8,6 @@ Version 1.0.5
 
 import numpy as np
 from scipy.signal import lfilter
-import thread
 
 
 """
@@ -23,8 +22,8 @@ class SignalObj(object):
             try:
                 from scipy.io import wavfile
             except:
-                print "ERROR: Wav modules could not loaded!"
-                thread.interrupt_main()
+                print("ERROR: Wav modules could not loaded!")
+                raise KeyboardInterrupt
             self.fs, self.data = wavfile.read(args[0])
             self.fs = float(self.fs)
             self.nbits = int(16)
@@ -37,7 +36,7 @@ class SignalObj(object):
         self.size = len(self.data)
       
         if self.size == self.data.size/2:
-            print "Warning: stereo wav file. Converting it to mono for the analysis."
+            print("Warning: stereo wav file. Converting it to mono for the analysis.")
             self.data = (self.data[:,0]+self.data[:,1])/2
 
 

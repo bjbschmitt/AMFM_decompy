@@ -45,7 +45,7 @@ import numpy.lib.stride_tricks as stride_tricks
 from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
 from scipy.interpolate import *
 import amfm_decompy.basic_tools as basic
-from thread import interrupt_main
+
 
 """
 --------------------------------------------
@@ -166,7 +166,7 @@ class PitchObj(object):
         else:
             nz_pitch = pitch2[pitch2 > 0]
             pitch2 = pchip(np.nonzero(pitch2)[0],
-                           nz_pitch)(xrange(self.nframes))
+                           nz_pitch)(range(self.nframes))
             pitch[pitch == 0] = pitch2[pitch == 0]
         if self.SMOOTH > 0:
             pitch = medfilt(pitch, self.SMOOTH_FACTOR)
@@ -196,14 +196,14 @@ class PitchObj(object):
             if np.amin(samp_values) > 0:
                 if interp_tech is 'pchip':
                     up_version = pchip(self.frames_pos,
-                                       samp_values)(xrange(file_size))
+                                       samp_values)(range(file_size))
 
                 elif interp_tech is 'spline':
                     tck, u_original = splprep([self.frames_pos, samp_values],
                                               u=self.frames_pos)
-                    up_version = splev(xrange(file_size), tck)[1]
+                    up_version = splev(range(file_size), tck)[1]
             else:
-                beg_pad = (self.noverlap)/2
+                beg_pad = int((self.noverlap)/2)
                 up_version = np.zeros((file_size))
                 up_version[:beg_pad] = first_samp
                 voiced_frames = np.nonzero(samp_values)[0]
@@ -213,8 +213,8 @@ class PitchObj(object):
 
                 for frame in voiced_frames:
                     up_interval = self.frames_pos[frame]
-                    tot_interval = np.arange(up_interval[0]-(self.frame_jump/2),
-                                          up_interval[-1]+(self.frame_jump/2))
+                    tot_interval = np.arange(int(up_interval[0]-(self.frame_jump/2)),
+                                          int(up_interval[-1]+(self.frame_jump/2)))
 
                     if interp_tech is 'pchip' and len(frame) > 2:
                         up_version[tot_interval] = pchip(up_interval,
@@ -329,10 +329,10 @@ def yaapt(signal, **kwargs):
     pitch = PitchObj(frame_size, frame_jump, nfft)
 
     if pitch.frame_size < 15:
-        print 'Frame length value {} is too short.'.format(pitch.frame_size)
+        print('Frame length value {} is too short.'.format(pitch.frame_size))
         interrupt_main()
     elif pitch.frame_size > 2048:
-        print 'Frame length value {} exceeds the limit.'.format(pitch.frame_size)
+        print('Frame length value {} exceeds the limit.'.format(pitch.frame_size))
         interrupt_main()
 
     #---------------------------------------------------------------
@@ -453,7 +453,7 @@ def spec_track(signal, pitch, parameters):
     row3_mat = np.empty((max_SHC-min_SHC+1, window_length))
     row4_mat = np.empty((max_SHC-min_SHC+1, window_length))
 
-    magnitude = np.zeros((half_window_length+(pitch.nfft/2)+1))
+    magnitude = np.zeros(int((half_window_length+(pitch.nfft/2)+1)))
 
     for frame in np.where(pitch.vuv)[0].tolist():
         fir_step = frame*pitch.frame_jump
@@ -490,16 +490,16 @@ def spec_track(signal, pitch, parameters):
     delta1 = abs((voiced_cand_pitch - 0.8*avg_voiced))*(3-voiced_cand_merit)
     index = delta1.argmin(0)
 
-    voiced_peak_minmrt = voiced_cand_pitch[index, xrange(num_voiced_cand)]
-    voiced_merit_minmrt = voiced_cand_merit[index, xrange(num_voiced_cand)]
+    voiced_peak_minmrt = voiced_cand_pitch[index, range(num_voiced_cand)]
+    voiced_merit_minmrt = voiced_cand_merit[index, range(num_voiced_cand)]
 
     voiced_peak_minmrt = medfilt(voiced_peak_minmrt,
                                  max(1, parameters['median_value']-2))
 
     #Replace the lowest merit candidates by the median smoothed ones
     #computed from highest merit peaks above.
-    voiced_cand_pitch[index, xrange(num_voiced_cand)] = voiced_peak_minmrt
-    voiced_cand_merit[index, xrange(num_voiced_cand)] = voiced_merit_minmrt
+    voiced_cand_pitch[index, range(num_voiced_cand)] = voiced_peak_minmrt
+    voiced_cand_merit[index, range(num_voiced_cand)] = voiced_merit_minmrt
 
     #Use dynamic programming to find best overal path among pitch candidates.
     #Dynamic weight for transition costs balance between local and
@@ -530,7 +530,7 @@ def spec_track(signal, pitch, parameters):
 
     spec_voiced = np.array(np.nonzero(spec_pitch)[0])
     spec_pitch = pchip(spec_voiced,
-                       spec_pitch[spec_voiced])(xrange(pitch.nframes))
+                       spec_pitch[spec_voiced])(range(pitch.nframes))
 
     spec_pitch = lfilter(np.ones((3))/3, 1.0, spec_pitch)
 
@@ -567,7 +567,7 @@ def time_track(signal, spec_pitch, pitch_std, pitch, parameters):
     signal_frames = stride_matrix(data, pitch.nframes,
                                   pitch.frame_size, pitch.frame_jump)
 
-    for frame in xrange(pitch.nframes):
+    for frame in range(pitch.nframes):
         lag_min0 = (int(np.fix(signal.new_fs/spec_range[1, frame])) -
                                     int(np.fix(parameters['nccf_pwidth']/2.0)))
         lag_max0 = (int(np.fix(signal.new_fs/spec_range[0, frame])) +
@@ -609,7 +609,7 @@ def refine(time_pitch1, time_merit1, time_pitch2, time_merit2, spec_pitch,
     time_merit.sort(axis=0)
     time_merit[:, :] = time_merit[::-1,:]
 
-    time_pitch = time_pitch[idx, xrange(pitch.nframes)]
+    time_pitch = time_pitch[idx, range(pitch.nframes)]
 
     best_pitch = medfilt(time_pitch[0, :], parameters['median_value'])*pitch.vuv
 
@@ -698,7 +698,7 @@ def dynamic(ref_pitch, ref_merit, pitch, parameters):
 
     trans_cmatrix = trans_cmatrix/dp_w4
     path = path1(local_cost, trans_cmatrix, num_cands, pitch.nframes)
-    final_pitch = ref_pitch[path, xrange(pitch.nframes)]
+    final_pitch = ref_pitch[path, range(pitch.nframes)]
 
     return final_pitch
 
@@ -734,11 +734,11 @@ def peaks(data, delta, maxpeaks, parameters):
 
     if (min_lag < 1):
         min_lag = 1
-        print 'Min_lag is too low and adjusted ({}).'.format(min_lag)
+        print('Min_lag is too low and adjusted ({}).'.format(min_lag))
 
     if max_lag > (len(data) - width):
         max_lag = len(data) - width
-        print 'Max_lag is too high and adjusted ({}).'.format(max_lag)
+        print('Max_lag is too high and adjusted ({}).'.format(max_lag))
 
     pitch = np.zeros((maxpeaks))
     merit = np.zeros((maxpeaks))
@@ -848,7 +848,7 @@ def dynamic5(pitch_array, merit_array, k1, f0_min):
     trans = k1*trans
     path = path1(local, trans, num_cand, num_frames)
 
-    final_pitch = pitch_array[path, xrange(num_frames)]
+    final_pitch = pitch_array[path, range(num_frames)]
 
     return final_pitch
 
@@ -864,11 +864,11 @@ def path1(local, trans, n_lin, n_col):
 
 #    if n_lin >= 100:
 #        print 'Stop in Dynamic due to M>100'
-#        thread.interrupt_main()
+#        raise KeyboardInterrupt
 #
 #    if n_col >= 1000:
 #        print 'Stop in Dynamic due to N>1000'
-#        thread.interrupt_main()
+#        raise KeyboardInterrupt
 
     PRED = np.zeros((n_lin, n_col), dtype=int)
     P = np.ones((n_col), dtype=int)
@@ -878,14 +878,14 @@ def path1(local, trans, n_lin, n_col):
     CCOST = np.zeros((n_lin))
     PCOST = local[:, 0]
 
-    for I in xrange(1, n_col):
+    for I in range(1, n_col):
 
         aux_matrix = PCOST+np.transpose(trans[:, :, I])
         K = n_lin-np.argmin(aux_matrix[:, ::-1], axis=1)-1
         PRED[:, I] = K
-        CCOST = PCOST[K]+trans[K, xrange(n_lin), I]
+        CCOST = PCOST[K]+trans[K, range(n_lin), I]
         if CCOST.any() >= 1.0E+30:
-            print 'CCOST>1.0E+30, Stop in Dynamic'
+            print('CCOST>1.0E+30, Stop in Dynamic')
             interrupt_main()
         CCOST = CCOST+local[:, I]
 
@@ -895,7 +895,7 @@ def path1(local, trans, n_lin, n_col):
 
     P[-1] = p_small[-1]
 
-    for I in xrange(n_col-2, -1, -1):
+    for I in range(n_col-2, -1, -1):
         P[I] = PRED[P[I+1], I+1]
 
     return P

@@ -37,17 +37,17 @@ if SNR != float('Inf'):
 # Perform the QHM extraction.
 QHM = pyqhm.qhm(signal, pitch, window, 0.001, N_iter = 3, phase_tech = 'phase')
 
-print ("QHM SRER: %s" % (QHM.SRER))
+print ("QHM SRER: {}".format(QHM.SRER))
 
 # Perform the aQHM extraction.
 aQHM = pyqhm.aqhm(signal, QHM, pitch, window, 0.001, N_iter = 3, N_runs = 2,
             phase_tech = 'phase')
 
-print ("aQHM SRER: %s" % (aQHM.SRER))
+print ("aQHM SRER: {}".format(aQHM.SRER))
 
 # Perform the eaQHM extraction.
 eaQHM = pyqhm.eaqhm(signal, aQHM, pitch, window, 0.001, N_iter=3, N_runs=2,
               phase_tech = 'phase')
 
-print ("eaQHM SRER: %s" % (eaQHM.SRER))
+print ("eaQHM SRER: {}".format(eaQHM.SRER))
 

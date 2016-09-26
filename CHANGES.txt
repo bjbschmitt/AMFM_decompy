@@ -1,4 +1,12 @@
-v1.0.5, Sep/2016
+v1.0.5.1, 26/Sep/2016
+- print functions updated in order to allow compability with Python 3. Thanks to Javier 
+  Villalba García for reporting it.
+- "xrange" function replaced by "range" in order to allow compability with Python 3.
+- "thread" module replaced by "raise KeyboardInterrupt" in pYAAPT.py and basic_tools.py.
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float numbers
+  as argument to numpy.zeros() and as array indeces in pYAAPT.py.
+
+v1.0.5, 22/Sep/2016
 - issue with the interpolation of short voiced frames fixed and also minor corrections 
   in the code. Thanks to Michał Dankiewicz for reporting and fixing them.
 - "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra 

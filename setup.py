@@ -13,22 +13,23 @@ except:
 into its modulated components, aka AM-FM decomposition.'
 
 setup(
-    name='AMFM_decompy',
-    version='1.0.5',
-    author='Bernardo J.B. Schmitt',
-    author_email='bernardo.jb.schmitt@gmail.com',
-    packages=['amfm_decompy'],
-    scripts=['bin/AMFM_test.py'],
+    name = 'AMFM_decompy',
+    version = '1.0.5.1',
+    author = 'Bernardo J.B. Schmitt',
+    author_email = 'bernardo.jb.schmitt@gmail.com',
+    packages = ['amfm_decompy'],
+    scripts = ['bin/AMFM_test.py'],
     package_data = {'amfm_decompy': ['*.wav']},
-    install_requires=['numpy', 'scipy',],
-    url='https://github.com/bjbschmitt/AMFM_decompy/',
-    license='LICENSE.txt',
-    description='Package to decompose the voiced part of a speech signal into \
+    install_requires = ['numpy', 'scipy',],
+    url = 'https://github.com/bjbschmitt/AMFM_decompy/',
+    license = 'LICENSE.txt',
+    description = 'Package to decompose the voiced part of a speech signal into \
 its modulated components, aka AM-FM decomposition.',
     long_description = long_description,
-    classifiers=[
+    classifiers = [
                 'License :: OSI Approved :: MIT License',
                 'Programming Language :: Python :: 2.7',
+                'Programming Language :: Python :: 3.5',
                 'Topic :: Scientific/Engineering',
                 'Topic :: Scientific/Engineering :: Human Machine Interfaces',
                 'Topic :: Scientific/Engineering :: Information Analysis',
@@ -36,5 +37,6 @@ its modulated components, aka AM-FM decomposition.',
                 ],
     keywords = 'Python, speech, pitch, QHM, YAAPT, modulated components, \
                 AM-FM decomposition',
-    zip_safe= False,
+    zip_safe = False,
+    include_package_data = True,
 )
