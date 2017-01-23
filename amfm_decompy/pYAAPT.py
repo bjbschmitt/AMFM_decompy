@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.5
-22/Sep/2016 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.6
+23/Jan/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -161,6 +161,15 @@ class PitchObj(object):
         pitch = np.zeros((self.nframes))
         pitch[:] = self.samp_values
         pitch2 = medfilt(self.samp_values, self.SMOOTH_FACTOR)
+        
+        # This part in the original code is kind of confused and caused
+        # some problems with the extrapolated points before the first
+        # voiced frame and after the last voiced frame. So, I made some
+        # small modifications in order to make it work better.
+        edges = self.edges_finder(pitch)
+        first_sample = pitch[0]
+        last_sample = pitch[-1]
+        
         if len(np.nonzero(pitch2)[0]) < 2:
             pitch[pitch == 0] = self.PTCH_TYP
         else:
@@ -170,10 +179,11 @@ class PitchObj(object):
             pitch[pitch == 0] = pitch2[pitch == 0]
         if self.SMOOTH > 0:
             pitch = medfilt(pitch, self.SMOOTH_FACTOR)
-        edges = self.edges_finder(pitch)
         try:
-            pitch[:edges[0]-1] = np.mean(pitch[pitch > 0])
-            pitch[edges[-1]+1:] = np.mean(pitch[pitch > 0])
+            if first_sample == 0:
+                pitch[:edges[0]-1] = pitch[edges[0]]
+            if last_sample == 0:
+                pitch[edges[-1]+1:] = pitch[edges[-1]]
         except:
             pass
         self.samp_interp = pitch

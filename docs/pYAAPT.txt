@@ -212,7 +212,15 @@ PITCH OBJECT ATTRIBUTES:
 .. py:attribute:: frames_pos
     :module: PitchObj
 
-    A numpy array that contains the samples where the center of the frames were placed during the extraction. It is set by the PitchObj.set_frame_pos method.
+    A numpy array that contains the temporal location of the center of each extraction frame, which is also referred as time stamp. It is set by the PitchObj.set_frame_pos method. The locations are given in sample domain, so their values in time domain are calculated as::
+
+       import amfm_decompy.pYAAPT as pYAAPT
+       import amfm_decompy.basic_tools as basic
+
+       signal = basic.SignalObj('path_to_sample.wav')
+       pitch = pYAAPT.yaapt(signal)
+
+       time_stamp_in_seconds = pitch.frame_pos/signal.fs
 
 .. py:attribute:: nframes
     :module: PitchObj
@@ -299,6 +307,7 @@ PITCH OBJECT METHODS:
        plt.xlabel('samples', fontsize=18)
        plt.ylabel('pitch (Hz)', fontsize=18)
        plt.legend(loc='upper right')
+       plt.show()
 
     The output is presented below:
 

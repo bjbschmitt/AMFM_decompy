@@ -1,3 +1,7 @@
+v1.0.6, 23/Jan/2017
+- issue with incorrect high values at the beginning and at the end of PitchObj.samp_interp 
+  array fixed. Thanks to Esther Judd-Klabbers for reporting it.
+
 v1.0.5.1, 26/Sep/2016
 - print functions updated in order to allow compability with Python 3. Thanks to Javier 
   Villalba García for reporting it.
@@ -19,12 +23,10 @@ v1.0.5, 22/Sep/2016
 - distutils replaced by setuptools in setup.py.
 
 v1.0.4, 13/Jan/2015
-
 - segmentation fault issue in pYAAPT.py fixed.
 - online documentation added.
 
 v1.0.3, 23/Dec/2014 
-
 - several bugs related to the analysis of 44,1 kHz files fixed. Thanks to 
   Tomasz Toczyski for reporting them.
 - "growing pitch and merit vectors" bug in the peaks function from pYAAPT.py 
@@ -44,11 +46,9 @@ v1.0.3, 23/Dec/2014
 - documentation updated.
 
 v1.0.2, 27/Nov/2014 
-
 - "missing thread package" bug in basic_tools.py fixed.
 
 v1.0.1, 20/Sep/2014 
-
 - 'f0_min' bug in pYAAPT fixed.
 - PitchObj.mean_energy attribute added.
 - two SignalObj classes merged into only one.
@@ -56,5 +56,4 @@ v1.0.1, 20/Sep/2014
 - documentation added.
 
 v1.0.0, 10/Sep/2014 
-
 - Initial release.
