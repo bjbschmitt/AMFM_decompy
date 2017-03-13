@@ -1,5 +1,5 @@
 v1.0.6.1, 13/Mar/2017
-- error due misuse of the numpy's "ones" funtion in spec_track function from pYAAPT
+- error due misuse of the numpy's "ones" function in spec_track function from pYAAPT
   fixed. Thanks to Paritosh Gupta for reporting it.
 
 v1.0.6, 23/Jan/2017
