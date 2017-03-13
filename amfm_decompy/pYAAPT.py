@@ -11,7 +11,7 @@ the state university of New York at Binghamton. The original program is
 available at http://www.ws.binghamton.edu/zahorian as free software. Further
 information about the program could be found at Stephen A. Zahorian, and
 Hongbing Hu, "A spectral/temporal method for robust fundamental frequency
-tracking," J. Acosut. Soc. Am. 123(6), June 2008.
+tracking," J. Acoust. Soc. Am. 123(6), June 2008.
 
 It must be noticed that, although this ported version is almost equal to the
 original, some few changes were made in order to make the program more "pythonic"
@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.6
-23/Jan/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.6.1
+13/Mar/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -523,7 +523,7 @@ def spec_track(signal, pitch, parameters):
 
     else:
         if num_voiced_cand > 0:
-            voiced_pitch = (ones(1, num_voiced_cand))*150.0
+            voiced_pitch = (np.ones((1, num_voiced_cand)))*150.0
         else:
             voiced_pitch = [150.0]
             cand_pitch[0, 0] = 0

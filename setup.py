@@ -14,7 +14,7 @@ into its modulated components, aka AM-FM decomposition.'
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.6',
+    version = '1.0.6.1',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],

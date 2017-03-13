@@ -1,3 +1,7 @@
+v1.0.6.1, 13/Mar/2017
+- error due misuse of the numpy's "ones" funtion in spec_track function from pYAAPT
+  fixed. Thanks to Paritosh Gupta for reporting it.
+
 v1.0.6, 23/Jan/2017
 - issue with incorrect high values at the beginning and at the end of PitchObj.samp_interp 
   array fixed. Thanks to Esther Judd-Klabbers for reporting it.
