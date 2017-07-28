@@ -2,20 +2,16 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>pYAAPT &#8212; AMFM decompy 1.0.6 documentation</title>
-    
+    <title>pYAAPT &#8212; AMFM_decompy 1.0.7 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.6',
+        VERSION:     '1.0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +31,7 @@
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -48,7 +44,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to AMFM decompy’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -76,7 +72,7 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to AMFM decompy&#8217;s documentation!</a></p>
+                        title="previous chapter">Welcome to AMFM decompy’s documentation!</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pyQHM.html"
                         title="next chapter">pyQHM</a></p>
@@ -109,7 +105,7 @@
 <h1>pYAAPT<a class="headerlink" href="#pyaapt" title="Permalink to this headline">¶</a></h1>
 <p>This a ported version for Python from the YAAPT (Yet Another Algorithm for Pitch Tracking) algorithm. The original MATLAB program was written by Hongbing Hu and Stephen A. Zahorian.</p>
 <p>The YAAPT program, designed for fundamental frequency tracking, is extremely robust for both high quality and telephone speech. The YAAPT program was created by the Speech Communication Laboratory of the state university of New York at Binghamton. The original program is available at <a class="reference external" href="http://www.ws.binghamton.edu/zahorian">http://www.ws.binghamton.edu/zahorian</a> as free software. Further information about the program could be found at <a class="reference internal" href="#ref1" id="id1">[ref1]</a>.</p>
-<p>It must be noticed that, although this ported version is almost equal to the original, some few changes were made in order to make the program more &#8220;pythonic&#8221; and improve its performance. Nevertheless, the results obtained with both algorithms were similar.</p>
+<p>It must be noticed that, although this ported version is almost equal to the original, some few changes were made in order to make the program more “pythonic” and improve its performance. Nevertheless, the results obtained with both algorithms were similar.</p>
 <div class="section" id="quick-start">
 <h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
 <p>The pYAAPT basically contains the whole set of functions to extract the pitch track from a speech signal. These functions, in their turn, are independent from the pyQHM package. Therefore, pYAAPT can be used in any other speech processing application, not only in the AM-FM decomposition.</p>
@@ -122,8 +118,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>signal</strong> (<em>signal object</em>) &#8211; created with amfm_decompy.basic_tools.</li>
-<li><strong>options</strong> (Must be formatted as follow: <a href="#id3"><span class="problematic" id="id4">**</span></a>{&#8216;option_name1&#8217; : value1,   &#8216;option_name2&#8217; : value2, ...}) &#8211; the default configuration values for all of them are the same as in the original version. A short description about them is presented in the next subitem. For more information about them, please refer to <a class="reference internal" href="#ref1" id="id2">[ref1]</a>.</li>
+<li><strong>signal</strong> (<em>signal object</em>) – created with amfm_decompy.basic_tools.</li>
+<li><strong>options</strong> (Must be formatted as follow: <a href="#id3"><span class="problematic" id="id4">**</span></a>{‘option_name1’ : value1,   ‘option_name2’ : value2, …}) – the default configuration values for all of them are the same as in the original version. A short description about them is presented in the next subitem. For more information about them, please refer to <a class="reference internal" href="#ref1" id="id2">[ref1]</a>.</li>
 </ul>
 </td>
 </tr>
@@ -136,38 +132,39 @@
 
 <p>OPTIONS:</p>
 <ul class="simple">
-<li>&#8216;frame_length&#8217; - length of each analysis frame (default: 25 ms)</li>
-<li>&#8216;frame_space&#8217; - spacing between analysis frames (default: 10 ms)</li>
-<li>&#8216;f0_min&#8217; - minimum pitch searched (default: 60 Hz)</li>
-<li>&#8216;f0_max&#8217; - maximum pitch searched (default: 400 Hz)</li>
-<li>&#8216;fft_length&#8217; - FFT length (default: 8192 samples)</li>
-<li>&#8216;bp_forder&#8217; - order of band-pass filter (default: 150)</li>
-<li>&#8216;bp_low&#8217; - low frequency of filter passband (default: 50 Hz)</li>
-<li>&#8216;bp_high&#8217; - high frequency of filter passband (default: 1500 Hz)</li>
-<li>&#8216;nlfer_thresh1&#8217; - NLFER (Normalized Low Frequency Energy Ratio) boundary for voiced/unvoiced decisions (default: 0.75)</li>
-<li>&#8216;nlfer_thresh2&#8217; - threshold for NLFER definitely unvoiced (default: 0.1)</li>
-<li>&#8216;shc_numharms&#8217; - number of harmonics in SHC (Spectral Harmonics Correlation) calculation (default: 3)</li>
-<li>&#8216;shc_window&#8217; - SHC window length (default: 40 Hz)</li>
-<li>&#8216;shc_maxpeaks&#8217; - maximum number of SHC peaks to be found (default: 4)</li>
-<li>&#8216;shc_pwidth&#8217; - window width in SHC peak picking (default: 50 Hz)</li>
-<li>&#8216;shc_thresh1&#8217; - threshold 1 for SHC peak picking (default: 5)</li>
-<li>&#8216;shc_thresh2&#8217; - threshold 2 for SHC peak picking (default: 1.25)</li>
-<li>&#8216;f0_double&#8217;- pitch doubling decision threshold (default: 150 Hz)</li>
-<li>&#8216;f0_half&#8217; - pitch halving decision threshold (default: 150 Hz)</li>
-<li>&#8216;dp5_k1&#8217; - weight used in dynamic program (default: 11)</li>
-<li>&#8216;dec_factor&#8217; - factor for signal resampling (default: 1)</li>
-<li>&#8216;nccf_thresh1&#8217; - threshold for considering a peak in NCCF (Normalized Cross Correlation Function) (default: 0.25)</li>
-<li>&#8216;nccf_thresh2&#8217; - threshold for terminating search in NCCF (default: 0.9)</li>
-<li>&#8216;nccf_maxcands&#8217; - maximum number of candidates found (default: 3)</li>
-<li>&#8216;nccf_pwidth&#8217; - window width in NCCF peak picking (default: 5)</li>
-<li>&#8216;merit_boost&#8217; - boost merit (default. 0.20)</li>
-<li>&#8216;merit_pivot&#8217; - merit assigned to unvoiced candidates in definitely unvoiced frames (default: 0.99)</li>
-<li>&#8216;merit_extra&#8217; - merit assigned to extra candidates in reducing pitch doubling/halving errors (default: 0.4)</li>
-<li>&#8216;median_value&#8217; - order of medial filter (default: 7)</li>
-<li>&#8216;dp_w1&#8217; - DP (Dynamic Programming) weight factor for voiced-voiced transitions (default: 0.15)</li>
-<li>&#8216;dp_w2&#8217; - DP weight factor for voiced-unvoiced or unvoiced-voiced transitions (default: 0.5)</li>
-<li>&#8216;dp_w3&#8217; - DP weight factor of unvoiced-unvoiced transitions (default: 0.1)</li>
-<li>&#8216;dp_w4&#8217; - Weight factor for local costs (default: 0.9)</li>
+<li>‘frame_length’ - length of each analysis frame (default: 35 ms)</li>
+<li>‘tda_frame_length’ - frame length employed in the time domain analysis (default: 35 ms). IMPORTANT: in the original YAAPT v4.0 MATLAB source code this parameter is called ‘frame_lengtht’. Since its name is quite similar to ‘frame_length’, the alternative alias ‘tda_frame_length’ is employed by pYAAPT in order to avoid confusion. Nevertheless, both inputs (‘frame_lengtht’ and ‘tda_frame_length’) are accepted by the yaapt function.</li>
+<li>‘frame_space’ - spacing between analysis frames (default: 10 ms)</li>
+<li>‘f0_min’ - minimum pitch searched (default: 60 Hz)</li>
+<li>‘f0_max’ - maximum pitch searched (default: 400 Hz)</li>
+<li>‘fft_length’ - FFT length (default: 8192 samples)</li>
+<li>‘bp_forder’ - order of band-pass filter (default: 150)</li>
+<li>‘bp_low’ - low frequency of filter passband (default: 50 Hz)</li>
+<li>‘bp_high’ - high frequency of filter passband (default: 1500 Hz)</li>
+<li>‘nlfer_thresh1’ - NLFER (Normalized Low Frequency Energy Ratio) boundary for voiced/unvoiced decisions (default: 0.75)</li>
+<li>‘nlfer_thresh2’ - threshold for NLFER definitely unvoiced (default: 0.1)</li>
+<li>‘shc_numharms’ - number of harmonics in SHC (Spectral Harmonics Correlation) calculation (default: 3)</li>
+<li>‘shc_window’ - SHC window length (default: 40 Hz)</li>
+<li>‘shc_maxpeaks’ - maximum number of SHC peaks to be found (default: 4)</li>
+<li>‘shc_pwidth’ - window width in SHC peak picking (default: 50 Hz)</li>
+<li>‘shc_thresh1’ - threshold 1 for SHC peak picking (default: 5)</li>
+<li>‘shc_thresh2’ - threshold 2 for SHC peak picking (default: 1.25)</li>
+<li>‘f0_double’- pitch doubling decision threshold (default: 150 Hz)</li>
+<li>‘f0_half’ - pitch halving decision threshold (default: 150 Hz)</li>
+<li>‘dp5_k1’ - weight used in dynamic program (default: 11)</li>
+<li>‘dec_factor’ - factor for signal resampling (default: 1)</li>
+<li>‘nccf_thresh1’ - threshold for considering a peak in NCCF (Normalized Cross Correlation Function) (default: 0.3)</li>
+<li>‘nccf_thresh2’ - threshold for terminating search in NCCF (default: 0.9)</li>
+<li>‘nccf_maxcands’ - maximum number of candidates found (default: 3)</li>
+<li>‘nccf_pwidth’ - window width in NCCF peak picking (default: 5)</li>
+<li>‘merit_boost’ - boost merit (default. 0.20)</li>
+<li>‘merit_pivot’ - merit assigned to unvoiced candidates in definitely unvoiced frames (default: 0.99)</li>
+<li>‘merit_extra’ - merit assigned to extra candidates in reducing pitch doubling/halving errors (default: 0.4)</li>
+<li>‘median_value’ - order of medial filter (default: 7)</li>
+<li>‘dp_w1’ - DP (Dynamic Programming) weight factor for voiced-voiced transitions (default: 0.15)</li>
+<li>‘dp_w2’ - DP weight factor for voiced-unvoiced or unvoiced-voiced transitions (default: 0.5)</li>
+<li>‘dp_w3’ - DP weight factor of unvoiced-unvoiced transitions (default: 0.1)</li>
+<li>‘dp_w4’ - Weight factor for local costs (default: 0.9)</li>
 </ul>
 <p>EXAMPLES:</p>
 <p>Example 1 - extract the pitch track from a signal using the default configurations:</p>
@@ -201,9 +198,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>frame_size</strong> (<em>int</em>) &#8211; analysis frame length.</li>
-<li><strong>frame_jump</strong> (<em>int</em>) &#8211; distance between the center of a extracting frame and the center of its adjacent neighbours.</li>
-<li><strong>nfft</strong> (<em>int</em>) &#8211; FFT length.</li>
+<li><strong>frame_size</strong> (<em>int</em>) – analysis frame length.</li>
+<li><strong>frame_jump</strong> (<em>int</em>) – distance between the center of a extracting frame and the center of its adjacent neighbours.</li>
+<li><strong>nfft</strong> (<em>int</em>) – FFT length.</li>
 </ul>
 </td>
 </tr>
@@ -267,7 +264,7 @@
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>)</em> don&#8217;t mistake this interpolation with the one performed by the pYAAPT.upsample method. For more explanation, please refer to the pYAAPT.samp_interp and pYAAPT.values_interp attributes.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>)</em> don’t mistake this interpolation with the one performed by the pYAAPT.upsample method. For more explanation, please refer to the pYAAPT.samp_interp and pYAAPT.values_interp attributes.</td></tr>
 </tbody>
 </table>
 <p>EXAMPLE:</p>
@@ -290,31 +287,31 @@
 <dl class="attribute">
 <dt id="PitchObj.nfft">
 <code class="descclassname">PitchObj.</code><code class="descname">nfft</code><a class="headerlink" href="#PitchObj.nfft" title="Permalink to this definition">¶</a></dt>
-<dd><p>Length in samples from the FFT used by the pitch tracker. It is set during the object&#8217;s initialization.</p>
+<dd><p>Length in samples from the FFT used by the pitch tracker. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.frame_size">
 <code class="descclassname">PitchObj.</code><code class="descname">frame_size</code><a class="headerlink" href="#PitchObj.frame_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Length in samples from the frames used by the pitch tracker. It is set during the object&#8217;s initialization.</p>
+<dd><p>Length in samples from the frames used by the pitch tracker. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.frame_jump">
 <code class="descclassname">PitchObj.</code><code class="descname">frame_jump</code><a class="headerlink" href="#PitchObj.frame_jump" title="Permalink to this definition">¶</a></dt>
-<dd><p>Distance in samples between the center of a extracting frame and the center of its adjacent neighbours. It is set during the object&#8217;s initialization.</p>
+<dd><p>Distance in samples between the center of a extracting frame and the center of its adjacent neighbours. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.noverlap">
 <code class="descclassname">PitchObj.</code><code class="descname">noverlap</code><a class="headerlink" href="#PitchObj.noverlap" title="Permalink to this definition">¶</a></dt>
-<dd><p>It&#8217;s the difference between the frame size and the frame jump. Represents the number of samples that two adjacent frames share in common, i.e, how much they overlap each other. It is set during the object&#8217;s initialization.</p>
+<dd><p>It’s the difference between the frame size and the frame jump. Represents the number of samples that two adjacent frames share in common, i.e, how much they overlap each other. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="PitchObj.mean_energy">
 <code class="descclassname">PitchObj.</code><code class="descname">mean_energy</code><a class="headerlink" href="#PitchObj.mean_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Signal&#8217;s low frequency band mean energy. It is set by the PitchObj.set_energy method.</p>
+<dd><p>Signal’s low frequency band mean energy. It is set by the PitchObj.set_energy method.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -326,7 +323,7 @@
 <dl class="attribute">
 <dt id="PitchObj.vuv">
 <code class="descclassname">PitchObj.</code><code class="descname">vuv</code><a class="headerlink" href="#PitchObj.vuv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Boolean vector that indicates if each speech frame was classified as voiced (represented as &#8216;True&#8217;) or unvoiced (represented as &#8216;False&#8217;). It is set by the PitchObj.set_energy method.</p>
+<dd><p>Boolean vector that indicates if each speech frame was classified as voiced (represented as ‘True’) or unvoiced (represented as ‘False’). It is set by the PitchObj.set_energy method.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -355,7 +352,27 @@
 <code class="descclassname">PitchObj.</code><code class="descname">samp_values</code><a class="headerlink" href="#PitchObj.samp_values" title="Permalink to this definition">¶</a></dt>
 <dt id="PitchObj.samp_interp">
 <code class="descclassname">PitchObj.</code><code class="descname">samp_interp</code><a class="headerlink" href="#PitchObj.samp_interp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are substituted by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications. The figure below presents both arrays from the sample.wav file:</p>
+<dd><p>Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are replaced by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samp_values&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">samp_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samp_interp&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;frames&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pitch (Hz)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The output is presented below:</p>
 </dd></dl>
 
 <img alt="_images/samp_values.png" src="_images/samp_values.png" />
@@ -365,7 +382,27 @@
 <code class="descclassname">PitchObj.</code><code class="descname">values</code><a class="headerlink" href="#PitchObj.values" title="Permalink to this definition">¶</a></dt>
 <dt id="PitchObj.values_interp">
 <code class="descclassname">PitchObj.</code><code class="descname">values_interp</code><a class="headerlink" href="#PitchObj.values_interp" title="Permalink to this definition">¶</a></dt>
-<dd><p>PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method). The figure below presents both arrays from the sample.wav file:</p>
+<dd><p>PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method).</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pYAAPT</span>
+<span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">signal</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">SignalObj</span><span class="p">(</span><span class="s1">&#39;path_to_sample.wav&#39;</span><span class="p">)</span>
+<span class="n">pitch</span> <span class="o">=</span> <span class="n">pYAAPT</span><span class="o">.</span><span class="n">yaapt</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samp_values&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">values_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samp_interp&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;samples&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pitch (Hz)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">16000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The output is presented below:</p>
 </dd></dl>
 
 <img alt="_images/values.png" src="_images/values.png" />
@@ -387,8 +424,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>energy</strong> (<em>numpy array</em>) &#8211; contains the low frequency energy for each frame.</li>
-<li><strong>threshold</strong> &#8211; normalized threshold.</li>
+<li><strong>energy</strong> (<em>numpy array</em>) – contains the low frequency energy for each frame.</li>
+<li><strong>threshold</strong> – normalized threshold.</li>
 </ul>
 </td>
 </tr>
@@ -404,7 +441,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frames_pos</strong> &#8211; index with the sample positions.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frames_pos</strong> – index with the sample positions.</td>
 </tr>
 </tbody>
 </table>
@@ -419,9 +456,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>samp_values</strong> (<em>numpy array</em>) &#8211; pitch value for each frame.</li>
-<li><strong>file_size</strong> (<em>int</em>) &#8211; length of the speech signal.</li>
-<li><strong>interp_tech</strong> (<em>string</em>) &#8211; interpolation method employed to upsample the data. Can be &#8216;pchip&#8217; (default), &#8216;spline&#8217; and &#8216;step&#8217;.</li>
+<li><strong>samp_values</strong> (<em>numpy array</em>) – pitch value for each frame.</li>
+<li><strong>file_size</strong> (<em>int</em>) – length of the speech signal.</li>
+<li><strong>interp_tech</strong> (<em>string</em>) – interpolation method employed to upsample the data. Can be ‘pchip’ (default), ‘spline’ and ‘step’.</li>
 </ul>
 </td>
 </tr>
@@ -447,6 +484,10 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;samples&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pitch (Hz)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">16000</span><span class="p">])</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">150</span><span class="p">,</span><span class="mi">250</span><span class="p">])</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -461,7 +502,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>values</strong> (<em>numpy array</em>) &#8211; contains the low frequency energy for each frame.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>values</strong> (<em>numpy array</em>) – contains the low frequency energy for each frame.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list.</td>
 </tr>
@@ -484,8 +525,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>fs</strong> (<em>float</em>) &#8211; signal&#8217;s fundamental frequency</li>
-<li><strong>parameters</strong> (<em>dictionary</em>) &#8211; contains the parameters options from the YAAPT algorithm.</li>
+<li><strong>fs</strong> (<em>float</em>) – signal’s fundamental frequency</li>
+<li><strong>parameters</strong> (<em>dictionary</em>) – contains the parameters options from the YAAPT algorithm.</li>
 </ul>
 </td>
 </tr>
@@ -501,25 +542,25 @@
 <dl class="attribute">
 <dt id="BandpassFilter.b">
 <code class="descclassname">BandpassFilter.</code><code class="descname">b</code><a class="headerlink" href="#BandpassFilter.b" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bandpass filter zeros coefficients. It is set during the object&#8217;s initialization.</p>
+<dd><p>Bandpass filter zeros coefficients. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="BandpassFilter.a">
 <code class="descclassname">BandpassFilter.</code><code class="descname">a</code><a class="headerlink" href="#BandpassFilter.a" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bandpass filter poles coefficients. It is set during the object&#8217;s initialization.</p>
+<dd><p>Bandpass filter poles coefficients. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="BandpassFilter.dec_factor">
 <code class="descclassname">BandpassFilter.</code><code class="descname">dec_factor</code><a class="headerlink" href="#BandpassFilter.dec_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decimation factor used for downsampling the data. It is set during the object&#8217;s initialization.</p>
+<dd><p>Decimation factor used for downsampling the data. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <table class="docutils citation" frame="void" id="ref1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[ref1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Stephen A. Zahorian, and Hongbing Hu, &#8220;A spectral/temporal method for robust fundamental frequency tracking,&#8221; J. Acosut. Soc. Am. 123(6), June 2008.</td></tr>
+<tr><td class="label">[ref1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Stephen A. Zahorian, and Hongbing Hu, “A spectral/temporal method for robust fundamental frequency tracking,” J. Acosut. Soc. Am. 123(6), June 2008.</td></tr>
 </tbody>
 </table>
 </div>
@@ -545,12 +586,12 @@
         <li class="right" >
           <a href="index.html" title="Welcome to AMFM decompy’s documentation!"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

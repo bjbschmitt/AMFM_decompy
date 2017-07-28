@@ -296,6 +296,8 @@ Example 1 - Shows how to to access the component data of a specific component::
 
    plt.xlabel('samples', fontsize=18)
    plt.ylabel('magnitude', fontsize=18)
+   
+   plt.show()
 
 The results are presented in the next two pictures:
 

@@ -2,20 +2,16 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>basic_tools &#8212; AMFM decompy 1.0.6 documentation</title>
-    
+    <title>basic_tools &#8212; AMFM_decompy 1.0.7 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.6',
+        VERSION:     '1.0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,7 +30,7 @@
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -44,7 +40,7 @@
         <li class="right" >
           <a href="pyQHM.html" title="pyQHM"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -112,7 +108,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">speech signal object.</td>
 </tr>
@@ -125,19 +121,19 @@
 <dl class="attribute">
 <dt id="SignalObj.data">
 <code class="descclassname">SignalObj.</code><code class="descname">data</code><a class="headerlink" href="#SignalObj.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numpy array containing the speech signal data. It is set during the object&#8217;s initialization.</p>
+<dd><p>Numpy array containing the speech signal data. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SignalObj.fs">
 <code class="descclassname">SignalObj.</code><code class="descname">fs</code><a class="headerlink" href="#SignalObj.fs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample frequency in Hz. It is set during the object&#8217;s initialization.</p>
+<dd><p>Sample frequency in Hz. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SignalObj.size">
 <code class="descclassname">SignalObj.</code><code class="descname">size</code><a class="headerlink" href="#SignalObj.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Speech signal length. It is set during the object&#8217;s initialization.</p>
+<dd><p>Speech signal length. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -168,7 +164,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bp_filter</strong> &#8211; BandpassFilter object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bp_filter</strong> – BandpassFilter object.</td>
 </tr>
 </tbody>
 </table>
@@ -183,8 +179,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pitch_track</strong> (<em>numpy array</em>) &#8211; pitch extracted values for each signal sample.</li>
-<li><strong>n_harm_max</strong> (<em>int</em>) &#8211; represents the maximum number of components that can be extracted from the signal.</li>
+<li><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</li>
+<li><strong>n_harm_max</strong> (<em>int</em>) – represents the maximum number of components that can be extracted from the signal.</li>
 </ul>
 </td>
 </tr>
@@ -201,8 +197,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pitch_track</strong> (<em>numpy array</em>) &#8211; pitch extracted values for each signal sample.</li>
-<li><strong>SNR</strong> (<em>float</em>) &#8211; desired signal-to-noise ratio from the output signal.</li>
+<li><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</li>
+<li><strong>SNR</strong> (<em>float</em>) – desired signal-to-noise ratio from the output signal.</li>
 </ul>
 </td>
 </tr>
@@ -227,8 +223,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sig</strong> (<em>numpy array</em>) &#8211; PCM speech signal data.</li>
-<li><strong>dtype</strong> (<em>float</em>) &#8211; data type from the elements of the output array (default: numpy.float64).</li>
+<li><strong>sig</strong> (<em>numpy array</em>) – PCM speech signal data.</li>
+<li><strong>dtype</strong> (<em>float</em>) – data type from the elements of the output array (default: numpy.float64).</li>
 </ul>
 </td>
 </tr>
@@ -259,12 +255,12 @@
         <li class="right" >
           <a href="pyQHM.html" title="pyQHM"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

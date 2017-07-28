@@ -2,20 +2,16 @@
 
 <!doctype html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>pyQHM &#8212; AMFM decompy 1.0.6 documentation</title>
-    
+    <title>pyQHM &#8212; AMFM_decompy 1.0.7 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.6',
+        VERSION:     '1.0.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +31,7 @@
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -48,7 +44,7 @@
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -129,14 +125,14 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>signal</strong> (<em>signal object</em>) &#8211; contains the signal data and its parameters.</li>
-<li><strong>pitch</strong> (<em>pitch object</em>) &#8211; contains the pitch track and its parameters.</li>
-<li><strong>window</strong> (<em>window object</em>) &#8211; contains the sample window and some reference arrays.</li>
-<li><strong>samp_jump</strong> (<em>float</em>) &#8211; distance in seconds between the center of a extracting frame and the center of its adjacent neighbours (default: sample by sample).</li>
-<li><strong>N_iter</strong> (<em>int</em>) &#8211; number of iterations for each frame estimation (default: 1).</li>
-<li><strong>phase_tech</strong> (<em>str</em>) &#8211; has two options: &#8216;phase&#8217; (default) and &#8216;freq&#8217;. The objective is to choose the smoother base for further aQHM and eaQHM calculations in order to avoid the degradation of their performance due the phase wild behaviour. Normally when a sample jump is employed,  the &#8216;phase&#8217; option it&#8217;s enough, since that the interpolation process already smooths the phase signal. However, in a sample by sample analysis, the use of &#8216;freq&#8217; (cumulative frequency) is favoured.</li>
-<li><strong>previous_HM</strong> (<em>modulated signal object</em>) &#8211; previously extracted AM-FM signal, used as base for the aQHM and eaQHM calculations.</li>
-<li><strong>N_runs</strong> (<em>int</em>) &#8211; after the aQHM/eaQHM algorithm has been applied on the whole signal, the function takes the output modulated signal object as new input and restart the aQHM/eaQHM until N_runs are performed OR until the output SRER (Signal-to-Reconstruction Error Ratio) stops growing. The goal is to refine the results. (default: keeps restarting the algorithm infinitely until the maximum SRER).</li>
+<li><strong>signal</strong> (<em>signal object</em>) – contains the signal data and its parameters.</li>
+<li><strong>pitch</strong> (<em>pitch object</em>) – contains the pitch track and its parameters.</li>
+<li><strong>window</strong> (<em>window object</em>) – contains the sample window and some reference arrays.</li>
+<li><strong>samp_jump</strong> (<em>float</em>) – distance in seconds between the center of a extracting frame and the center of its adjacent neighbours (default: sample by sample).</li>
+<li><strong>N_iter</strong> (<em>int</em>) – number of iterations for each frame estimation (default: 1).</li>
+<li><strong>phase_tech</strong> (<em>str</em>) – has two options: ‘phase’ (default) and ‘freq’. The objective is to choose the smoother base for further aQHM and eaQHM calculations in order to avoid the degradation of their performance due the phase wild behaviour. Normally when a sample jump is employed,  the ‘phase’ option it’s enough, since that the interpolation process already smooths the phase signal. However, in a sample by sample analysis, the use of ‘freq’ (cumulative frequency) is favoured.</li>
+<li><strong>previous_HM</strong> (<em>modulated signal object</em>) – previously extracted AM-FM signal, used as base for the aQHM and eaQHM calculations.</li>
+<li><strong>N_runs</strong> (<em>int</em>) – after the aQHM/eaQHM algorithm has been applied on the whole signal, the function takes the output modulated signal object as new input and restart the aQHM/eaQHM until N_runs are performed OR until the output SRER (Signal-to-Reconstruction Error Ratio) stops growing. The goal is to refine the results. (default: keeps restarting the algorithm infinitely until the maximum SRER).</li>
 </ul>
 </td>
 </tr>
@@ -194,10 +190,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n_harm</strong> (<em>int</em>) &#8211; number of modulated components that form the signal.</li>
-<li><strong>file_size</strong> (<em>int</em>) &#8211; length of the speech signal in samples.</li>
-<li><strong>fs</strong> (<em>float</em>) &#8211; sampling frequency in Hz.</li>
-<li><strong>phase_tech</strong> (<em>str</em>) &#8211; has two options: &#8216;phase&#8217; (default) and &#8216;freq&#8217;. The objective is to choose the smoother base for further aQHM and eaQHM calculations in order to avoid the degradation of their performance due the phase wild behaviour. Normally when a sample jump is employed,  the &#8216;phase&#8217; option it&#8217;s enough, since that the interpolation process already smooths the phase signal. However, in a sample by sample analysis, the use of &#8216;freq&#8217; (cumulative frequency) is favoured.</li>
+<li><strong>n_harm</strong> (<em>int</em>) – number of modulated components that form the signal.</li>
+<li><strong>file_size</strong> (<em>int</em>) – length of the speech signal in samples.</li>
+<li><strong>fs</strong> (<em>float</em>) – sampling frequency in Hz.</li>
+<li><strong>phase_tech</strong> (<em>str</em>) – has two options: ‘phase’ (default) and ‘freq’. The objective is to choose the smoother base for further aQHM and eaQHM calculations in order to avoid the degradation of their performance due the phase wild behaviour. Normally when a sample jump is employed,  the ‘phase’ option it’s enough, since that the interpolation process already smooths the phase signal. However, in a sample by sample analysis, the use of ‘freq’ (cumulative frequency) is favoured.</li>
 </ul>
 </td>
 </tr>
@@ -213,43 +209,43 @@
 <dl class="attribute">
 <dt id="ModulatedSign.n_harm">
 <code class="descclassname">ModulatedSign.</code><code class="descname">n_harm</code><a class="headerlink" href="#ModulatedSign.n_harm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of modulated components that form the signal. It is set during the object&#8217;s initialization.</p>
+<dd><p>Number of modulated components that form the signal. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.size">
 <code class="descclassname">ModulatedSign.</code><code class="descname">size</code><a class="headerlink" href="#ModulatedSign.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Length of the speech signal in samples. It is set during the object&#8217;s initialization.</p>
+<dd><p>Length of the speech signal in samples. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.fs">
 <code class="descclassname">ModulatedSign.</code><code class="descname">fs</code><a class="headerlink" href="#ModulatedSign.fs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sampling frequency in Hz. It is set during the object&#8217;s initialization.</p>
+<dd><p>Sampling frequency in Hz. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.H">
 <code class="descclassname">ModulatedSign.</code><code class="descname">H</code><a class="headerlink" href="#ModulatedSign.H" title="Permalink to this definition">¶</a></dt>
-<dd><p>3-dimension numpy array (n_harm, 3, file_size), which stores the magnitude, phase and frequency values from all components. Its first dimension refers to the n_harm components, the second to the three composing parameters (where 0 stands for the magnitude, 1 for the phase and 2 for the frequency) and the third dimension to the temporal axis. It is created during the object&#8217;s initialization.</p>
+<dd><p>3-dimension numpy array (n_harm, 3, file_size), which stores the magnitude, phase and frequency values from all components. Its first dimension refers to the n_harm components, the second to the three composing parameters (where 0 stands for the magnitude, 1 for the phase and 2 for the frequency) and the third dimension to the temporal axis. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.harmonics">
 <code class="descclassname">ModulatedSign.</code><code class="descname">harmonics</code><a class="headerlink" href="#ModulatedSign.harmonics" title="Permalink to this definition">¶</a></dt>
-<dd><p>List where each element is a modulated component. Read more about it in the ComponentObj Class section. It is created during the object&#8217;s initialization.</p>
+<dd><p>List where each element is a modulated component. Read more about it in the ComponentObj Class section. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.error">
 <code class="descclassname">ModulatedSign.</code><code class="descname">error</code><a class="headerlink" href="#ModulatedSign.error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numpy array where each element is the mean squared error between the original signal frame and its synthesized version. It is created during the object&#8217;s initialization.</p>
+<dd><p>Numpy array where each element is the mean squared error between the original signal frame and its synthesized version. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ModulatedSign.phase_tech">
 <code class="descclassname">ModulatedSign.</code><code class="descname">phase_tech</code><a class="headerlink" href="#ModulatedSign.phase_tech" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of the phase smoothing method used to create a reference for future aQHM/eaQHM calculations. Can be &#8216;phase&#8217; or &#8216;freq&#8217;. It is set during the object&#8217;s initialization.</p>
+<dd><p>Name of the phase smoothing method used to create a reference for future aQHM/eaQHM calculations. Can be ‘phase’ or ‘freq’. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -281,9 +277,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<em>numpy array</em>) &#8211; contains the extracted complex coefficients from the harmonic model (for more information about them, please check the references).</li>
-<li><strong>freq</strong> (<em>numpy array</em>) &#8211; instantaneous frequency from each of the components.</li>
-<li><strong>frame</strong> (<em>int</em>) &#8211; sample where the center of the moving sample window is located.</li>
+<li><strong>a</strong> (<em>numpy array</em>) – contains the extracted complex coefficients from the harmonic model (for more information about them, please check the references).</li>
+<li><strong>freq</strong> (<em>numpy array</em>) – instantaneous frequency from each of the components.</li>
+<li><strong>frame</strong> (<em>int</em>) – sample where the center of the moving sample window is located.</li>
 </ul>
 </td>
 </tr>
@@ -300,8 +296,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>samp_frames</strong> (<em>numpy array</em>) &#8211; contains the sample locations where the algorithm was employed.</li>
-<li><strong>pitch</strong> (<em>pitch object</em>) &#8211; pitch information.</li>
+<li><strong>samp_frames</strong> (<em>numpy array</em>) – contains the sample locations where the algorithm was employed.</li>
+<li><strong>pitch</strong> (<em>pitch object</em>) – pitch information.</li>
 </ul>
 </td>
 </tr>
@@ -317,7 +313,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>N</strong> &#8211; select which of the components are going to be synthesized (default: all of them).</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>N</strong> – select which of the components are going to be synthesized (default: all of them).</td>
 </tr>
 </tbody>
 </table>
@@ -332,8 +328,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>orig_signal</strong> (<em>numpy array</em>) &#8211; original signal.</li>
-<li><strong>pitch_track</strong> (<em>numpy array</em>) &#8211; pitch values for each sample.</li>
+<li><strong>orig_signal</strong> (<em>numpy array</em>) – original signal.</li>
+<li><strong>pitch_track</strong> (<em>numpy array</em>) – pitch values for each sample.</li>
 </ul>
 </td>
 </tr>
@@ -351,8 +347,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>edges</strong> &#8211; index where occur the pitch transitions between unvoiced-voiced and voiced-unvoiced.</li>
-<li><strong>window</strong> (<em>window object</em>) &#8211; sample window and its parameters.</li>
+<li><strong>edges</strong> – index where occur the pitch transitions between unvoiced-voiced and voiced-unvoiced.</li>
+<li><strong>window</strong> (<em>window object</em>) – sample window and its parameters.</li>
 </ul>
 </td>
 </tr>
@@ -375,8 +371,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>H</strong> (<em>numpy array</em>) &#8211; 3-dimensional array where the component data is stored (for more information, check the ModulatedSign.H attribute).</li>
-<li><strong>harm</strong> (<em>int</em>) &#8211; the component index.</li>
+<li><strong>H</strong> (<em>numpy array</em>) – 3-dimensional array where the component data is stored (for more information, check the ModulatedSign.H attribute).</li>
+<li><strong>harm</strong> (<em>int</em>) – the component index.</li>
 </ul>
 </td>
 </tr>
@@ -392,19 +388,19 @@
 <dl class="attribute">
 <dt id="ComponentObj.mag">
 <code class="descclassname">ComponentObj.</code><code class="descname">mag</code><a class="headerlink" href="#ComponentObj.mag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Magnitude envelope of the component. It is set during the object&#8217;s initialization.</p>
+<dd><p>Magnitude envelope of the component. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ComponentObj.phase">
 <code class="descclassname">ComponentObj.</code><code class="descname">phase</code><a class="headerlink" href="#ComponentObj.phase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phase angle track of the component in radians. It is set during the object&#8217;s initialization.</p>
+<dd><p>Phase angle track of the component in radians. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="ComponentObj.freq">
 <code class="descclassname">ComponentObj.</code><code class="descname">freq</code><a class="headerlink" href="#ComponentObj.freq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instantaneous normalized frequency track of the component. To get the value in Hz just multiply this array by the sample frequency. It is set during the object&#8217;s initialization.</p>
+<dd><p>Instantaneous normalized frequency track of the component. To get the value in Hz just multiply this array by the sample frequency. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -458,6 +454,8 @@
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;samples&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;magnitude&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The results are presented in the next two pictures:</p>
@@ -473,7 +471,7 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="mi">950</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>will return the magnitude of the third harmonic at the 950th sample. However, due the way that the python language is internally built, unfortunately it&#8217;s not possible to slice the harmonics list. For example:</p>
+<p>will return the magnitude of the third harmonic at the 950th sample. However, due the way that the python language is internally built, unfortunately it’s not possible to slice the harmonics list. For example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
 <span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="mi">950</span><span class="p">]</span>
 </pre></div>
@@ -509,8 +507,8 @@ phase.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>window_duration</strong> (<em>float</em>) &#8211; window duration in seconds.</li>
-<li><strong>fs</strong> (<em>float</em>) &#8211; sample frequency in Hz.</li>
+<li><strong>window_duration</strong> (<em>float</em>) – window duration in seconds.</li>
+<li><strong>fs</strong> (<em>float</em>) – sample frequency in Hz.</li>
 </ul>
 </td>
 </tr>
@@ -526,43 +524,43 @@ phase.</p>
 <dl class="attribute">
 <dt id="SampleWindow.dur">
 <code class="descclassname">SampleWindow.</code><code class="descname">dur</code><a class="headerlink" href="#SampleWindow.dur" title="Permalink to this definition">¶</a></dt>
-<dd><p>Window duration in seconds. It is set during the object&#8217;s initialization.</p>
+<dd><p>Window duration in seconds. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.length">
 <code class="descclassname">SampleWindow.</code><code class="descname">length</code><a class="headerlink" href="#SampleWindow.length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Window length in samples. It is set during the object&#8217;s initialization.</p>
+<dd><p>Window length in samples. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.data">
 <code class="descclassname">SampleWindow.</code><code class="descname">data</code><a class="headerlink" href="#SampleWindow.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array containing the hamming window data. It is set during the object&#8217;s initialization.</p>
+<dd><p>Array containing the hamming window data. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.data2">
 <code class="descclassname">SampleWindow.</code><code class="descname">data2</code><a class="headerlink" href="#SampleWindow.data2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array containing the hamming window data with each element raised to the 2 power. It is set during the object&#8217;s initialization.</p>
+<dd><p>Array containing the hamming window data with each element raised to the 2 power. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.N">
 <code class="descclassname">SampleWindow.</code><code class="descname">N</code><a class="headerlink" href="#SampleWindow.N" title="Permalink to this definition">¶</a></dt>
-<dd><p>Half-window length, i.e., SampleWindow.length/2 -1. It is set during the object&#8217;s initialization.</p>
+<dd><p>Half-window length, i.e., SampleWindow.length/2 -1. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.half_len_vec">
 <code class="descclassname">SampleWindow.</code><code class="descname">half_len_vec</code><a class="headerlink" href="#SampleWindow.half_len_vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numpy array that contains the indexes from zero to N, i.e, [0, 1 ... N]. It is set during the object&#8217;s initialization.</p>
+<dd><p>Numpy array that contains the indexes from zero to N, i.e, [0, 1 … N]. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="SampleWindow.len_vec">
 <code class="descclassname">SampleWindow.</code><code class="descname">len_vec</code><a class="headerlink" href="#SampleWindow.len_vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numpy array that contains the indexes from -N to N, i.e, [-N, -N+1 ... N-1, N]. It is set during the object&#8217;s initialization.</p>
+<dd><p>Numpy array that contains the indexes from -N to N, i.e, [-N, -N+1 … N-1, N]. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <table class="docutils citation" frame="void" id="ref2" rules="none">
@@ -606,12 +604,12 @@ phase.</p>
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>
