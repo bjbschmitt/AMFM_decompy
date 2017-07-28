@@ -36,14 +36,14 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.6.1
-13/Mar/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.7
+27/Jul/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
 import numpy.lib.stride_tricks as stride_tricks
 from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
-from scipy.interpolate import *
+import scipy.interpolate as scipy_interp
 import amfm_decompy.basic_tools as basic
 
 
@@ -161,7 +161,7 @@ class PitchObj(object):
         pitch = np.zeros((self.nframes))
         pitch[:] = self.samp_values
         pitch2 = medfilt(self.samp_values, self.SMOOTH_FACTOR)
-        
+
         # This part in the original code is kind of confused and caused
         # some problems with the extrapolated points before the first
         # voiced frame and after the last voiced frame. So, I made some
@@ -169,13 +169,13 @@ class PitchObj(object):
         edges = self.edges_finder(pitch)
         first_sample = pitch[0]
         last_sample = pitch[-1]
-        
+
         if len(np.nonzero(pitch2)[0]) < 2:
             pitch[pitch == 0] = self.PTCH_TYP
         else:
             nz_pitch = pitch2[pitch2 > 0]
-            pitch2 = pchip(np.nonzero(pitch2)[0],
-                           nz_pitch)(range(self.nframes))
+            pitch2 = scipy_interp.pchip(np.nonzero(pitch2)[0],
+                                        nz_pitch)(range(self.nframes))
             pitch[pitch == 0] = pitch2[pitch == 0]
         if self.SMOOTH > 0:
             pitch = medfilt(pitch, self.SMOOTH_FACTOR)
@@ -195,7 +195,7 @@ class PitchObj(object):
     def upsample(self, samp_values, file_size, first_samp=0, last_samp=0,
                  interp_tech='pchip'):
         if interp_tech is 'step':
-            beg_pad = (self.noverlap)/2
+            beg_pad = int((self.noverlap)/2)
             up_version = np.zeros((file_size))
             up_version[:beg_pad] = first_samp
             up_version[beg_pad:beg_pad+self.frame_jump*self.nframes] = \
@@ -205,13 +205,14 @@ class PitchObj(object):
         elif interp_tech is 'pchip' or 'spline':
             if np.amin(samp_values) > 0:
                 if interp_tech is 'pchip':
-                    up_version = pchip(self.frames_pos,
-                                       samp_values)(range(file_size))
+                    up_version = scipy_interp.pchip(self.frames_pos,
+                                                    samp_values)(range(file_size))
 
                 elif interp_tech is 'spline':
-                    tck, u_original = splprep([self.frames_pos, samp_values],
-                                              u=self.frames_pos)
-                    up_version = splev(range(file_size), tck)[1]
+                    tck, u_original = scipy_interp.splprep(
+                                                [self.frames_pos, samp_values],
+                                                u=self.frames_pos)
+                    up_version = scipy_interp.splev(range(file_size), tck)[1]
             else:
                 beg_pad = int((self.noverlap)/2)
                 up_version = np.zeros((file_size))
@@ -227,18 +228,21 @@ class PitchObj(object):
                                           int(up_interval[-1]+(self.frame_jump/2)))
 
                     if interp_tech is 'pchip' and len(frame) > 2:
-                        up_version[tot_interval] = pchip(up_interval,
-                                            samp_values[frame])(tot_interval)
+                        up_version[tot_interval] = scipy_interp.pchip(
+                                                    up_interval,
+                                                    samp_values[frame])(tot_interval)
 
                     elif interp_tech is 'spline' and len(frame) > 2:
-                        tck, u_original = splprep([up_interval, samp_values[frame]],
-                                                  u=up_interval)
-                        up_version[tot_interval] = splev(tot_interval, tck)[1]
+                        tck, u_original = scipy_interp.splprep(
+                                            [up_interval, samp_values[frame]],
+                                             u=up_interval)
+                        up_version[tot_interval] = scipy_interp.splev(tot_interval, tck)[1]
 
                     # MD: In case len(frame)==2, above methods fail.
                     #Use linear interpolation instead.
                     elif len(frame) == 2:
-                        up_version[tot_interval] = interp1d(up_interval,
+                        up_version[tot_interval] = scipy_interp.interp1d(
+                                                    up_interval,
                                                     samp_values[frame],
                                         fill_value='extrapolate')(tot_interval)
 
@@ -282,11 +286,29 @@ class BandpassFilter(object):
 """
 def yaapt(signal, **kwargs):
 
+    # Rename the YAAPT v4.0 parameter "frame_lengtht" to "tda_frame_length"
+    # (if provided).
+    if 'frame_lengtht' in kwargs:
+        if 'tda_frame_length' in kwargs:
+            warning_str = 'WARNING: Both "tda_frame_length" and "frame_lengtht" '
+            warning_str += 'refer to the same parameter. Therefore, the value '
+            warning_str += 'of "frame_lengtht" is going to be discarded.'
+            print(warning_str)
+        else:
+            kwargs['tda_frame_length'] = kwargs.pop('frame_lengtht')
+
     #---------------------------------------------------------------
     # Set the default values for the parameters.
     #---------------------------------------------------------------
     parameters = {}
-    parameters['frame_length'] = kwargs.get('frame_length', 25.0)   #Length of each analysis frame (ms)
+    parameters['frame_length'] = kwargs.get('frame_length', 35.0)   #Length of each analysis frame (ms)
+    # WARNING: In the original MATLAB YAAPT 4.0 code the next parameter is called
+    # "frame_lengtht" which is quite similar to the previous one "frame_length".
+    # Therefore, I've decided to rename it to "tda_frame_length" in order to
+    # avoid confusion between them. Nevertheless, both inputs ("frame_lengtht"
+    # and "tda_frame_length") are accepted when the function is called.
+    parameters['tda_frame_length'] = \
+                              kwargs.get('tda_frame_length', 35.0)  #Frame length employed in the time domain analysis (ms)
     parameters['frame_space'] = kwargs.get('frame_space', 10.0)     #Spacing between analysis frames (ms)
     parameters['f0_min'] = kwargs.get('f0_min', 60.0)               #Minimum F0 searched (Hz)
     parameters['f0_max'] = kwargs.get('f0_max', 400.0)              #Maximum F0 searched (Hz)
@@ -306,7 +328,7 @@ def yaapt(signal, **kwargs):
     parameters['f0_half'] = kwargs.get('f0_half', 150.0)            #F0 halving decision threshold (Hz)
     parameters['dp5_k1'] = kwargs.get('dp5_k1', 11.0)               #Weight used in dynamic program
     parameters['dec_factor'] = kwargs.get('dec_factor', 1)          #Factor for signal resampling
-    parameters['nccf_thresh1'] = kwargs.get('nccf_thresh1', 0.25)   #Threshold for considering a peak in NCCF
+    parameters['nccf_thresh1'] = kwargs.get('nccf_thresh1', 0.3)    #Threshold for considering a peak in NCCF
     parameters['nccf_thresh2'] = kwargs.get('nccf_thresh2', 0.9)    #Threshold for terminating serach in NCCF
     parameters['nccf_maxcands'] = kwargs.get('nccf_maxcands', 3)    #Maximum number of candidates found
     parameters['nccf_pwidth'] = kwargs.get('nccf_pwidth', 5)        #Window width in NCCF peak picking
@@ -338,12 +360,9 @@ def yaapt(signal, **kwargs):
     frame_jump = int(np.fix(parameters['frame_space']*signal.fs/1000))
     pitch = PitchObj(frame_size, frame_jump, nfft)
 
-    if pitch.frame_size < 15:
-        print('Frame length value {} is too short.'.format(pitch.frame_size))
-        interrupt_main()
-    elif pitch.frame_size > 2048:
-        print('Frame length value {} exceeds the limit.'.format(pitch.frame_size))
-        interrupt_main()
+    assert pitch.frame_size > 15, 'Frame length value {} is too short.'.format(pitch.frame_size)
+    assert pitch.frame_size < 2048, 'Frame length value {} exceeds the limit.'.format(pitch.frame_size)
+
 
     #---------------------------------------------------------------
     # Calculate NLFER and determine voiced/unvoiced frames.
@@ -363,6 +382,19 @@ def yaapt(signal, **kwargs):
 
     time_pitch2, time_merit2 = time_track(nonlinear_sign, spec_pitch, pitch_std,
                                           pitch, parameters)
+
+    # Added in YAAPT 4.0
+    if time_pitch1.shape[1] < len(spec_pitch):
+        len_time = time_pitch1.shape[1]
+        len_spec = len(spec_pitch)
+        time_pitch1 = np.concatenate((time_pitch1, np.zeros((3,len_spec-len_time),
+                                      dtype=time_pitch1.dtype)),axis=1)
+        time_pitch2 = np.concatenate((time_pitch2, np.zeros((3,len_spec-len_time),
+                                      dtype=time_pitch2.dtype)),axis=1)
+        time_merit1 = np.concatenate((time_merit1, np.zeros((3,len_spec-len_time),
+                                      dtype=time_merit1.dtype)),axis=1)
+        time_merit2 = np.concatenate((time_merit2, np.zeros((3,len_spec-len_time),
+                                      dtype=time_merit2.dtype)),axis=1)
 
     #---------------------------------------------------------------
     # Refine pitch candidates.
@@ -458,10 +490,8 @@ def spec_track(signal, pitch, parameters):
     #Compute SHC for voiced frame
     window = kaiser(nframe_size, 0.5)
     SHC = np.zeros((max_SHC))
-    row1_mat = np.empty((max_SHC-min_SHC+1, window_length))
-    row2_mat = np.empty((max_SHC-min_SHC+1, window_length))
-    row3_mat = np.empty((max_SHC-min_SHC+1, window_length))
-    row4_mat = np.empty((max_SHC-min_SHC+1, window_length))
+    row_mat_list = np.array([np.empty((max_SHC-min_SHC+1, window_length))
+                            for x in range(num_harmonics+1)])
 
     magnitude = np.zeros(int((half_window_length+(pitch.nfft/2)+1)))
 
@@ -474,16 +504,11 @@ def spec_track(signal, pitch, parameters):
         magnitude[half_window_length:] = np.abs(np.fft.rfft(data_slice,
                                                 pitch.nfft))
 
-        row1_mat[:, :] = stride_matrix(magnitude[min_SHC:], max_SHC-min_SHC+1,
-                                     window_length, 1)
-        row2_mat[:, :] = stride_matrix(magnitude[min_SHC*2:], max_SHC-min_SHC+1,
-                                     window_length, 2)
-        row3_mat[:, :] = stride_matrix(magnitude[min_SHC*3:], max_SHC-min_SHC+1,
-                                     window_length, 3)
-        row4_mat[:, :] = stride_matrix(magnitude[min_SHC*4:], max_SHC-min_SHC+1,
-                                     window_length, 4)
-        SHC[min_SHC-1:max_SHC] = np.sum(row1_mat*row2_mat*row3_mat*row4_mat,
-                                     axis=1)
+        for idx,row_mat in enumerate(row_mat_list):
+            row_mat[:, :] = stride_matrix(magnitude[min_SHC*(idx+1):],
+                                          max_SHC-min_SHC+1,
+                                          window_length, idx+1)
+        SHC[min_SHC-1:max_SHC] = np.sum(np.prod(row_mat_list,axis=0),axis=1)
 
         cand_pitch[:, frame], cand_merit[:, frame] = \
             peaks(SHC, delta, maxpeaks, parameters)
@@ -539,8 +564,8 @@ def spec_track(signal, pitch, parameters):
         spec_pitch[-1] = pitch_avg
 
     spec_voiced = np.array(np.nonzero(spec_pitch)[0])
-    spec_pitch = pchip(spec_voiced,
-                       spec_pitch[spec_voiced])(range(pitch.nframes))
+    spec_pitch = scipy_interp.pchip(spec_voiced,
+                                    spec_pitch[spec_voiced])(range(pitch.nframes))
 
     spec_pitch = lfilter(np.ones((3))/3, 1.0, spec_pitch)
 
@@ -558,6 +583,16 @@ def time_track(signal, spec_pitch, pitch_std, pitch, parameters):
     #---------------------------------------------------------------
     # Set parameters.
     #---------------------------------------------------------------
+    tda_frame_length = int(parameters['tda_frame_length']*signal.fs/1000)
+    tda_noverlap = tda_frame_length-pitch.frame_jump
+    tda_nframes = int((len(signal.data)-tda_noverlap)/pitch.frame_jump)
+
+    len_spectral = len(spec_pitch)
+    if tda_nframes < len_spectral:
+        spec_pitch = spec_pitch[:tda_nframes]
+    elif tda_nframes > len_spectral:
+        tda_nframes = len_spectral
+
     merit_boost = parameters['merit_boost']
     maxcands = parameters['nccf_maxcands']
     freq_thresh = 5.0*pitch_std
@@ -566,18 +601,17 @@ def time_track(signal, spec_pitch, pitch_std, pitch, parameters):
     spec_range = np.vstack((spec_range,
                          np.minimum(spec_pitch+2.0*pitch_std, parameters['f0_max'])))
 
-    time_pitch = np.zeros((maxcands, pitch.nframes))
-    time_merit = np.zeros((maxcands, pitch.nframes))
+    time_pitch = np.zeros((maxcands, tda_nframes))
+    time_merit = np.zeros((maxcands, tda_nframes))
 
     #---------------------------------------------------------------
     # Main routine.
     #---------------------------------------------------------------
     data = np.zeros((signal.size))  #Needs other array, otherwise stride and
     data[:] = signal.filtered       #windowing will modify signal.filtered
-    signal_frames = stride_matrix(data, pitch.nframes,
-                                  pitch.frame_size, pitch.frame_jump)
-
-    for frame in range(pitch.nframes):
+    signal_frames = stride_matrix(data, tda_nframes,tda_frame_length,
+                                  pitch.frame_jump)
+    for frame in range(tda_nframes):
         lag_min0 = (int(np.fix(signal.new_fs/spec_range[1, frame])) -
                                     int(np.fix(parameters['nccf_pwidth']/2.0)))
         lag_max0 = (int(np.fix(signal.new_fs/spec_range[0, frame])) +
@@ -894,9 +928,8 @@ def path1(local, trans, n_lin, n_col):
         K = n_lin-np.argmin(aux_matrix[:, ::-1], axis=1)-1
         PRED[:, I] = K
         CCOST = PCOST[K]+trans[K, range(n_lin), I]
-        if CCOST.any() >= 1.0E+30:
-            print('CCOST>1.0E+30, Stop in Dynamic')
-            interrupt_main()
+
+        assert CCOST.any() < 1.0E+30, 'CCOST>1.0E+30, Stop in Dynamic'
         CCOST = CCOST+local[:, I]
 
         PCOST[:] = CCOST
@@ -920,6 +953,11 @@ def crs_corr(data, lag_min, lag_max):
     eps1 = 0.0
     data_len = len(data)
     N = data_len-lag_max
+
+    error_str = 'ERROR: Negative index in the cross correlation calculation of '
+    error_str += 'the pYAAPT time domain analysis. Please try to increase the '
+    error_str += 'value of the "tda_frame_length" parameter.'
+    assert N>0, error_str
 
     phi = np.zeros((data_len))
     data -= np.mean(data)

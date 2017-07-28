@@ -28,7 +28,8 @@ USAGE:
 
 OPTIONS:
 
-* 'frame_length' - length of each analysis frame (default: 25 ms)
+* 'frame_length' - length of each analysis frame (default: 35 ms)
+* 'tda_frame_length' - frame length employed in the time domain analysis (default: 35 ms). IMPORTANT: in the original YAAPT v4.0 MATLAB source code this parameter is called 'frame_lengtht'. Since its name is quite similar to 'frame_length', the alternative alias 'tda_frame_length' is employed by pYAAPT in order to avoid confusion. Nevertheless, both inputs ('frame_lengtht' and 'tda_frame_length') are accepted by the yaapt function.
 * 'frame_space' - spacing between analysis frames (default: 10 ms)
 * 'f0_min' - minimum pitch searched (default: 60 Hz)
 * 'f0_max' - maximum pitch searched (default: 400 Hz)
@@ -48,7 +49,7 @@ OPTIONS:
 * 'f0_half' - pitch halving decision threshold (default: 150 Hz)
 * 'dp5_k1' - weight used in dynamic program (default: 11)
 * 'dec_factor' - factor for signal resampling (default: 1)
-* 'nccf_thresh1' - threshold for considering a peak in NCCF (Normalized Cross Correlation Function) (default: 0.25)
+* 'nccf_thresh1' - threshold for considering a peak in NCCF (Normalized Cross Correlation Function) (default: 0.3)
 * 'nccf_thresh2' - threshold for terminating search in NCCF (default: 0.9)
 * 'nccf_maxcands' - maximum number of candidates found (default: 3)
 * 'nccf_pwidth' - window width in NCCF peak picking (default: 5)
@@ -231,7 +232,28 @@ PITCH OBJECT ATTRIBUTES:
                   samp_interp
     :module: PitchObj
 
-    Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are substituted by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications. The figure below presents both arrays from the sample.wav file:
+    Both arrays contain the pitch values from each of the nframes. The only difference is that, in PitchObj.samp_interp the unvoiced segments are replaced by the interpolation from the adjacent voiced segments edges. This provides a non-zero version from the pitch track, which can be necessary for some applications.
+
+    Example::
+
+       import amfm_decompy.pYAAPT as pYAAPT
+       import amfm_decompy.basic_tools as basic
+       from matplotlib import pyplot as plt
+
+       signal = basic.SignalObj('path_to_sample.wav')
+       pitch = pYAAPT.yaapt(signal)
+
+       plt.plot(pitch.samp_values, label='samp_values', color='blue')
+       plt.plot(pitch.samp_interp, label='samp_interp', color='green')
+
+       plt.xlabel('frames', fontsize=18)
+       plt.ylabel('pitch (Hz)', fontsize=18)
+       plt.legend(loc='upper right')
+       axes = plt.gca()
+       axes.set_xlim([0,90])
+       plt.show()
+
+    The output is presented below:
 
 .. image:: samp_values.png
 
@@ -241,7 +263,28 @@ Both attributes are set by the PitchObj.set_values method.
                   values_interp
     :module: PitchObj
 
-    PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method). The figure below presents both arrays from the sample.wav file:
+    PitchObj.values and PitchObj.values_interp are the upsampled versions from PitchObj.samp_values and PitchObj.samp_interp respectively. Therefore, their length is equal to the original file length (for more information, check the PitchObj.upsample() method).
+
+    Example::
+
+       import amfm_decompy.pYAAPT as pYAAPT
+       import amfm_decompy.basic_tools as basic
+       from matplotlib import pyplot as plt
+
+       signal = basic.SignalObj('path_to_sample.wav')
+       pitch = pYAAPT.yaapt(signal)
+
+       plt.plot(pitch.values, label='samp_values', color='blue')
+       plt.plot(pitch.values_interp, label='samp_interp', color='green')
+
+       plt.xlabel('samples', fontsize=18)
+       plt.ylabel('pitch (Hz)', fontsize=18)
+       plt.legend(loc='upper right')
+       axes = plt.gca()
+       axes.set_xlim([0,16000])
+       plt.show()
+
+    The output is presented below:
 
 .. image:: values.png
 
@@ -307,6 +350,10 @@ PITCH OBJECT METHODS:
        plt.xlabel('samples', fontsize=18)
        plt.ylabel('pitch (Hz)', fontsize=18)
        plt.legend(loc='upper right')
+       axes = plt.gca()
+       axes.set_xlim([0,16000])
+       axes.set_ylim([150,250])
+       
        plt.show()
 
     The output is presented below:

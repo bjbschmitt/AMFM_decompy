@@ -1,3 +1,19 @@
+v 1.0.7, 27/Jul/2017
+- issue with negative indexes in the "crs_corr" function from pYAAPT.py due short frame 
+  lengths in the "time_track" function fixed. Thanks to Paritosh Gupta, Puff Kan and 
+  tuanad121 for reporting it.
+- function "interrupt_main()" replaced by "assert", since that the first one is not working 
+  properly. Thanks to tuanad121 for reporting and fixing it.
+- "frame_lengtht" parameter (renamed to "tda_frame_length") from YAAPT 4.0 added.
+- default value from the "frame_length" parameter in pYAAPT.py changed from 25 ms to 35 ms 
+  following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
+- default value from the "nccf_thresh1" parameter in pYAAPT.py changed from 0.25 to 0.3 
+  following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
+- some extra minor alterations in pYAAPT.py from the new YAAPT 4.0 MATLAB code.
+- minor alterations in the SHC computation of the "spec_track" function from pYAAPT.py.
+- minor correction in the step interpolation of "upsample" method from PitchObj in order
+  to allow compability with Python 3.
+
 v1.0.6.1, 13/Mar/2017
 - error due misuse of the numpy's "ones" function in spec_track function from pYAAPT
   fixed. Thanks to Paritosh Gupta for reporting it.

@@ -9,12 +9,12 @@ pip.main(['install','numpy'])
 try:
     long_description = io.open('README.txt',encoding='utf8').read()
 except:
-    long_description ='Package to decompose the voiced part of a speech signal \
-into its modulated components, aka AM-FM decomposition.'
+    long_description ='Package containing the tools necessary for decomposing a \
+            speech signal into its modulated components, aka AM-FM decomposition.'
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.6.1',
+    version = '1.0.7',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],
@@ -23,8 +23,8 @@ setup(
     install_requires = ['numpy', 'scipy',],
     url = 'https://github.com/bjbschmitt/AMFM_decompy/',
     license = 'LICENSE.txt',
-    description = 'Package to decompose the voiced part of a speech signal into \
-its modulated components, aka AM-FM decomposition.',
+    description = 'Package containing the tools necessary for decomposing a \
+speech signal into its modulated components, aka AM-FM decomposition.',
     long_description = long_description,
     classifiers = [
                 'License :: OSI Approved :: MIT License',

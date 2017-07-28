@@ -27,8 +27,8 @@ References:
         of the adaptive quasi-harmonic model”, em IEEE International Conference
         on Acoustics, Speech and Signal Processing (ICASSP), 2012.
 
-Version 1.0.6.1
-13/Mar/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.7
+27/Jul/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np

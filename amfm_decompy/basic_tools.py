@@ -2,8 +2,8 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.6.1
-13/Mar/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.7
+27/Jul/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -34,7 +34,7 @@ class SignalObj(object):
             self.fs = args[1]
 
         self.size = len(self.data)
-      
+
         if self.size == self.data.size/2:
             print("Warning: stereo wav file. Converting it to mono for the analysis.")
             self.data = (self.data[:,0]+self.data[:,1])/2
