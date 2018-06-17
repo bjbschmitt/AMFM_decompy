@@ -42,7 +42,7 @@ Version 1.0.7
 
 import numpy as np
 import numpy.lib.stride_tricks as stride_tricks
-from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter
+from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter, windows
 import scipy.interpolate as scipy_interp
 import amfm_decompy.basic_tools as basic
 
@@ -431,7 +431,7 @@ def nlfer(signal, pitch, parameters):
     N_f0_min = np.around((parameters['f0_min']*2/float(signal.new_fs))*pitch.nfft)
     N_f0_max = np.around((parameters['f0_max']/float(signal.new_fs))*pitch.nfft)
 
-    window = hanning(pitch.frame_size+2)[1:-1]
+    window = windows.hann(pitch.frame_size+2)[1:-1]
     data = np.zeros((signal.size))  #Needs other array, otherwise stride and
     data[:] = signal.filtered     #windowing will modify signal.filtered
 
