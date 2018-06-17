@@ -548,7 +548,7 @@ def spec_track(signal, pitch, parameters):
 
     else:
         if num_voiced_cand > 0:
-            voiced_pitch = (np.ones((1, num_voiced_cand)))*150.0
+            voiced_pitch = (np.ones((num_voiced_cand)))*150.0
         else:
             voiced_pitch = [150.0]
             cand_pitch[0, 0] = 0
