@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.7
+version 1.0.8
 
 This python package provides the tools necessary for decomposing the voiced part of a speech signal into its modulated components, aka AM-FM decomposition. This designation is used due the fact that, in this method, the signal is modeled as a sum of amplitude- and frequency-modulated components.
 
@@ -29,7 +29,7 @@ The QHM-like algorithms present some stability problems concerning small magnitu
 
 Actually, I dedicated a chapter in my Master Thesis to a deeper study about this problem and came up with a better solution. Unfortunately, due stupid bureaucratic issues, I don't know if and when my work will be defended and published (to be short, the deadline was expired because me and my advisor needed more time to correct and improve the thesis text. Then we required a prorrogation, but the lecturers board declined it. So, basically, I was expelled from the post-gradute program with a finished and working thesis). Anyway, I'm still trying to figure out do now with my work and as soon as find a solution, I'll add my own contributions to this package.
 
-IMPORTANT - Considerations about version 1.0.7
+IMPORTANT - Considerations about version 1.0.7 and later versions
 =============
 
 In the latest release of the original YAAPT MATLAB source code (YAAPT v4.0) the default values from the following parameters have been altered:
@@ -39,20 +39,20 @@ In the latest release of the original YAAPT MATLAB source code (YAAPT v4.0) the 
 
 Moreover, a new parameter called `frame_lengtht` was added (please pay atention to the extra "t" at the end), which name is quite similar to `frame_length`. In order to avoid confusion between them, an alternative (and preferred) alias for `frame_lengtht` called `tda_frame_length` was used in pYAAPT.py. Nevertheless, both inputs (`frame_lengtht` and `tda_frame_length`) are accepted.
 
-Due these modifications, if you were running AMFM_decompy 1.0.6 or earlier versions with their default settings, you may obtain slightly different results from the ones obtained by running AMFM_decompy 1.0.7. with the new default parameters.
+Due these modifications, if you were running AMFM_decompy 1.0.6 or earlier versions with their default settings, you may obtain slightly different results from the ones obtained by running AMFM_decompy 1.0.7. and later versions with the new default parameters.
 
 Therefore, if you really need to obtain exactly the same results from previous versions, you must provide the old parameter values to the yaapt function. For example, a 1.0.6 or earlier code like
 
 `pitch = pYAAPT.yaapt(signal)`
 
-should be rewritten in the 1.0.7 version as
+should be rewritten in the 1.0.7 and later versions as
 
 `pitch = pYAAPT.yaapt(signal, **{'frame_length': 25.0, 'nccf_thresh1': 0.25, 'tda_frame_length': 25.0})`
 
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.7 is recommended for a quick installation. But you can also copy all directories here and then run
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.8 is recommended for a quick installation. But you can also copy all directories here and then run
 
 ```python setup.py install```
 

@@ -1,44 +1,59 @@
+v 1.0.8, 21/Jun/2018
+- issue caused by extra unneeded numpy array dimensions in pYAAPT.py fixed. 
+  Thanks to Omar Altayyan for reporting and fixing it.
+- deprecation warning for the hanning and kaiser windows from scipy fixed. 
+  Thanks to Omar Altayyan for reporting and fixing it.
+- pip module import issue in setup.py fixed.
+
 v 1.0.7, 27/Jul/2017
-- issue with negative indexes in the "crs_corr" function from pYAAPT.py due short frame 
-  lengths in the "time_track" function fixed. Thanks to Paritosh Gupta, Puff Kan and 
-  tuanad121 for reporting it.
-- function "interrupt_main()" replaced by "assert", since that the first one is not working 
-  properly. Thanks to tuanad121 for reporting and fixing it.
-- "frame_lengtht" parameter (renamed to "tda_frame_length") from YAAPT 4.0 added.
-- default value from the "frame_length" parameter in pYAAPT.py changed from 25 ms to 35 ms 
-  following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
-- default value from the "nccf_thresh1" parameter in pYAAPT.py changed from 0.25 to 0.3 
-  following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
+- issue with negative indexes in the "crs_corr" function from pYAAPT.py due 
+  short frame lengths in the "time_track" function fixed. Thanks to Paritosh 
+  Gupta, Puff Kan and tuanad121 for reporting it.
+- function "interrupt_main()" replaced by "assert", since that the first one is
+  not working properly. Thanks to tuanad121 for reporting and fixing it.
+- "frame_lengtht" parameter (renamed to "tda_frame_length") from YAAPT 4.0 
+  added.
+- default value from the "frame_length" parameter in pYAAPT.py changed from 
+  25 ms to 35 ms following the alteration ocurred in the new YAAPT 4.0 MATLAB 
+  code.
+- default value from the "nccf_thresh1" parameter in pYAAPT.py changed from 
+  0.25 to 0.3 following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
 - some extra minor alterations in pYAAPT.py from the new YAAPT 4.0 MATLAB code.
-- minor alterations in the SHC computation of the "spec_track" function from pYAAPT.py.
-- minor correction in the step interpolation of "upsample" method from PitchObj in order
-  to allow compability with Python 3.
+- minor alterations in the SHC computation of the "spec_track" function from 
+  pYAAPT.py.
+- minor correction in the step interpolation of "upsample" method from PitchObj 
+  in order to allow compability with Python 3.
 
 v1.0.6.1, 13/Mar/2017
-- error due misuse of the numpy's "ones" function in spec_track function from pYAAPT
-  fixed. Thanks to Paritosh Gupta for reporting it.
+- error due misuse of the numpy's "ones" function in spec_track function from 
+  pYAAPT fixed. Thanks to Paritosh Gupta for reporting it.
 
 v1.0.6, 23/Jan/2017
-- issue with incorrect high values at the beginning and at the end of PitchObj.samp_interp 
-  array fixed. Thanks to Esther Judd-Klabbers for reporting it.
+- issue with incorrect high values at the beginning and at the end of 
+  PitchObj.samp_interp array fixed. Thanks to Esther Judd-Klabbers for reporting 
+  it.
 
 v1.0.5.1, 26/Sep/2016
-- print functions updated in order to allow compability with Python 3. Thanks to Javier 
-  Villalba García for reporting it.
-- "xrange" function replaced by "range" in order to allow compability with Python 3.
-- "thread" module replaced by "raise KeyboardInterrupt" in pYAAPT.py and basic_tools.py.
-- corrected the "VisibleDeprecationWarning"  regarding the misuse of float numbers
-  as argument to numpy.zeros() and as array indeces in pYAAPT.py.
+- print functions updated in order to allow compability with Python 3. Thanks to 
+  Javier Villalba García for reporting it.
+- "xrange" function replaced by "range" in order to allow compability with 
+  Python 3.
+- "thread" module replaced by "raise KeyboardInterrupt" in pYAAPT.py and 
+  basic_tools.py.
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float 
+  numbers as argument to numpy.zeros() and as array indeces in pYAAPT.py.
 
 v1.0.5, 22/Sep/2016
-- issue with the interpolation of short voiced frames fixed and also minor corrections 
-  in the code. Thanks to Michał Dankiewicz for reporting and fixing them.
+- issue with the interpolation of short voiced frames fixed and also minor 
+  corrections in the code. Thanks to Michał Dankiewicz for reporting and fixing
+  them.
 - "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra 
-   workaround to avoid it added. Thanks to Javier Villalba García for reporting it.
-- corrected the array lenght mismatch in the edges_finder method from the PitchObj
-  class in pYAAPT.py.
-- corrected the "VisibleDeprecationWarning"  regarding the misuse of float numbers
-  as array indeces in pYAAPT.py.
+   workaround to avoid it added. Thanks to Javier Villalba García for reporting 
+   it.
+- corrected the array lenght mismatch in the edges_finder method from the 
+  PitchObj class in pYAAPT.py.
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float 
+  numbers as array indeces in pYAAPT.py.
 - requirements and classifiers added to setup.py.
 - distutils replaced by setuptools in setup.py.
 

@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.7
+version 1.0.8
 
 This python package provides the tools necessary for decomposing the voiced part
 of a speech signal into its modulated components, aka AM-FM decomposition. This
@@ -69,7 +69,7 @@ from the post-gradute program with a finished and working thesis). Anyway, I'm
 still trying to figure out do now with my work and as soon as find a solution,
 I'll add my own contributions to this package.
 
-IMPORTANT - Considerations about version 1.0.7
+IMPORTANT - Considerations about version 1.0.7 and later versions
 =============
 
 In the latest release of the original YAAPT MATLAB source code (YAAPT v4.0)
@@ -86,8 +86,8 @@ both inputs (`frame_lengtht` and `tda_frame_length`) are accepted.
 
 Due these modifications, if you were running AMFM_decompy 1.0.6 or earlier
 versions with their default settings, you may obtain slightly different results
-from the ones obtained by running AMFM_decompy 1.0.7. with the new default
-parameters.
+from the ones obtained by running AMFM_decompy 1.0.7 and later versions. with 
+the new default parameters.
 
 Therefore, if you really need to obtain exactly the same results from previous
 versions, you must provide the old parameter values to the yaapt function. For
@@ -95,14 +95,14 @@ example, a 1.0.6 or earlier code like
 
 `pitch = pYAAPT.yaapt(signal)`
 
-should be rewritten in the 1.0.7 version as
+should be rewritten in the 1.0.7 and later versions as
 
 `pitch = pYAAPT.yaapt(signal, **{'frame_length': 25.0, 'nccf_thresh1': 0.25, 'tda_frame_length': 25.0})`
 
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.7 is recommended for
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.8 is recommended for
 a quick installation. But you can also copy all directories here and then run
 
 ```python setup.py install```

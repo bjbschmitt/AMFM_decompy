@@ -319,7 +319,7 @@ NOTE:
      QHM.harmonics[0:3].freq[920:1000]
      QHM.harmonics[0:2].mag[950]
 
-   will raise an ERROR message. Therefore, the only way to simultaneously get the data of a group of components is by directly accessing the ModulatedSign.H matrix (or using a foor loop, but this option is slower)::
+   will raise an ERROR message. Therefore, the only way to simultaneously get the data of a group of components is by directly accessing the ModulatedSign.H matrix (or using a for loop, but this option is slower)::
 
      QHM.H[0:3, 2, 920:1000]
      QHM.H[0:2, 0, 950]

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import io
-import pip
 from setuptools import setup
-
-pip.main(['install','numpy'])
 
 try:
     long_description = io.open('README.txt',encoding='utf8').read()
@@ -14,7 +11,7 @@ except:
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.7',
+    version = '1.0.8',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],

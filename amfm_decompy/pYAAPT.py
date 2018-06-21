@@ -36,13 +36,14 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.7
-27/Jul/2017 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.8
+21/Jun/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
 import numpy.lib.stride_tricks as stride_tricks
-from scipy.signal import firwin, hanning, kaiser, medfilt, lfilter, windows
+from scipy.signal import firwin, medfilt, lfilter
+from scipy.signal.windows import hann, kaiser
 import scipy.interpolate as scipy_interp
 import amfm_decompy.basic_tools as basic
 
@@ -431,7 +432,7 @@ def nlfer(signal, pitch, parameters):
     N_f0_min = np.around((parameters['f0_min']*2/float(signal.new_fs))*pitch.nfft)
     N_f0_max = np.around((parameters['f0_max']/float(signal.new_fs))*pitch.nfft)
 
-    window = windows.hann(pitch.frame_size+2)[1:-1]
+    window = hann(pitch.frame_size+2)[1:-1]
     data = np.zeros((signal.size))  #Needs other array, otherwise stride and
     data[:] = signal.filtered     #windowing will modify signal.filtered
 
@@ -550,7 +551,7 @@ def spec_track(signal, pitch, parameters):
         if num_voiced_cand > 0:
             voiced_pitch = (np.ones((num_voiced_cand)))*150.0
         else:
-            voiced_pitch = [150.0]
+            voiced_pitch = np.array([150.0])
             cand_pitch[0, 0] = 0
 
     pitch_avg = np.mean(voiced_pitch)
