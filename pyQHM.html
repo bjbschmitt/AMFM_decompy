@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pyQHM &#8212; AMFM_decompy 1.0.7 documentation</title>
+    <title>pyQHM &#8212; AMFM_decompy 1.0.8 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0.7',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -30,8 +22,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -44,7 +35,7 @@
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.8 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -89,12 +80,14 @@
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -145,7 +138,7 @@
 
 <p>EXAMPLES:</p>
 <p>Example 1 - the parameters of a speech signal are extracted sample by sample through QHM. After that, its output is used as input for the first of two aQHM runs with 1 ms sample jump. Finally, the result is used to start one run of the eaQHM with a 1 ms sample jump again. The three algorithms perform 3 iterations per frame extraction.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pyaapt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pyaapt</span>
 <span class="kn">import</span> <span class="nn">amfm_decompy.pyQHM</span> <span class="k">as</span> <span class="nn">pyqhm</span>
 <span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
 
@@ -411,7 +404,7 @@
 
 <p>EXAMPLES:</p>
 <p>Example 1 - Shows how to to access the component data of a specific component:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pyaapt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amfm_decompy.pYAAPT</span> <span class="k">as</span> <span class="nn">pyaapt</span>
 <span class="kn">import</span> <span class="nn">amfm_decompy.pyQHM</span> <span class="k">as</span> <span class="nn">pyqhm</span>
 <span class="kn">import</span> <span class="nn">amfm_decompy.basic_tools</span> <span class="k">as</span> <span class="nn">basic</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -464,20 +457,20 @@
 <dl class="docutils">
 <dt>NOTE:</dt>
 <dd><p class="first">It must noticed that the ComponentObj can be normally sliced. For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>will return a array containing only the segment of the fundamental frequency between the samples from 920 to 999, while:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="mi">950</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="mi">950</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>will return the magnitude of the third harmonic at the 950th sample. However, due the way that the python language is internally built, unfortunately it’s not possible to slice the harmonics list. For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
 <span class="n">QHM</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span><span class="p">[</span><span class="mi">950</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>will raise an ERROR message. Therefore, the only way to simultaneously get the data of a group of components is by directly accessing the ModulatedSign.H matrix (or using a foor loop, but this option is slower):</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+<p>will raise an ERROR message. Therefore, the only way to simultaneously get the data of a group of components is by directly accessing the ModulatedSign.H matrix (or using a for loop, but this option is slower):</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QHM</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">920</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
 <span class="n">QHM</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">950</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -604,12 +597,12 @@ phase.</p>
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.8 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+        &#169; Copyright 2018, Bernardo J. B. Schmitt.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>
