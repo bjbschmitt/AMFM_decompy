@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: AMFM_decompy
-Version: 1.0.8
+Version: 1.0.8.1
 Summary: Package containing the tools necessary for decomposing a speech signal into its modulated components, aka AM-FM decomposition.
 Home-page: https://github.com/bjbschmitt/AMFM_decompy/
 Author: Bernardo J.B. Schmitt
@@ -9,7 +9,7 @@ License: LICENSE.txt
 Description: AMFM_decompy
         =============
         
-        version 1.0.8
+        version 1.0.8.1
         
         This python package provides the tools necessary for decomposing the voiced part
         of a speech signal into its modulated components, aka AM-FM decomposition. This

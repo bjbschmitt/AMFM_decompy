@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.8
+version 1.0.8.1
 
 This python package provides the tools necessary for decomposing the voiced part
 of a speech signal into its modulated components, aka AM-FM decomposition. This

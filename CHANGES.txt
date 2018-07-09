@@ -1,3 +1,8 @@
+v 1.0.8.1, 09/Jul/2018
+- issue caused when a PCM integral data signal is employed to create a SignalObj 
+  instance fixed. Thanks to Omar Altayyan for reporting and fixing it.
+- calculation of the nbits property of a SignalObj modified.
+
 v 1.0.8, 21/Jun/2018
 - issue caused by extra unneeded numpy array dimensions in pYAAPT.py fixed. 
   Thanks to Omar Altayyan for reporting and fixing it.

@@ -11,7 +11,7 @@ except:
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.8',
+    version = '1.0.8.1',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],

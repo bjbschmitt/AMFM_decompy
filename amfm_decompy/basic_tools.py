@@ -2,8 +2,8 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.8
-21/Jun/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.8.1
+09/Jul/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -26,21 +26,13 @@ class SignalObj(object):
                 raise KeyboardInterrupt
             self.fs, self.data = wavfile.read(args[0])
             self.name = args[0]
-
         elif len(args) == 2:
             self.data = args[0]
             self.fs = args[1]
 
-<<<<<<< Updated upstream
-        self.data = pcm2float(self.data, dtype='f')
-        self.fs = float(self.fs)
-        self.nbits = int(16)
-
-=======
         if self.data.dtype.kind == 'i':
             self.nbits = self.data.itemsize*8
             self.data = pcm2float(self.data, dtype='f')
->>>>>>> Stashed changes
 
         self.size = len(self.data)
         self.fs = float(self.fs)
@@ -91,11 +83,10 @@ Transform a pcm raw signal into a float one, with values limited between -1 and
 def pcm2float(sig, dtype=np.float64):
 
     sig = np.asarray(sig) # make sure it's a NumPy array
-    if sig.dtype.kind == 'i':
-        dtype = np.dtype(dtype) # allow string input (e.g. 'f')
+    assert sig.dtype.kind == 'i', "'sig' must be an array of signed integers!"
+    dtype = np.dtype(dtype) # allow string input (e.g. 'f')
 
-        # Note that 'min' has a greater (by 1) absolute value than 'max'!
-        # Therefore, we use 'min' here to avoid clipping.
-        sig = sig.astype(dtype) / dtype.type(-np.iinfo(sig.dtype).min)
-    return sig
+    # Note that 'min' has a greater (by 1) absolute value than 'max'!
+    # Therefore, we use 'min' here to avoid clipping.
+    return sig.astype(dtype) / dtype.type(-np.iinfo(sig.dtype).min)
 

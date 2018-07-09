@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.8
-21/Jun/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.8.1
+09/Jul/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
