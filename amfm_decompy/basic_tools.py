@@ -31,18 +31,23 @@ class SignalObj(object):
             self.data = args[0]
             self.fs = args[1]
 
+<<<<<<< Updated upstream
         self.data = pcm2float(self.data, dtype='f')
         self.fs = float(self.fs)
         self.nbits = int(16)
 
+=======
+        if self.data.dtype.kind == 'i':
+            self.nbits = self.data.itemsize*8
+            self.data = pcm2float(self.data, dtype='f')
+>>>>>>> Stashed changes
 
         self.size = len(self.data)
+        self.fs = float(self.fs)
 
         if self.size == self.data.size/2:
             print("Warning: stereo wav file. Converting it to mono for the analysis.")
             self.data = (self.data[:,0]+self.data[:,1])/2
-
-
 
 
     """
