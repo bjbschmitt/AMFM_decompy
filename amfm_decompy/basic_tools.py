@@ -18,6 +18,7 @@ class SignalObj(object):
 
     def __init__(self, *args):
 
+        # Read the signal data from the path of a wav file.
         if len(args) == 1:
             try:
                 from scipy.io import wavfile
@@ -26,10 +27,13 @@ class SignalObj(object):
                 raise KeyboardInterrupt
             self.fs, self.data = wavfile.read(args[0])
             self.name = args[0]
+        # Alternatively, read the signal from a Numpy array.
         elif len(args) == 2:
             self.data = args[0]
             self.fs = args[1]
 
+        # If the signal data is in the signed integer format (PCM), convert it
+        # to float.
         if self.data.dtype.kind == 'i':
             self.nbits = self.data.itemsize*8
             self.data = pcm2float(self.data, dtype='f')
@@ -37,18 +41,21 @@ class SignalObj(object):
         self.size = len(self.data)
         self.fs = float(self.fs)
 
+        # Check if the wav file is stereo.
         if self.size == self.data.size/2:
             print("Warning: stereo wav file. Converting it to mono for the analysis.")
             self.data = (self.data[:,0]+self.data[:,1])/2
 
 
     """
-    Filters the signal data by a bandpass filter.
+    Filters the signal data by a bandpass filter object and decimate it.
     """
     def filtered_version(self, bp_filter):
 
+        # Filter the signal.
         tempData = lfilter(bp_filter.b, bp_filter.a, self.data)
 
+        # Decimate the filtered output.
         self.filtered = tempData[0:self.size:bp_filter.dec_factor]
         self.new_fs = self.fs/bp_filter.dec_factor
 
@@ -80,13 +87,18 @@ Transform a pcm raw signal into a float one, with values limited between -1 and
 1.
 """
 
-def pcm2float(sig, dtype=np.float64):
+def pcm2float(sig, output_dtype=np.float64):
 
-    sig = np.asarray(sig) # make sure it's a NumPy array
+     # Make sure it's a NumPy array.
+    sig = np.asarray(sig)
+    
+    # Check if it is an array of signed integers.
     assert sig.dtype.kind == 'i', "'sig' must be an array of signed integers!"
-    dtype = np.dtype(dtype) # allow string input (e.g. 'f')
+    # Set the array output format. Accepts string as input argument for the 
+    # desired output format (e.g. 'f'). 
+    out_dtype = np.dtype(output_dtype) 
 
     # Note that 'min' has a greater (by 1) absolute value than 'max'!
     # Therefore, we use 'min' here to avoid clipping.
-    return sig.astype(dtype) / dtype.type(-np.iinfo(sig.dtype).min)
+    return sig.astype(out_dtype) / out_dtype.type(-np.iinfo(sig.dtype).min)
 
