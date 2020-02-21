@@ -2,8 +2,8 @@
 """
 Auxiliary classes and functions for used by the other AMFM_decompy modules.
 
-Version 1.0.8.1
-09/Jul/2018 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.9
+20/Feb/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -16,27 +16,35 @@ Creates a signal object.
 
 class SignalObj(object):
 
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
+        output_dtype = kwargs.get('output_dtype', 'f')
 
         # Read the signal data from the path of a wav file.
-        if len(args) == 1:
+        if len(args) == 1 or 'name' in kwargs:
+            name = args[0] if len(args) == 1 else kwargs['name']
+
             try:
                 from scipy.io import wavfile
             except:
                 print("ERROR: Wav modules could not loaded!")
                 raise KeyboardInterrupt
-            self.fs, self.data = wavfile.read(args[0])
-            self.name = args[0]
+            self.fs, self.data = wavfile.read(name)
+            self.name = name
+
         # Alternatively, read the signal from a Numpy array.
-        elif len(args) == 2:
-            self.data = args[0]
-            self.fs = args[1]
+        elif len(args) == 2 or all (k in kwargs.keys() for k in ('data','fs')):
+            data = args[0] if len(args) == 2 else kwargs['data']
+            fs = args[1] if len(args) == 2 else kwargs['fs']
+
+            self.data = data
+            self.fs = fs
+
 
         # If the signal data is in the signed integer format (PCM), convert it
         # to float.
         if self.data.dtype.kind == 'i':
             self.nbits = self.data.itemsize*8
-            self.data = pcm2float(self.data, dtype='f')
+            self.data = pcm2float(self.data, output_dtype)
 
         self.size = len(self.data)
         self.fs = float(self.fs)
@@ -91,12 +99,12 @@ def pcm2float(sig, output_dtype=np.float64):
 
      # Make sure it's a NumPy array.
     sig = np.asarray(sig)
-    
+
     # Check if it is an array of signed integers.
     assert sig.dtype.kind == 'i', "'sig' must be an array of signed integers!"
-    # Set the array output format. Accepts string as input argument for the 
-    # desired output format (e.g. 'f'). 
-    out_dtype = np.dtype(output_dtype) 
+    # Set the array output format. Accepts string as input argument for the
+    # desired output format (e.g. 'f').
+    out_dtype = np.dtype(output_dtype)
 
     # Note that 'min' has a greater (by 1) absolute value than 'max'!
     # Therefore, we use 'min' here to avoid clipping.

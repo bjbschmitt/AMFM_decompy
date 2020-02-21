@@ -4,14 +4,14 @@ import io
 from setuptools import setup
 
 try:
-    long_description = io.open('README.txt',encoding='utf8').read()
+    long_description = io.open('README.md',encoding='utf8').read()
 except:
     long_description ='Package containing the tools necessary for decomposing a \
             speech signal into its modulated components, aka AM-FM decomposition.'
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.8.1',
+    version = '1.0.9',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],
@@ -23,6 +23,7 @@ setup(
     description = 'Package containing the tools necessary for decomposing a \
 speech signal into its modulated components, aka AM-FM decomposition.',
     long_description = long_description,
+    long_description_content_type = 'text/markdown',
     classifiers = [
                 'License :: OSI Approved :: MIT License',
                 'Programming Language :: Python :: 2.7',

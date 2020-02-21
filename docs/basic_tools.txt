@@ -15,12 +15,21 @@ The SignalObj Class stores the speech signal and all the parameters related to i
 
 USAGE:
 
-.. py:function:: SignalObj(args)
+.. py:function:: SignalObj(*args, **kwargs)
     :module: amfm_decompy.basic_tools
 
-    :param args: the input argument can be a string with the wav file path OR a tuple containing the speech signal data and its fundamental frequency in Hz.
+    :param args: the input argument can be a string with the wav file path OR two arguments, where the first one is a numpy array containing the speech signal data and the second one represents its fundamental frequency in Hz.
+    :param kwargs: please check below for the options.
+    
 
     :rtype: speech signal object.
+    
+KWARGS OPTIONS:
+
+* 'data' - instead of initializing a SignalObj with two arguments, the input signal data can be alternatively passed using this kwarg. It must used along with the 'fs' kwarg.
+* 'fs' - instead of initializing a SignalObj with two arguments, the input signal sample frequency can be alternatively passed using this kwarg. It must used along with the 'data' kwarg.
+* 'name' - instead of initializing a SignalObj with one argument, the input wav file path can be alternatively passed using this kwarg.
+* 'output_dtype' - the numpy dtype of the output signal data.
 
 SIGNAL OBJECT ATTRIBUTES:
 ^^^^^^^^^^^^^^^^^^^^^^^^^
