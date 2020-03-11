@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.9
-20/Feb/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.9.1
+11/Feb/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -233,7 +233,7 @@ class PitchObj(object):
                                                     up_interval,
                                                     samp_values[frame])(tot_interval)
 
-                    elif interp_tech is 'spline' and len(frame) > 2:
+                    elif interp_tech is 'spline' and len(frame) > 3:
                         tck, u_original = scipy_interp.splprep(
                                             [up_interval, samp_values[frame]],
                                              u=up_interval)
@@ -241,7 +241,7 @@ class PitchObj(object):
 
                     # MD: In case len(frame)==2, above methods fail.
                     #Use linear interpolation instead.
-                    elif len(frame) == 2:
+                    elif len(frame) > 1:
                         up_version[tot_interval] = scipy_interp.interp1d(
                                                     up_interval,
                                                     samp_values[frame],

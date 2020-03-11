@@ -6,4 +6,6 @@ include *.png
 recursive-include docs *.png
 include *.wav
 recursive-include amfm_decompy *.wav
+prune dist*
+prune docs/_build*
 
