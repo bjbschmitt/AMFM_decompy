@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.9.1
+version 1.0.10
 
 This python package provides the tools necessary for decomposing the voiced part
 of a speech signal into its modulated components, aka AM-FM decomposition. This
@@ -43,9 +43,9 @@ However, the QHM algorithms still run as fast as their counterparts in MATLAB.
 That's because the main bottleneck of both versions are the matrix dot and
 least-squares operations. Since numpy and MATLAB are already optimized to perform
 these tasks using internal Fortran functions, as far as I investigated there's
-no way to speed them up using Cython, for example. Nevertheless, recently I have
-read about numba, which could be applied to improve the AMFM_decompy performance
-substantially. Therefore, I may run some tests using it.
+no way to speed them up using Cython, for example. Nevertheless, numba and CUDA 
+seem to be promising tools to speed the code, so adding support to them is one 
+of my priorities for future releases.
 
 In [1] the YAAPT is compared with well-known pitch trackers like the YIN and
 the RAPT, and presents the best results. In fact, so far I've been using it,
@@ -102,7 +102,7 @@ should be rewritten in the 1.0.7 and later versions as
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.9.1 is recommended for
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.10 is recommended for
 a quick installation. But you can also copy all directories here and then run
 
 ```python setup.py install```
@@ -137,7 +137,7 @@ It is available at http://www.ws.binghamton.edu/zahorian as free software.
 Further information about the program can be found at
 
    [1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust
-       fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.
+       fundamental frequency tracking," J. Acoust. Soc. Am. 123(6), June 2008.
 
 The QHM algorithm and its upgrades are formulated and presented in the following publications:
 

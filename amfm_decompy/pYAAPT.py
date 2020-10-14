@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.9.1
-11/Feb/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.10
+12/Oct/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -45,6 +45,7 @@ import numpy.lib.stride_tricks as stride_tricks
 from scipy.signal import firwin, medfilt, lfilter
 from scipy.signal.windows import hann, kaiser
 import scipy.interpolate as scipy_interp
+
 import amfm_decompy.basic_tools as basic
 
 
@@ -195,7 +196,7 @@ class PitchObj(object):
     """
     def upsample(self, samp_values, file_size, first_samp=0, last_samp=0,
                  interp_tech='pchip'):
-        if interp_tech is 'step':
+        if interp_tech == 'step':
             beg_pad = int((self.noverlap)/2)
             up_version = np.zeros((file_size))
             up_version[:beg_pad] = first_samp
@@ -203,13 +204,13 @@ class PitchObj(object):
                                     np.repeat(samp_values, self.frame_jump)
             up_version[beg_pad+self.frame_jump*self.nframes:] = last_samp
 
-        elif interp_tech is 'pchip' or 'spline':
+        elif interp_tech in ['pchip', 'spline']:
             if np.amin(samp_values) > 0:
-                if interp_tech is 'pchip':
+                if interp_tech == 'pchip':
                     up_version = scipy_interp.pchip(self.frames_pos,
                                                     samp_values)(range(file_size))
 
-                elif interp_tech is 'spline':
+                elif interp_tech == 'spline':
                     tck, u_original = scipy_interp.splprep(
                                                 [self.frames_pos, samp_values],
                                                 u=self.frames_pos)
@@ -228,12 +229,12 @@ class PitchObj(object):
                     tot_interval = np.arange(int(up_interval[0]-(self.frame_jump/2)),
                                           int(up_interval[-1]+(self.frame_jump/2)))
 
-                    if interp_tech is 'pchip' and len(frame) > 2:
+                    if interp_tech == 'pchip' and len(frame) > 2:
                         up_version[tot_interval] = scipy_interp.pchip(
                                                     up_interval,
                                                     samp_values[frame])(tot_interval)
 
-                    elif interp_tech is 'spline' and len(frame) > 3:
+                    elif interp_tech == 'spline' and len(frame) > 3:
                         tck, u_original = scipy_interp.splprep(
                                             [up_interval, samp_values[frame]],
                                              u=up_interval)
@@ -343,6 +344,14 @@ def yaapt(signal, **kwargs):
     parameters['dp_w2'] = kwargs.get('dp_w2', 0.5)                  #DP weight factor for V-UV or UV-V transitions
     parameters['dp_w3'] = kwargs.get('dp_w3', 0.1)                  #DP weight factor of UV-UV transitions
     parameters['dp_w4'] = kwargs.get('dp_w4', 0.9)                  #Weight factor for local costs
+
+    # Exclusive from pYAAPT.
+
+    parameters['spec_pitch_min_std'] = kwargs.get('spec_pitch_min_std', 0.05) 
+                                                                    #Weight factor that sets a minimum
+                                                                    #spectral pitch standard deviation,
+                                                                    #which is calculated as 
+                                                                    #min_std = pitch_avg*spec_pitch_min_std
 
     #---------------------------------------------------------------
     # Create the signal objects and filter them.
@@ -555,7 +564,7 @@ def spec_track(signal, pitch, parameters):
             cand_pitch[0, 0] = 0
 
     pitch_avg = np.mean(voiced_pitch)
-    pitch_std = np.std(voiced_pitch)
+    pitch_std = np.maximum(np.std(voiced_pitch), pitch_avg*parameters['spec_pitch_min_std']) 
     spec_pitch[cand_pitch[0, :] > 0] = voiced_pitch[:]
 
     if (spec_pitch[0] < pitch_avg/2):
