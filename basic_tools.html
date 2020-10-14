@@ -2,10 +2,11 @@
 
 <!doctype html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>basic_tools &#8212; AMFM_decompy 1.0.9 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>basic_tools &#8212; AMFM_decompy 1.0.10 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -18,7 +19,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="pyQHM" href="pyQHM.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
@@ -32,9 +33,162 @@
         <li class="right" >
           <a href="pyQHM.html" title="pyQHM"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">basic_tools</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-tools">
+<h1>basic_tools<a class="headerlink" href="#basic-tools" title="Permalink to this headline">¶</a></h1>
+<p>This module contains a set of basic classes and functions that are commonly used by the other modules of the package.</p>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="signalobj-class">
+<h3>SignalObj Class<a class="headerlink" href="#signalobj-class" title="Permalink to this headline">¶</a></h3>
+<p>The SignalObj Class stores the speech signal and all the parameters related to it.</p>
+<p>USAGE:</p>
+<dl class="py function">
+<dt id="amfm_decompy.basic_tools.SignalObj">
+<code class="sig-prename descclassname">amfm_decompy.basic_tools.</code><code class="sig-name descname">SignalObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.basic_tools.SignalObj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – the input argument can be a string with the wav file path OR two arguments, where the first one is a numpy array containing the speech signal data and the second one represents its fundamental frequency in Hz.</p></li>
+<li><p><strong>kwargs</strong> – please check below for the options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>speech signal object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>KWARGS OPTIONS:</p>
+<ul class="simple">
+<li><p>‘data’ - instead of initializing a SignalObj with two arguments, the input signal data can be alternatively passed using this kwarg. It must used along with the ‘fs’ kwarg.</p></li>
+<li><p>‘fs’ - instead of initializing a SignalObj with two arguments, the input signal sample frequency can be alternatively passed using this kwarg. It must used along with the ‘data’ kwarg.</p></li>
+<li><p>‘name’ - instead of initializing a SignalObj with one argument, the input wav file path can be alternatively passed using this kwarg.</p></li>
+<li><p>‘output_dtype’ - the numpy dtype of the output signal data.</p></li>
+</ul>
+<div class="section" id="signal-object-attributes">
+<h4>SIGNAL OBJECT ATTRIBUTES:<a class="headerlink" href="#signal-object-attributes" title="Permalink to this headline">¶</a></h4>
+<dl class="py attribute">
+<dt id="SignalObj.data">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">data</code><a class="headerlink" href="#SignalObj.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numpy array containing the speech signal data. It is set during the object’s initialization.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SignalObj.fs">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">fs</code><a class="headerlink" href="#SignalObj.fs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample frequency in Hz. It is set during the object’s initialization.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SignalObj.size">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">size</code><a class="headerlink" href="#SignalObj.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Speech signal length. It is set during the object’s initialization.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SignalObj.filtered">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">filtered</code><a class="headerlink" href="#SignalObj.filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bandpassed version from the speech data. It is set by the SignalObj.filtered_version method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SignalObj.new_fs">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">new_fs</code><a class="headerlink" href="#SignalObj.new_fs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downsampled fundamental frequency from the speech data. It is set by the SignalObj.filtered_version method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SignalObj.clean">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">clean</code><a class="headerlink" href="#SignalObj.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the SignalObj.noiser method is called, this attribute is created and used to store a clean copy from the original signal.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="signal-object-methods">
+<h4>SIGNAL OBJECT METHODS:<a class="headerlink" href="#signal-object-methods" title="Permalink to this headline">¶</a></h4>
+<dl class="py method">
+<dt id="SignalObj.filtered_version">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">filtered_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bp_filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.filtered_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bp_filter</strong> – BandpassFilter object.</p>
+</dd>
+</dl>
+<p>Filters the signal data by a bandpass filter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SignalObj.set_nharm">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">set_nharm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pitch_track</span></em>, <em class="sig-param"><span class="n">n_harm_max</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.set_nharm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</p></li>
+<li><p><strong>n_harm_max</strong> (<em>int</em>) – represents the maximum number of components that can be extracted from the signal.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Uses the pitch values to estimate the number of modulated components in the signal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SignalObj.noiser">
+<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">noiser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pitch_track</span></em>, <em class="sig-param"><span class="n">SNR</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.noiser" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</p></li>
+<li><p><strong>SNR</strong> (<em>float</em>) – desired signal-to-noise ratio from the output signal.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Adds a zero-mean gaussian noise to the signal.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pcm2float">
+<h3>pcm2float<a class="headerlink" href="#pcm2float" title="Permalink to this headline">¶</a></h3>
+<p>USAGE:</p>
+<dl class="py function">
+<dt id="amfm_decompy.basic_tools.pcm2float">
+<code class="sig-prename descclassname">amfm_decompy.basic_tools.</code><code class="sig-name descname">pcm2float</code><span class="sig-paren">(</span><em class="sig-param">sig</em><span class="optional">[</span>, <em class="sig-param">dtype=numpy.float64</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.basic_tools.pcm2float" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig</strong> (<em>numpy array</em>) – PCM speech signal data.</p></li>
+<li><p><strong>dtype</strong> (<em>float</em>) – data type from the elements of the output array (default: numpy.float64).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy array.</p>
+</dd>
+</dl>
+<p>Transform a PCM raw signal into a float one, with values limited between -1 and 1.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
@@ -78,157 +232,6 @@
 <script>$('#searchbox').show(0);</script>
         </div>
       </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="basic-tools">
-<h1>basic_tools<a class="headerlink" href="#basic-tools" title="Permalink to this headline">¶</a></h1>
-<p>This module contains a set of basic classes and functions that are commonly used by the other modules of the package.</p>
-<div class="section" id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="signalobj-class">
-<h3>SignalObj Class<a class="headerlink" href="#signalobj-class" title="Permalink to this headline">¶</a></h3>
-<p>The SignalObj Class stores the speech signal and all the parameters related to it.</p>
-<p>USAGE:</p>
-<dl class="function">
-<dt id="amfm_decompy.basic_tools.SignalObj">
-<code class="sig-prename descclassname">amfm_decompy.basic_tools.</code><code class="sig-name descname">SignalObj</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.basic_tools.SignalObj" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> – the input argument can be a string with the wav file path OR two arguments, where the first one is a numpy array containing the speech signal data and the second one represents its fundamental frequency in Hz.</p></li>
-<li><p><strong>kwargs</strong> – please check below for the options.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>speech signal object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>KWARGS OPTIONS:</p>
-<ul class="simple">
-<li><p>‘data’ - instead of initializing a SignalObj with two arguments, the input signal data can be alternatively passed using this kwarg. It must used along with the ‘fs’ kwarg.</p></li>
-<li><p>‘fs’ - instead of initializing a SignalObj with two arguments, the input signal sample frequency can be alternatively passed using this kwarg. It must used along with the ‘data’ kwarg.</p></li>
-<li><p>‘name’ - instead of initializing a SignalObj with one argument, the input wav file path can be alternatively passed using this kwarg.</p></li>
-<li><p>‘output_dtype’ - the numpy dtype of the output signal data.</p></li>
-</ul>
-<div class="section" id="signal-object-attributes">
-<h4>SIGNAL OBJECT ATTRIBUTES:<a class="headerlink" href="#signal-object-attributes" title="Permalink to this headline">¶</a></h4>
-<dl class="attribute">
-<dt id="SignalObj.data">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">data</code><a class="headerlink" href="#SignalObj.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numpy array containing the speech signal data. It is set during the object’s initialization.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="SignalObj.fs">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">fs</code><a class="headerlink" href="#SignalObj.fs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample frequency in Hz. It is set during the object’s initialization.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="SignalObj.size">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">size</code><a class="headerlink" href="#SignalObj.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Speech signal length. It is set during the object’s initialization.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="SignalObj.filtered">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">filtered</code><a class="headerlink" href="#SignalObj.filtered" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bandpassed version from the speech data. It is set by the SignalObj.filtered_version method.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="SignalObj.new_fs">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">new_fs</code><a class="headerlink" href="#SignalObj.new_fs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Downsampled fundamental frequency from the speech data. It is set by the SignalObj.filtered_version method.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="SignalObj.clean">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">clean</code><a class="headerlink" href="#SignalObj.clean" title="Permalink to this definition">¶</a></dt>
-<dd><p>When the SignalObj.noiser method is called, this attribute is created and used to store a clean copy from the original signal.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="signal-object-methods">
-<h4>SIGNAL OBJECT METHODS:<a class="headerlink" href="#signal-object-methods" title="Permalink to this headline">¶</a></h4>
-<dl class="method">
-<dt id="SignalObj.filtered_version">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">filtered_version</code><span class="sig-paren">(</span><em class="sig-param">bp_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.filtered_version" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>bp_filter</strong> – BandpassFilter object.</p>
-</dd>
-</dl>
-<p>Filters the signal data by a bandpass filter.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="SignalObj.set_nharm">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">set_nharm</code><span class="sig-paren">(</span><em class="sig-param">pitch_track</em>, <em class="sig-param">n_harm_max</em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.set_nharm" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</p></li>
-<li><p><strong>n_harm_max</strong> (<em>int</em>) – represents the maximum number of components that can be extracted from the signal.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Uses the pitch values to estimate the number of modulated components in the signal.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="SignalObj.noiser">
-<code class="sig-prename descclassname">SignalObj.</code><code class="sig-name descname">noiser</code><span class="sig-paren">(</span><em class="sig-param">pitch_track</em>, <em class="sig-param">SNR</em><span class="sig-paren">)</span><a class="headerlink" href="#SignalObj.noiser" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pitch_track</strong> (<em>numpy array</em>) – pitch extracted values for each signal sample.</p></li>
-<li><p><strong>SNR</strong> (<em>float</em>) – desired signal-to-noise ratio from the output signal.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Adds a zero-mean gaussian noise to the signal.</p>
-</dd></dl>
-
-</div>
-</div>
-</div>
-<div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="pcm2float">
-<h3>pcm2float<a class="headerlink" href="#pcm2float" title="Permalink to this headline">¶</a></h3>
-<p>USAGE:</p>
-<dl class="function">
-<dt id="amfm_decompy.basic_tools.pcm2float">
-<code class="sig-prename descclassname">amfm_decompy.basic_tools.</code><code class="sig-name descname">pcm2float</code><span class="sig-paren">(</span><em class="sig-param">sig</em><span class="optional">[</span>, <em class="sig-param">dtype=numpy.float64</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.basic_tools.pcm2float" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sig</strong> (<em>numpy array</em>) – PCM speech signal data.</p></li>
-<li><p><strong>dtype</strong> (<em>float</em>) – data type from the elements of the output array (default: numpy.float64).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>numpy array.</p>
-</dd>
-</dl>
-<p>Transform a PCM raw signal into a float one, with values limited between -1 and 1.</p>
-</dd></dl>
-
-</div>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -240,12 +243,13 @@
         <li class="right" >
           <a href="pyQHM.html" title="pyQHM"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.9 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">basic_tools</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Bernardo J. B. Schmitt.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
   </body>
 </html>

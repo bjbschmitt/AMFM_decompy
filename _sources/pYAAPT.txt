@@ -62,6 +62,13 @@ OPTIONS:
 * 'dp_w3' - DP weight factor of unvoiced-unvoiced transitions (default: 0.1)
 * 'dp_w4' - Weight factor for local costs (default: 0.9)
 
+Exclusive from pYAAPT:
+
+This extra parameter had to be added in order to fix a bug in the original code. More information about it :ref:`here<pyaapt-differences>`.
+
+* 'spec_pitch_min_std' - Weight factor that sets a minimum spectral pitch standard deviation,which is calculated as min_std = pitch_avg*spec_pitch_min_std (default: 0.05, i.e. 5% of the average spectral pitch).
+
+
 EXAMPLES:
 
 Example 1 - extract the pitch track from a signal using the default configurations::
@@ -405,5 +412,34 @@ BANDPASS FILTER ATTRIBUTES:
     :module: BandpassFilter
 
     Decimation factor used for downsampling the data. It is set during the object's initialization.
+
+.. _pyaapt-differences:
+    
+-------------------------------------------------
+Differences between pYAAPT and the original YAAPT
+-------------------------------------------------
+
+As stated before, the pYAAPT was conceived as a port of the original Matlab YAAPT package. However, with the evolution of the YAAPT and also with the constant feedback from pYAAPT users, there are currently a few important differences between both codes:
+
+YAAPT 4.0 processing speed
+----------------------------
+	
+The version 4.0 from the YAAPT came with an additional feature that allows the user to "skip" the spectral pitch tracking, or alternatively, skip the time domain pitch tracking. Although I understand why the feature was implemented (Matlab has some limitations in terms of optimizing the code performance), personally I consider this addition a bit questionable. 
+
+The strong point of the YAAPT is its robustness. And by personal experience, I would say that most of my speech processing projects relied on the efficiency of the pitch tracker. Thus, sacrificing the robustness of the algorithm can cause a snowball effect that could eventually compromise an entire project. 
+	
+Therefore, until the present moment the speed feature is not available at pYAAPT. Specially because Python still has some better speeding options to be explored, like numba or CUDA. Eventually I might add this speed parameter to some future major release, it does not require an extensive code refactoring anyway. 
+
+But since that this feature is a bit counter-productive, I do not see it currently as priority.
+
+spec_pitch_min_std parameter
+----------------------------
+
+In the function tm_trk.m from the original YAAPT code, the spectral pitch standard deviation (pStd) is employed to calculate the frequency threshold (freq_threshold) variable, which is later used to refine the merit of the pitch candidates.
+	
+However, in some corner cases it might happen that all spectral pitch values are the same, which results in a standard deviation equal to zero. And since that the freq_threshold is employed as the denominator of a fraction, this will lead to a division by 0, which will consequently crash the algorithm. This issue was reported in real-time applications using the pYAAPT.
+	
+Since that this bug is also present in the original Matlab code, a custom solution had to be developed. Thus, the most reasonable approach was to use a percentage of the average spectral pitch. This percentage was named spec_pitch_min_std, which has default value of 0.05. Therefore, when the standard deviation of the spectral pitch is lower than 5% of its mean value, this fraction of the average pitch is employed instead of the standard deviation.  
+
 
 .. [ref1] Stephen A. Zahorian, and Hongbing Hu, "A spectral/temporal method for robust fundamental frequency tracking," J. Acosut. Soc. Am. 123(6), June 2008.

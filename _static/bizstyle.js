@@ -36,6 +36,6 @@ $(window).resize(function(){
         $("li.nav-item-0 a").text("Top");
     }
     else {
-        $("li.nav-item-0 a").text("AMFM_decompy 1.0.9 documentation");
+        $("li.nav-item-0 a").text("AMFM_decompy 1.0.10 documentation");
     }
 });
