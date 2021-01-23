@@ -11,7 +11,7 @@ except:
 
 setup(
     name = 'AMFM_decompy',
-    version = '1.0.10',
+    version = '1.0.11',
     author = 'Bernardo J.B. Schmitt',
     author_email = 'bernardo.jb.schmitt@gmail.com',
     packages = ['amfm_decompy'],
@@ -28,6 +28,9 @@ speech signal into its modulated components, aka AM-FM decomposition.',
                 'License :: OSI Approved :: MIT License',
                 'Programming Language :: Python :: 2.7',
                 'Programming Language :: Python :: 3.5',
+                'Programming Language :: Python :: 3.6',
+                'Programming Language :: Python :: 3.7',
+                'Programming Language :: Python :: 3.8',
                 'Topic :: Scientific/Engineering',
                 'Topic :: Scientific/Engineering :: Human Machine Interfaces',
                 'Topic :: Scientific/Engineering :: Information Analysis',

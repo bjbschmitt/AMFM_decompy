@@ -3,8 +3,8 @@
 """
 Script to test the AMFM_decompy package.
 
-Version 1.0.10
-12/Oct/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.11
+23/Jan/2021 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 import amfm_decompy
 import amfm_decompy.pYAAPT as pyaapt

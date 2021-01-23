@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.10
-12/Oct/2020 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.11
+23/Jan/2021 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -857,22 +857,9 @@ def peaks(data, delta, maxpeaks, parameters):
     #Step4
     #---------------------------------------------------------------
 
-    if (numpeaks > 0):
-        # The first two "if pitch[0]" statements seem to had been deprecated in
-        # the original YAAPT Matlab code, so they may be removed here as well.
-        if (pitch[0] > parameters['f0_double']):
-            numpeaks = min(numpeaks+1, maxpeaks)
-            pitch[numpeaks-1] = pitch[0]/2.0
-            merit[numpeaks-1] = parameters['merit_extra']
-
-        if (pitch[0] < parameters['f0_half']):
-            numpeaks = min(numpeaks+1, maxpeaks)
-            pitch[numpeaks-1] = pitch[0]*2.0
-            merit[numpeaks-1] = parameters['merit_extra']
-
-        if (numpeaks < maxpeaks):
-            pitch[numpeaks:maxpeaks] = pitch[0]
-            merit[numpeaks:maxpeaks] = merit[0]
+    if (0 < numpeaks < maxpeaks):
+        pitch[numpeaks:maxpeaks] = pitch[0]
+        merit[numpeaks:maxpeaks] = merit[0]
 
     else:
         pitch = np.zeros((maxpeaks))
