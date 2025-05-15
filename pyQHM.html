@@ -1,30 +1,24 @@
+<!DOCTYPE html>
 
-
-<!doctype html>
-
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyQHM &#8212; AMFM_decompy 1.0.11 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyQHM &#8212; AMFM decompy 1.0.12 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/bizstyle.js"></script>
+    <script src="_static/documentation_options.js?v=a4fe78c3"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="basic_tools" href="basic_tools.html" />
-    <link rel="prev" title="pYAAPT" href="pYAAPT.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <!--[if lt IE 9]>
-    <script src="_static/css3-mediaqueries.js"></script>
-    <![endif]-->
+    <link rel="prev" title="pYAAPT" href="pYAAPT.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,7 +30,7 @@
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">pyQHM</a></li> 
       </ul>
     </div>  
@@ -46,23 +40,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="pyqhm">
-<h1>pyQHM<a class="headerlink" href="#pyqhm" title="Permalink to this headline">¶</a></h1>
+  <section id="pyqhm">
+<h1>pyQHM<a class="headerlink" href="#pyqhm" title="Link to this heading">¶</a></h1>
 <p>The algorithms here implemented were the QHM (Quasi-Harmonic Model), and its upgrades, aQHM (adaptive Quasi-Harmonic Model) and eaQHM (extended adaptive Quasi-Harmonic Model). Their formulation can be found at references <a class="reference internal" href="#ref2" id="id1"><span>[ref2]</span></a>, <a class="reference internal" href="#ref3" id="id2"><span>[ref3]</span></a> and <a class="reference internal" href="#ref4" id="id3"><span>[ref4]</span></a>.</p>
 <p>These algorithms perform the so-called AM-FM decomposition. This designation is used due the fact that, in this method, the signal is modeled as a sum of amplitude- and frequency-modulated components. The goal is to overcome the drawbacks from Fourier-alike techniques, e.g. SFFT, wavelets, etc, which are limited in the time-frequency analysis by the so-called Heisenberg-Gabor inequality.</p>
-<div class="section" id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
 <p>The pyQHM module provides a function for each of the QHM family algorithms:</p>
 <p>USAGE:</p>
 <dl class="py function">
-<dt id="amfm_decompy.pyQHM.qhm">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">qhm</code><span class="sig-paren">(</span><em class="sig-param">signal</em>, <em class="sig-param">pitch</em>, <em class="sig-param">window</em><span class="optional">[</span>, <em class="sig-param">samp_jump=None</em>, <em class="sig-param">N_iter=1</em>, <em class="sig-param">phase_tech='phase'</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.qhm" title="Permalink to this definition">¶</a></dt>
-<dt id="amfm_decompy.pyQHM.aqhm">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">aqhm</code><span class="sig-paren">(</span><em class="sig-param">signal</em>, <em class="sig-param">previous_HM</em>, <em class="sig-param">pitch</em>, <em class="sig-param">window</em><span class="optional">[</span>, <em class="sig-param">samp_jump=None</em>, <em class="sig-param">N_iter=1</em>, <em class="sig-param">N_runs=float('Inf')</em>, <em class="sig-param">phase_tech='phase'</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.aqhm" title="Permalink to this definition">¶</a></dt>
-<dt id="amfm_decompy.pyQHM.eaqhm">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">eaqhm</code><span class="sig-paren">(</span><em class="sig-param">signal</em>, <em class="sig-param">previous_HM</em>, <em class="sig-param">pitch</em>, <em class="sig-param">window</em><span class="optional">[</span>, <em class="sig-param">samp_jump=None</em>, <em class="sig-param">N_iter=1</em>, <em class="sig-param">N_runs=float('Inf')</em>, <em class="sig-param">phase_tech='phase'</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.eaqhm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.qhm">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">qhm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">samp_jump=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_iter=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_tech='phase'</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.qhm" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.aqhm">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">aqhm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_HM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">samp_jump=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_iter=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_runs=float('Inf')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_tech='phase'</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.aqhm" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.eaqhm">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">eaqhm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">previous_HM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">samp_jump=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_iter=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_runs=float('Inf')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_tech='phase'</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.eaqhm" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>signal</strong> (<em>signal object</em>) – contains the signal data and its parameters.</p></li>
 <li><p><strong>pitch</strong> (<em>pitch object</em>) – contains the pitch track and its parameters.</p></li>
@@ -74,7 +68,7 @@
 <li><p><strong>N_runs</strong> (<em>int</em>) – after the aQHM/eaQHM algorithm has been applied on the whole signal, the function takes the output modulated signal object as new input and restart the aQHM/eaQHM until N_runs are performed OR until the output SRER (Signal-to-Reconstruction Error Ratio) stops growing. The goal is to refine the results. (default: keeps restarting the algorithm infinitely until the maximum SRER).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>modulated signal object</p>
 </dd>
 </dl>
@@ -112,18 +106,18 @@
 <span class="n">eaQHM</span> <span class="o">=</span> <span class="n">pyqhm</span><span class="o">.</span><span class="n">eaqhm</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">aQHM</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">N_iter</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">N_runs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="modulatedsign-class">
-<h3>ModulatedSign Class<a class="headerlink" href="#modulatedsign-class" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<section id="modulatedsign-class">
+<h3>ModulatedSign Class<a class="headerlink" href="#modulatedsign-class" title="Link to this heading">¶</a></h3>
 <p>The ModulatedSign Class stores the extracted modulated signal and all the parameters related to it. The data structure provided by this class is used by all the QHM algorithms, since that the model for a modulated signal is basically the same for all of them.</p>
 <p>USAGE:</p>
 <dl class="py function">
-<dt id="amfm_decompy.pyQHM.ModulatedSign">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">ModulatedSign</code><span class="sig-paren">(</span><em class="sig-param">n_harm</em>, <em class="sig-param">file_size</em>, <em class="sig-param">fs</em><span class="optional">[</span>, <em class="sig-param">phase_tech='phase'</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.ModulatedSign" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.ModulatedSign">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">ModulatedSign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_harm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">phase_tech='phase'</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.ModulatedSign" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_harm</strong> (<em>int</em>) – number of modulated components that form the signal.</p></li>
 <li><p><strong>file_size</strong> (<em>int</em>) – length of the speech signal in samples.</p></li>
@@ -131,82 +125,82 @@
 <li><p><strong>phase_tech</strong> (<em>str</em>) – has two options: ‘phase’ (default) and ‘freq’. The objective is to choose the smoother base for further aQHM and eaQHM calculations in order to avoid the degradation of their performance due the phase wild behaviour. Normally when a sample jump is employed,  the ‘phase’ option it’s enough, since that the interpolation process already smooths the phase signal. However, in a sample by sample analysis, the use of ‘freq’ (cumulative frequency) is favoured.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>modulated signal object.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="section" id="modulated-signal-attributes">
-<h4>MODULATED SIGNAL ATTRIBUTES:<a class="headerlink" href="#modulated-signal-attributes" title="Permalink to this headline">¶</a></h4>
+<section id="modulated-signal-attributes">
+<h4>MODULATED SIGNAL ATTRIBUTES:<a class="headerlink" href="#modulated-signal-attributes" title="Link to this heading">¶</a></h4>
 <dl class="py attribute">
-<dt id="ModulatedSign.n_harm">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">n_harm</code><a class="headerlink" href="#ModulatedSign.n_harm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.n_harm">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">n_harm</span></span><a class="headerlink" href="#ModulatedSign.n_harm" title="Link to this definition">¶</a></dt>
 <dd><p>Number of modulated components that form the signal. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.size">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">size</code><a class="headerlink" href="#ModulatedSign.size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.size">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#ModulatedSign.size" title="Link to this definition">¶</a></dt>
 <dd><p>Length of the speech signal in samples. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.fs">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">fs</code><a class="headerlink" href="#ModulatedSign.fs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.fs">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">fs</span></span><a class="headerlink" href="#ModulatedSign.fs" title="Link to this definition">¶</a></dt>
 <dd><p>Sampling frequency in Hz. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.H">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">H</code><a class="headerlink" href="#ModulatedSign.H" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.H">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">H</span></span><a class="headerlink" href="#ModulatedSign.H" title="Link to this definition">¶</a></dt>
 <dd><p>3-dimension numpy array (n_harm, 3, file_size), which stores the magnitude, phase and frequency values from all components. Its first dimension refers to the n_harm components, the second to the three composing parameters (where 0 stands for the magnitude, 1 for the phase and 2 for the frequency) and the third dimension to the temporal axis. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.harmonics">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">harmonics</code><a class="headerlink" href="#ModulatedSign.harmonics" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.harmonics">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">harmonics</span></span><a class="headerlink" href="#ModulatedSign.harmonics" title="Link to this definition">¶</a></dt>
 <dd><p>List where each element is a modulated component. Read more about it in the ComponentObj Class section. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.error">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">error</code><a class="headerlink" href="#ModulatedSign.error" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.error">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#ModulatedSign.error" title="Link to this definition">¶</a></dt>
 <dd><p>Numpy array where each element is the mean squared error between the original signal frame and its synthesized version. It is created during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.phase_tech">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">phase_tech</code><a class="headerlink" href="#ModulatedSign.phase_tech" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.phase_tech">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">phase_tech</span></span><a class="headerlink" href="#ModulatedSign.phase_tech" title="Link to this definition">¶</a></dt>
 <dd><p>Name of the phase smoothing method used to create a reference for future aQHM/eaQHM calculations. Can be ‘phase’ or ‘freq’. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.signal">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">signal</code><a class="headerlink" href="#ModulatedSign.signal" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.signal">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">signal</span></span><a class="headerlink" href="#ModulatedSign.signal" title="Link to this definition">¶</a></dt>
 <dd><p>Final signal synthesized with the extracted parameters. It is created by the ModulatedSign.synthesize method.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.SRER">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">SRER</code><a class="headerlink" href="#ModulatedSign.SRER" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.SRER">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">SRER</span></span><a class="headerlink" href="#ModulatedSign.SRER" title="Link to this definition">¶</a></dt>
 <dd><p>Signal-to-Reconstruction Error Ratio, measures the similarity between the original signal and its synthesized version. The bigger its value, the better the reconstruction. It is calculated by the ModulatedSign.srer method.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ModulatedSign.extrap_phase">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">extrap_phase</code><a class="headerlink" href="#ModulatedSign.extrap_phase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.extrap_phase">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">extrap_phase</span></span><a class="headerlink" href="#ModulatedSign.extrap_phase" title="Link to this definition">¶</a></dt>
 <dd><p>2-dimension numpy array (n_harm, file_size) which contains a modified version of the extracted phase track from each component. The signals are smoothed (check the ModulatedSign.phase_tech attribute) and their edge values are extrapolated for future aQHM/eaQHM runs. It is calculated by the ModulatedSign.phase_edges method.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="modulated-signal-methods">
-<h4>MODULATED SIGNAL METHODS:<a class="headerlink" href="#modulated-signal-methods" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="modulated-signal-methods">
+<h4>MODULATED SIGNAL METHODS:<a class="headerlink" href="#modulated-signal-methods" title="Link to this heading">¶</a></h4>
 <dl class="py method">
-<dt id="ModulatedSign.update_values">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">update_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">freq</span></em>, <em class="sig-param"><span class="n">frame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.update_values" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.update_values">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">update_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.update_values" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> (<em>numpy array</em>) – contains the extracted complex coefficients from the harmonic model (for more information about them, please check the references).</p></li>
 <li><p><strong>freq</strong> (<em>numpy array</em>) – instantaneous frequency from each of the components.</p></li>
@@ -218,10 +212,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="ModulatedSign.interpolate_samp">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">interpolate_samp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samp_frames</span></em>, <em class="sig-param"><span class="n">pitch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.interpolate_samp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.interpolate_samp">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">interpolate_samp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samp_frames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.interpolate_samp" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>samp_frames</strong> (<em>numpy array</em>) – contains the sample locations where the algorithm was employed.</p></li>
 <li><p><strong>pitch</strong> (<em>pitch object</em>) – pitch information.</p></li>
@@ -232,10 +226,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="ModulatedSign.synthesize">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">synthesize</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">N=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.synthesize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.synthesize">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">synthesize</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">N=None</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.synthesize" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>N</strong> – select which of the components are going to be synthesized (default: all of them).</p>
 </dd>
 </dl>
@@ -243,10 +237,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="ModulatedSign.srer">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">srer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orig_signal</span></em>, <em class="sig-param"><span class="n">pitch_track</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.srer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.srer">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">srer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orig_signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch_track</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.srer" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>orig_signal</strong> (<em>numpy array</em>) – original signal.</p></li>
 <li><p><strong>pitch_track</strong> (<em>numpy array</em>) – pitch values for each sample.</p></li>
@@ -258,10 +252,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="ModulatedSign.phase_edges">
-<code class="sig-prename descclassname">ModulatedSign.</code><code class="sig-name descname">phase_edges</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edges</span></em>, <em class="sig-param"><span class="n">window</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.phase_edges" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ModulatedSign.phase_edges">
+<span class="sig-prename descclassname"><span class="pre">ModulatedSign.</span></span><span class="sig-name descname"><span class="pre">phase_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ModulatedSign.phase_edges" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>edges</strong> – index where occur the pitch transitions between unvoiced-voiced and voiced-unvoiced.</p></li>
 <li><p><strong>window</strong> (<em>window object</em>) – sample window and its parameters.</p></li>
@@ -271,51 +265,51 @@
 <p>Extrapolates the phase at the border of the voiced frames by integrating the edge frequency value. This procedure is necessary for posterior aQHM calculations. Additionally, the method allows the replacement of the extracted phase by the cumulative frequency. The objective is to provide smoother bases for further aQHM and eaQHM calculations. Normally this is not necessary, since that the interpolation process already smooths the phase vector. But in a sample-by-sample extraction case, this substitution is very helpful to avoid the degradation of aQHM and eaQHM performance due the phase wild behaviour.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="componentobj-class">
-<h3>ComponentObj Class<a class="headerlink" href="#componentobj-class" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="componentobj-class">
+<h3>ComponentObj Class<a class="headerlink" href="#componentobj-class" title="Link to this heading">¶</a></h3>
 <p>Creates a single component object, whose data is stored in the ModulatedSign.H matrix. The ComponentObj Class provides thus an alternative interface to separately access and manipulate each component.</p>
 <p>USAGE:</p>
 <dl class="py function">
-<dt id="amfm_decompy.pyQHM.ComponentObj">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">ComponentObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">H</span></em>, <em class="sig-param"><span class="n">harm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.ComponentObj" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.ComponentObj">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">ComponentObj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.ComponentObj" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>H</strong> (<em>numpy array</em>) – 3-dimensional array where the component data is stored (for more information, check the ModulatedSign.H attribute).</p></li>
 <li><p><strong>harm</strong> (<em>int</em>) – the component index.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>component object.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="section" id="modulated-component-attributes">
-<h4>MODULATED COMPONENT ATTRIBUTES:<a class="headerlink" href="#modulated-component-attributes" title="Permalink to this headline">¶</a></h4>
+<section id="modulated-component-attributes">
+<h4>MODULATED COMPONENT ATTRIBUTES:<a class="headerlink" href="#modulated-component-attributes" title="Link to this heading">¶</a></h4>
 <dl class="py attribute">
-<dt id="ComponentObj.mag">
-<code class="sig-prename descclassname">ComponentObj.</code><code class="sig-name descname">mag</code><a class="headerlink" href="#ComponentObj.mag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ComponentObj.mag">
+<span class="sig-prename descclassname"><span class="pre">ComponentObj.</span></span><span class="sig-name descname"><span class="pre">mag</span></span><a class="headerlink" href="#ComponentObj.mag" title="Link to this definition">¶</a></dt>
 <dd><p>Magnitude envelope of the component. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ComponentObj.phase">
-<code class="sig-prename descclassname">ComponentObj.</code><code class="sig-name descname">phase</code><a class="headerlink" href="#ComponentObj.phase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ComponentObj.phase">
+<span class="sig-prename descclassname"><span class="pre">ComponentObj.</span></span><span class="sig-name descname"><span class="pre">phase</span></span><a class="headerlink" href="#ComponentObj.phase" title="Link to this definition">¶</a></dt>
 <dd><p>Phase angle track of the component in radians. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ComponentObj.freq">
-<code class="sig-prename descclassname">ComponentObj.</code><code class="sig-name descname">freq</code><a class="headerlink" href="#ComponentObj.freq" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ComponentObj.freq">
+<span class="sig-prename descclassname"><span class="pre">ComponentObj.</span></span><span class="sig-name descname"><span class="pre">freq</span></span><a class="headerlink" href="#ComponentObj.freq" title="Link to this definition">¶</a></dt>
 <dd><p>Instantaneous normalized frequency track of the component. To get the value in Hz just multiply this array by the sample frequency. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="ComponentObj.signal">
-<code class="sig-prename descclassname">ComponentObj.</code><code class="sig-name descname">signal</code><a class="headerlink" href="#ComponentObj.signal" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ComponentObj.signal">
+<span class="sig-prename descclassname"><span class="pre">ComponentObj.</span></span><span class="sig-name descname"><span class="pre">signal</span></span><a class="headerlink" href="#ComponentObj.signal" title="Link to this definition">¶</a></dt>
 <dd><p>Component signal synthesized with the extracted parameters. It is created by the ComponentObj.synthesize method.</p>
 </dd></dl>
 
@@ -392,122 +386,171 @@
 </div>
 </dd>
 </dl>
-</div>
-<div class="section" id="modulated-component-methods">
-<h4>MODULATED COMPONENT METHODS:<a class="headerlink" href="#modulated-component-methods" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="modulated-component-methods">
+<h4>MODULATED COMPONENT METHODS:<a class="headerlink" href="#modulated-component-methods" title="Link to this heading">¶</a></h4>
 <dl class="py method">
-<dt id="ComponentObj.synthesize">
-<code class="sig-prename descclassname">ComponentObj.</code><code class="sig-name descname">synthesize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ComponentObj.synthesize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ComponentObj.synthesize">
+<span class="sig-prename descclassname"><span class="pre">ComponentObj.</span></span><span class="sig-name descname"><span class="pre">synthesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ComponentObj.synthesize" title="Link to this definition">¶</a></dt>
 <dd><p>Synthsize the modulated component by using the extracted magnitude and
 phase.</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="samplewindow-class">
-<h3>SampleWindow Class<a class="headerlink" href="#samplewindow-class" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="samplewindow-class">
+<h3>SampleWindow Class<a class="headerlink" href="#samplewindow-class" title="Link to this heading">¶</a></h3>
 <p>Creates the sample hamming window object and some related index arrays.</p>
 <p>USAGE:</p>
 <dl class="py function">
-<dt id="amfm_decompy.pyQHM.SampleWindow">
-<code class="sig-prename descclassname">amfm_decompy.pyQHM.</code><code class="sig-name descname">SampleWindow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window_duration</span></em>, <em class="sig-param"><span class="n">fs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.SampleWindow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="amfm_decompy.pyQHM.SampleWindow">
+<span class="sig-prename descclassname"><span class="pre">amfm_decompy.pyQHM.</span></span><span class="sig-name descname"><span class="pre">SampleWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amfm_decompy.pyQHM.SampleWindow" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>window_duration</strong> (<em>float</em>) – window duration in seconds.</p></li>
 <li><p><strong>fs</strong> (<em>float</em>) – sample frequency in Hz.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>sample window object.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="section" id="sample-window-attributes">
-<h4>SAMPLE WINDOW ATTRIBUTES:<a class="headerlink" href="#sample-window-attributes" title="Permalink to this headline">¶</a></h4>
+<section id="sample-window-attributes">
+<h4>SAMPLE WINDOW ATTRIBUTES:<a class="headerlink" href="#sample-window-attributes" title="Link to this heading">¶</a></h4>
 <dl class="py attribute">
-<dt id="SampleWindow.dur">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">dur</code><a class="headerlink" href="#SampleWindow.dur" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.dur">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">dur</span></span><a class="headerlink" href="#SampleWindow.dur" title="Link to this definition">¶</a></dt>
 <dd><p>Window duration in seconds. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.length">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">length</code><a class="headerlink" href="#SampleWindow.length" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.length">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#SampleWindow.length" title="Link to this definition">¶</a></dt>
 <dd><p>Window length in samples. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.data">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">data</code><a class="headerlink" href="#SampleWindow.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.data">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#SampleWindow.data" title="Link to this definition">¶</a></dt>
 <dd><p>Array containing the hamming window data. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.data2">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">data2</code><a class="headerlink" href="#SampleWindow.data2" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.data2">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">data2</span></span><a class="headerlink" href="#SampleWindow.data2" title="Link to this definition">¶</a></dt>
 <dd><p>Array containing the hamming window data with each element raised to the 2 power. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.N">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">N</code><a class="headerlink" href="#SampleWindow.N" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.N">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">N</span></span><a class="headerlink" href="#SampleWindow.N" title="Link to this definition">¶</a></dt>
 <dd><p>Half-window length, i.e., SampleWindow.length/2 -1. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.half_len_vec">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">half_len_vec</code><a class="headerlink" href="#SampleWindow.half_len_vec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.half_len_vec">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">half_len_vec</span></span><a class="headerlink" href="#SampleWindow.half_len_vec" title="Link to this definition">¶</a></dt>
 <dd><p>Numpy array that contains the indexes from zero to N, i.e, [0, 1 … N]. It is set during the object’s initialization.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="SampleWindow.len_vec">
-<code class="sig-prename descclassname">SampleWindow.</code><code class="sig-name descname">len_vec</code><a class="headerlink" href="#SampleWindow.len_vec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="SampleWindow.len_vec">
+<span class="sig-prename descclassname"><span class="pre">SampleWindow.</span></span><span class="sig-name descname"><span class="pre">len_vec</span></span><a class="headerlink" href="#SampleWindow.len_vec" title="Link to this definition">¶</a></dt>
 <dd><p>Numpy array that contains the indexes from -N to N, i.e, [-N, -N+1 … N-1, N]. It is set during the object’s initialization.</p>
 </dd></dl>
 
-<dl class="citation">
-<dt class="label" id="ref2"><span class="brackets"><a class="fn-backref" href="#id1">ref2</a></span></dt>
-<dd><p>Y.Pantazis, “Decomposition of AM-FM signals with applications in speech processing”, PhD Thesis, University of Creta, 2010.</p>
-</dd>
-<dt class="label" id="ref3"><span class="brackets"><a class="fn-backref" href="#id2">ref3</a></span></dt>
-<dd><p>Y.Pantazis, O. Rosec and Y. Stylianou, “Adaptive AM-FM signal decomposition with application to speech analysis”, IEEE Transactions on Audio, Speech and Language Processing, vol. 19, n 2, 2011.</p>
-</dd>
-<dt class="label" id="ref4"><span class="brackets"><a class="fn-backref" href="#id3">ref4</a></span></dt>
-<dd><p>G.P. Kafentzis, Y. Pantazis, O. Rosec and Y. Stylianou, “An extension of the adaptive quasi-harmonic model”, em IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2012.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="ref2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">ref2</a><span class="fn-bracket">]</span></span>
+<p>Y.Pantazis, “Decomposition of AM-FM signals with applications in speech processing”, PhD Thesis, University of Creta, 2010.</p>
+</div>
+<div class="citation" id="ref3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">ref3</a><span class="fn-bracket">]</span></span>
+<p>Y.Pantazis, O. Rosec and Y. Stylianou, “Adaptive AM-FM signal decomposition with application to speech analysis”, IEEE Transactions on Audio, Speech and Language Processing, vol. 19, n 2, 2011.</p>
+</div>
+<div class="citation" id="ref4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">ref4</a><span class="fn-bracket">]</span></span>
+<p>G.P. Kafentzis, Y. Pantazis, O. Rosec and Y. Stylianou, “An extension of the adaptive quasi-harmonic model”, em IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2012.</p>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">pyQHM</a><ul>
-<li><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li><a class="reference internal" href="#quick-start">Quick start</a><ul>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.qhm"><code class="docutils literal notranslate"><span class="pre">qhm()</span></code></a></li>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.aqhm"><code class="docutils literal notranslate"><span class="pre">aqhm()</span></code></a></li>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.eaqhm"><code class="docutils literal notranslate"><span class="pre">eaqhm()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#classes">Classes</a><ul>
 <li><a class="reference internal" href="#modulatedsign-class">ModulatedSign Class</a><ul>
-<li><a class="reference internal" href="#modulated-signal-attributes">MODULATED SIGNAL ATTRIBUTES:</a></li>
-<li><a class="reference internal" href="#modulated-signal-methods">MODULATED SIGNAL METHODS:</a></li>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.ModulatedSign"><code class="docutils literal notranslate"><span class="pre">ModulatedSign()</span></code></a></li>
+<li><a class="reference internal" href="#modulated-signal-attributes">MODULATED SIGNAL ATTRIBUTES:</a><ul>
+<li><a class="reference internal" href="#ModulatedSign.n_harm"><code class="docutils literal notranslate"><span class="pre">n_harm</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.size"><code class="docutils literal notranslate"><span class="pre">size</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.fs"><code class="docutils literal notranslate"><span class="pre">fs</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.H"><code class="docutils literal notranslate"><span class="pre">H</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.harmonics"><code class="docutils literal notranslate"><span class="pre">harmonics</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.error"><code class="docutils literal notranslate"><span class="pre">error</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.phase_tech"><code class="docutils literal notranslate"><span class="pre">phase_tech</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.signal"><code class="docutils literal notranslate"><span class="pre">signal</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.SRER"><code class="docutils literal notranslate"><span class="pre">SRER</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.extrap_phase"><code class="docutils literal notranslate"><span class="pre">extrap_phase</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modulated-signal-methods">MODULATED SIGNAL METHODS:</a><ul>
+<li><a class="reference internal" href="#ModulatedSign.update_values"><code class="docutils literal notranslate"><span class="pre">update_values()</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.interpolate_samp"><code class="docutils literal notranslate"><span class="pre">interpolate_samp()</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.synthesize"><code class="docutils literal notranslate"><span class="pre">synthesize()</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.srer"><code class="docutils literal notranslate"><span class="pre">srer()</span></code></a></li>
+<li><a class="reference internal" href="#ModulatedSign.phase_edges"><code class="docutils literal notranslate"><span class="pre">phase_edges()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#componentobj-class">ComponentObj Class</a><ul>
-<li><a class="reference internal" href="#modulated-component-attributes">MODULATED COMPONENT ATTRIBUTES:</a></li>
-<li><a class="reference internal" href="#modulated-component-methods">MODULATED COMPONENT METHODS:</a></li>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.ComponentObj"><code class="docutils literal notranslate"><span class="pre">ComponentObj()</span></code></a></li>
+<li><a class="reference internal" href="#modulated-component-attributes">MODULATED COMPONENT ATTRIBUTES:</a><ul>
+<li><a class="reference internal" href="#ComponentObj.mag"><code class="docutils literal notranslate"><span class="pre">mag</span></code></a></li>
+<li><a class="reference internal" href="#ComponentObj.phase"><code class="docutils literal notranslate"><span class="pre">phase</span></code></a></li>
+<li><a class="reference internal" href="#ComponentObj.freq"><code class="docutils literal notranslate"><span class="pre">freq</span></code></a></li>
+<li><a class="reference internal" href="#ComponentObj.signal"><code class="docutils literal notranslate"><span class="pre">signal</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modulated-component-methods">MODULATED COMPONENT METHODS:</a><ul>
+<li><a class="reference internal" href="#ComponentObj.synthesize"><code class="docutils literal notranslate"><span class="pre">synthesize()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#samplewindow-class">SampleWindow Class</a><ul>
-<li><a class="reference internal" href="#sample-window-attributes">SAMPLE WINDOW ATTRIBUTES:</a></li>
+<li><a class="reference internal" href="#amfm_decompy.pyQHM.SampleWindow"><code class="docutils literal notranslate"><span class="pre">SampleWindow()</span></code></a></li>
+<li><a class="reference internal" href="#sample-window-attributes">SAMPLE WINDOW ATTRIBUTES:</a><ul>
+<li><a class="reference internal" href="#SampleWindow.dur"><code class="docutils literal notranslate"><span class="pre">dur</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.length"><code class="docutils literal notranslate"><span class="pre">length</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.data"><code class="docutils literal notranslate"><span class="pre">data</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.data2"><code class="docutils literal notranslate"><span class="pre">data2</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.N"><code class="docutils literal notranslate"><span class="pre">N</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.half_len_vec"><code class="docutils literal notranslate"><span class="pre">half_len_vec</span></code></a></li>
+<li><a class="reference internal" href="#SampleWindow.len_vec"><code class="docutils literal notranslate"><span class="pre">len_vec</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -516,34 +559,39 @@ phase.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="pYAAPT.html"
-                        title="previous chapter">pYAAPT</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="basic_tools.html"
-                        title="next chapter">basic_tools</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pYAAPT.html"
+                          title="previous chapter">pYAAPT</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="basic_tools.html"
+                          title="next chapter">basic_tools</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pyQHM.txt"
+      <li><a href="_sources/pyQHM.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -555,13 +603,13 @@ phase.</p>
         <li class="right" >
           <a href="pYAAPT.html" title="pYAAPT"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">AMFM_decompy 1.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AMFM decompy 1.0.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">pyQHM</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Bernardo J. B. Schmitt.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    &#169; Copyright 2025, Bernardo J. B. Schmitt.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>
