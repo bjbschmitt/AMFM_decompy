@@ -1,5 +1,5 @@
 v 1.0.12, 16/May/2021
-- issue due upsample of silent signals fixed . Thanks to Divyesh Rajpura for
+- issue due upsample of silent signals fixed. Thanks to Divyesh Rajpura for
   reporting it.
 
 v 1.0.11, 23/Jan/2021
