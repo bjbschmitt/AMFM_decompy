@@ -1,7 +1,7 @@
 AMFM_decompy
 =============
 
-version 1.0.11
+version 1.0.12
 
 This python package provides the tools necessary for decomposing the voiced part
 of a speech signal into its modulated components, aka AM-FM decomposition. This
@@ -43,8 +43,8 @@ However, the QHM algorithms still run as fast as their counterparts in MATLAB.
 That's because the main bottleneck of both versions are the matrix dot and
 least-squares operations. Since numpy and MATLAB are already optimized to perform
 these tasks using internal Fortran functions, as far as I investigated there's
-no way to speed them up using Cython, for example. Nevertheless, numba and CUDA 
-seem to be promising tools to speed the code, so adding support to them is one 
+no way to speed them up using Cython, for example. Nevertheless, numba and CUDA
+seem to be promising tools to speed the code, so adding support to them is one
 of my priorities for future releases.
 
 In [1] the YAAPT is compared with well-known pitch trackers like the YIN and
@@ -86,7 +86,7 @@ both inputs (`frame_lengtht` and `tda_frame_length`) are accepted.
 
 Due these modifications, if you were running AMFM_decompy 1.0.6 or earlier
 versions with their default settings, you may obtain slightly different results
-from the ones obtained by running AMFM_decompy 1.0.7 and later versions. with 
+from the ones obtained by running AMFM_decompy 1.0.7 and later versions. with
 the new default parameters.
 
 Therefore, if you really need to obtain exactly the same results from previous
@@ -102,7 +102,7 @@ should be rewritten in the 1.0.7 and later versions as
 Installation
 =============
 
-The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.11 is recommended for
+The pypi page https://pypi.python.org/pypi/AMFM_decompy/1.0.12 is recommended for
 a quick installation. But you can also copy all directories here and then run
 
 ```python setup.py install```

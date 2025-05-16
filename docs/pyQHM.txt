@@ -296,14 +296,14 @@ Example 1 - Shows how to to access the component data of a specific component::
 
    plt.xlabel('samples', fontsize=18)
    plt.ylabel('magnitude', fontsize=18)
-   
+
    plt.show()
 
 The results are presented in the next two pictures:
 
-.. image:: freq1.png
+.. image:: ../_images/freq1.png
 
-.. image:: mag3.png
+.. image:: ../_images/mag3.png
 
 NOTE:
    It must noticed that the ComponentObj can be normally sliced. For example::

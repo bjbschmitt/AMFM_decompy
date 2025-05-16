@@ -20,10 +20,10 @@ USAGE:
 
     :param args: the input argument can be a string with the wav file path OR two arguments, where the first one is a numpy array containing the speech signal data and the second one represents its fundamental frequency in Hz.
     :param kwargs: please check below for the options.
-    
+
 
     :rtype: speech signal object.
-    
+
 KWARGS OPTIONS:
 
 * 'data' - instead of initializing a SignalObj with two arguments, the input signal data can be alternatively passed using this kwarg. It must used along with the 'fs' kwarg.

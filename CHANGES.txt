@@ -1,85 +1,89 @@
+v 1.0.12, 16/May/2021
+- issue due upsample of silent signals fixed . Thanks to Divyesh Rajpura for
+  reporting it.
+
 v 1.0.11, 23/Jan/2021
-- pitch halving errors with short audio samples bug fixed. Thanks to 
+- pitch halving errors with short audio samples bug fixed. Thanks to
   Esther Judd-Klabbers for reporting it.
 
 v 1.0.10, 12/Oct/2020
 - bug due the spectral pitch standard deviation being equal to 0 fixed.
   Thanks to kwanUm for reporting it.
 - SyntaxWarnings in the upsample method from the Pitch object corrected (the "is"
-  occurrences in the conditionals were replaced by "==" or "in"). 
+  occurrences in the conditionals were replaced by "==" or "in").
 
 v 1.0.9.1, 11/Mar/2020
-- the minimum frame length required to use the spline interpolation was increased 
-  to 4. Otherwise, due constraits imposed by the spline algorithm itself, the 
-  pitch extraction routine would be aborted in the cases where the frame has length 
+- the minimum frame length required to use the spline interpolation was increased
+  to 4. Otherwise, due constraits imposed by the spline algorithm itself, the
+  pitch extraction routine would be aborted in the cases where the frame has length
   equal to 3. Thanks to Richard Hemphill for reporting this issue.
 
 v 1.0.9, 20/Feb/2020
 - issue due wrong variable name "dtype" in SignalObj initialization fixed.
   Thanks to Richard Hemphill for reporting it.
-- SignalObj objects can now be initialized using kwargs. Additionally, the data 
+- SignalObj objects can now be initialized using kwargs. Additionally, the data
   output_dtype can also be set using kwargs.
 
 v 1.0.8.1, 09/Jul/2018
-- issue caused when a PCM integral data signal is employed to create a SignalObj 
+- issue caused when a PCM integral data signal is employed to create a SignalObj
   instance fixed. Thanks to Omar Altayyan for reporting and fixing it.
 - calculation of the nbits property of a SignalObj instance modified.
 
 v 1.0.8, 21/Jun/2018
-- issue caused by extra unneeded numpy array dimensions in pYAAPT.py fixed. 
+- issue caused by extra unneeded numpy array dimensions in pYAAPT.py fixed.
   Thanks to Omar Altayyan for reporting and fixing it.
-- deprecation warning for the hanning and kaiser windows from scipy fixed. 
+- deprecation warning for the hanning and kaiser windows from scipy fixed.
   Thanks to Omar Altayyan for reporting and fixing it.
 - pip module import issue in setup.py fixed.
 
 v 1.0.7, 27/Jul/2017
-- issue with negative indexes in the "crs_corr" function from pYAAPT.py due 
-  short frame lengths in the "time_track" function fixed. Thanks to Paritosh 
+- issue with negative indexes in the "crs_corr" function from pYAAPT.py due
+  short frame lengths in the "time_track" function fixed. Thanks to Paritosh
   Gupta, Puff Kan and tuanad121 for reporting it.
 - function "interrupt_main()" replaced by "assert", since that the first one is
   not working properly. Thanks to tuanad121 for reporting and fixing it.
-- "frame_lengtht" parameter (renamed to "tda_frame_length") from YAAPT 4.0 
+- "frame_lengtht" parameter (renamed to "tda_frame_length") from YAAPT 4.0
   added.
-- default value from the "frame_length" parameter in pYAAPT.py changed from 
-  25 ms to 35 ms following the alteration ocurred in the new YAAPT 4.0 MATLAB 
+- default value from the "frame_length" parameter in pYAAPT.py changed from
+  25 ms to 35 ms following the alteration ocurred in the new YAAPT 4.0 MATLAB
   code.
-- default value from the "nccf_thresh1" parameter in pYAAPT.py changed from 
+- default value from the "nccf_thresh1" parameter in pYAAPT.py changed from
   0.25 to 0.3 following the alteration ocurred in the new YAAPT 4.0 MATLAB code.
 - some extra minor alterations in pYAAPT.py from the new YAAPT 4.0 MATLAB code.
-- minor alterations in the SHC computation of the "spec_track" function from 
+- minor alterations in the SHC computation of the "spec_track" function from
   pYAAPT.py.
-- minor correction in the step interpolation of "upsample" method from PitchObj 
+- minor correction in the step interpolation of "upsample" method from PitchObj
   in order to allow compability with Python 3.
 
 v1.0.6.1, 13/Mar/2017
-- error due misuse of the numpy's "ones" function in spec_track function from 
+- error due misuse of the numpy's "ones" function in spec_track function from
   pYAAPT fixed. Thanks to Paritosh Gupta for reporting it.
 
 v1.0.6, 23/Jan/2017
-- issue with incorrect high values at the beginning and at the end of 
-  PitchObj.samp_interp array fixed. Thanks to Esther Judd-Klabbers for reporting 
+- issue with incorrect high values at the beginning and at the end of
+  PitchObj.samp_interp array fixed. Thanks to Esther Judd-Klabbers for reporting
   it.
 
 v1.0.5.1, 26/Sep/2016
-- print functions updated in order to allow compability with Python 3. Thanks to 
+- print functions updated in order to allow compability with Python 3. Thanks to
   Javier Villalba García for reporting it.
-- "xrange" function replaced by "range" in order to allow compability with 
+- "xrange" function replaced by "range" in order to allow compability with
   Python 3.
-- "thread" module replaced by "raise KeyboardInterrupt" in pYAAPT.py and 
+- "thread" module replaced by "raise KeyboardInterrupt" in pYAAPT.py and
   basic_tools.py.
-- corrected the "VisibleDeprecationWarning"  regarding the misuse of float 
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float
   numbers as argument to numpy.zeros() and as array indeces in pYAAPT.py.
 
 v1.0.5, 22/Sep/2016
-- issue with the interpolation of short voiced frames fixed and also minor 
+- issue with the interpolation of short voiced frames fixed and also minor
   corrections in the code. Thanks to Michał Dankiewicz for reporting and fixing
   them.
-- "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra 
-   workaround to avoid it added. Thanks to Javier Villalba García for reporting 
+- "UnicodeDecodeError: 'charmap'" issue in setup.py fixed and also an extra
+   workaround to avoid it added. Thanks to Javier Villalba García for reporting
    it.
-- corrected the array lenght mismatch in the edges_finder method from the 
+- corrected the array lenght mismatch in the edges_finder method from the
   PitchObj class in pYAAPT.py.
-- corrected the "VisibleDeprecationWarning"  regarding the misuse of float 
+- corrected the "VisibleDeprecationWarning"  regarding the misuse of float
   numbers as array indeces in pYAAPT.py.
 - requirements and classifiers added to setup.py.
 - distutils replaced by setuptools in setup.py.
@@ -88,34 +92,34 @@ v1.0.4, 13/Jan/2015
 - segmentation fault issue in pYAAPT.py fixed.
 - online documentation added.
 
-v1.0.3, 23/Dec/2014 
-- several bugs related to the analysis of 44,1 kHz files fixed. Thanks to 
+v1.0.3, 23/Dec/2014
+- several bugs related to the analysis of 44,1 kHz files fixed. Thanks to
   Tomasz Toczyski for reporting them.
-- "growing pitch and merit vectors" bug in the peaks function from pYAAPT.py 
+- "growing pitch and merit vectors" bug in the peaks function from pYAAPT.py
   fixed.
-- "Stop in Dynamic" exceptions in path1 function from pYAAPT.py removed. They 
+- "Stop in Dynamic" exceptions in path1 function from pYAAPT.py removed. They
   were inherited from the original MATLAB code, but apperently don't have a
   real use or meaning.
--  internal interpolation functions changed from spline to pchip in order to 
+-  internal interpolation functions changed from spline to pchip in order to
   keep the fidelity to the original MATLAB code and also to produce better
   results.
 - "pchip" option added and set as default to the PitchObj method "upsample" in
-  pYAAPT.py. This interpolation method is favored over "spline" because 
+  pYAAPT.py. This interpolation method is favored over "spline" because
   produces less horrible pitch spikes.
 - "single sample upsample" bug in PitchObj method "upsample" from
   pYAAPT.py fixed.
 - support for stereo files added.
 - documentation updated.
 
-v1.0.2, 27/Nov/2014 
+v1.0.2, 27/Nov/2014
 - "missing thread package" bug in basic_tools.py fixed.
 
-v1.0.1, 20/Sep/2014 
+v1.0.1, 20/Sep/2014
 - 'f0_min' bug in pYAAPT fixed.
 - PitchObj.mean_energy attribute added.
 - two SignalObj classes merged into only one.
 - minor PEP8, functions and commentaries changes.
 - documentation added.
 
-v1.0.0, 10/Sep/2014 
+v1.0.0, 10/Sep/2014
 - Initial release.

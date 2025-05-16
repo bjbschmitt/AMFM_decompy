@@ -36,8 +36,8 @@ OUTPUTS:
     pitch: pitch object. For more information about its properties, please
            consult the documentation file.
 
-Version 1.0.11
-23/Jan/2021 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
+Version 1.0.12
+16/May/2025 Bernardo J.B. Schmitt - bernardo.jb.schmitt@gmail.com
 """
 
 import numpy as np
@@ -46,7 +46,7 @@ from scipy.signal import firwin, medfilt, lfilter
 from scipy.signal.windows import hann, kaiser
 import scipy.interpolate as scipy_interp
 
-import amfm_decompy.basic_tools as basic
+import basic_tools as basic
 
 
 """
@@ -191,8 +191,8 @@ class PitchObj(object):
         self.samp_interp = pitch
 
     """
-    Upsample the pitch data so that it length becomes the same as the speech
-    value.
+    Upsample the pitch data so that its length becomes the same as the speech
+    signal.
     """
     def upsample(self, samp_values, file_size, first_samp=0, last_samp=0,
                  interp_tech='pchip'):
@@ -220,9 +220,11 @@ class PitchObj(object):
                 up_version = np.zeros((file_size))
                 up_version[:beg_pad] = first_samp
                 voiced_frames = np.nonzero(samp_values)[0]
-                edges = np.nonzero((voiced_frames[1:]-voiced_frames[:-1]) > 1)[0]
-                edges = np.insert(edges, len(edges), len(voiced_frames)-1)
-                voiced_frames = np.split(voiced_frames, edges+1)[:-1]
+
+                if len(voiced_frames) > 0:
+                    edges = np.nonzero((voiced_frames[1:]-voiced_frames[:-1]) > 1)[0]
+                    edges = np.insert(edges, len(edges), len(voiced_frames)-1)
+                    voiced_frames = np.split(voiced_frames, edges+1)[:-1]
 
                 for frame in voiced_frames:
                     up_interval = self.frames_pos[frame]
@@ -240,8 +242,8 @@ class PitchObj(object):
                                              u=up_interval)
                         up_version[tot_interval] = scipy_interp.splev(tot_interval, tck)[1]
 
-                    # MD: In case len(frame)==2, above methods fail.
-                    #Use linear interpolation instead.
+                    # In case len(frame)==2, above methods fail.
+                    # Therefore, linear interpolation is used instead.
                     elif len(frame) > 1:
                         up_version[tot_interval] = scipy_interp.interp1d(
                                                     up_interval,
@@ -347,10 +349,10 @@ def yaapt(signal, **kwargs):
 
     # Exclusive from pYAAPT.
 
-    parameters['spec_pitch_min_std'] = kwargs.get('spec_pitch_min_std', 0.05) 
+    parameters['spec_pitch_min_std'] = kwargs.get('spec_pitch_min_std', 0.05)
                                                                     #Weight factor that sets a minimum
                                                                     #spectral pitch standard deviation,
-                                                                    #which is calculated as 
+                                                                    #which is calculated as
                                                                     #min_std = pitch_avg*spec_pitch_min_std
 
     #---------------------------------------------------------------
@@ -564,7 +566,7 @@ def spec_track(signal, pitch, parameters):
             cand_pitch[0, 0] = 0
 
     pitch_avg = np.mean(voiced_pitch)
-    pitch_std = np.maximum(np.std(voiced_pitch), pitch_avg*parameters['spec_pitch_min_std']) 
+    pitch_std = np.maximum(np.std(voiced_pitch), pitch_avg*parameters['spec_pitch_min_std'])
     spec_pitch[cand_pitch[0, :] > 0] = voiced_pitch[:]
 
     if (spec_pitch[0] < pitch_avg/2):
